@@ -18,7 +18,7 @@ import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
-import TabOneScreen from "../screens/TabOneScreen";
+import MainFeedScreen from "../screens/MainFeedScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
 import {
   RootStackParamList,
@@ -86,12 +86,13 @@ function BottomTabNavigator() {
       initialRouteName="TabOne"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
+        headerShown: false,
       }}
     >
       <BottomTab.Screen
         name="TabOne"
         // options={{ headerShown: false }}
-        component={TabOneScreen}
+        component={MainFeedScreen}
         options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
           title: "Tab One",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,

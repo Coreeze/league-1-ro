@@ -11,9 +11,7 @@ const Standings = ({ standings }: StandingsProps) => {
   const topFiveStandings = standings.slice(0, 5);
   return (
     <View style={styles.container}>
-      <Text style={{ fontWeight: "bold", paddingVertical: 9 }}>
-        Liga 1 Romania
-      </Text>
+      <Text style={styles.title}>Liga 1 Romania</Text>
       <DataTable>
         <DataTable.Header style={styles.header}>
           <DataTable.Title>Poz</DataTable.Title>
@@ -50,6 +48,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 9,
     width: "100%",
     backgroundColor: "white",
+  },
+  title: {
+    fontWeight: "bold",
+    paddingVertical: 9,
+    fontSize: 18,
   },
   header: {
     backgroundColor: "lightgrey",

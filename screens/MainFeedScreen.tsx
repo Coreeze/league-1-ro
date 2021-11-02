@@ -8,7 +8,7 @@ import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
 import Standings from "../components/StandingsComponent";
 
-export default function TabOneScreen({
+export default function MainFeedScreen({
   navigation,
 }: RootTabScreenProps<"TabOne">) {
   const [standings, setStandings] = useState([]);
