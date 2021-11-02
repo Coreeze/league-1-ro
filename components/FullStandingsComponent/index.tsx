@@ -32,6 +32,7 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
         <DataTable style={styles.table}>
           <DataTable.Header style={styles.header}>
             <DataTable.Title>Poz</DataTable.Title>
+            <DataTable.Title> </DataTable.Title>
             <DataTable.Title style={styles.club}>Club</DataTable.Title>
             <DataTable.Title>MJ</DataTable.Title>
             <DataTable.Title>G</DataTable.Title>
@@ -41,6 +42,13 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
           {standings.map((team: Array<any>, i: number) => (
             <DataTable.Row style={styles.row} key={i}>
               <DataTable.Cell>{team.rank}</DataTable.Cell>
+              <DataTable.Cell>
+                <Avatar.Image
+                  size={25}
+                  source={{ uri: team.team.logo }}
+                  style={styles.avatar}
+                />
+              </DataTable.Cell>
               <DataTable.Cell style={styles.club}>
                 {team.team.name}
               </DataTable.Cell>
@@ -80,6 +88,9 @@ const styles = StyleSheet.create({
   },
   club: {
     flex: 3,
+  },
+  avatar: {
+    backgroundColor: "white",
   },
   button: {
     flexDirection: "row",

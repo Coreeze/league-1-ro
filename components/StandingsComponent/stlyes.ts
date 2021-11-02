@@ -1,4 +1,6 @@
 import { StyleSheet } from "react-native";
+import { useFonts } from "expo-font";
+import { useState } from "react";
 
 const styles = StyleSheet.create({
   container: {
@@ -7,9 +9,10 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   title: {
-    fontWeight: "bold",
+    // fontWeight: "bold",
     paddingVertical: 9,
     fontSize: 18,
+    fontFamily: "Radikal",
   },
   header: {
     backgroundColor: "lightgrey",
@@ -19,7 +22,14 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   club: {
-    flex: 3,
+    flex: 4,
+  },
+  avatar: {
+    backgroundColor: "white",
+  },
+  teamName: {
+    // fontWeight: "bold",
+    fontFamily: "Radikal",
   },
   button: {
     flexDirection: "row",
