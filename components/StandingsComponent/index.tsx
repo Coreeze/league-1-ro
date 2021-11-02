@@ -1,7 +1,10 @@
 import { FontAwesome5 } from "@expo/vector-icons";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { DataTable, Avatar } from "react-native-paper";
+import styles from "./stlyes";
 
 export type StandingsProps = {
   standings: Array<any>;
@@ -9,6 +12,15 @@ export type StandingsProps = {
 
 const Standings = ({ standings }: StandingsProps) => {
   const topFiveStandings = standings.slice(0, 5);
+  const navigation = useNavigation();
+
+  function showFullStandings(this: any) {
+    // @ts-ignore: Unreachable code error
+    navigation.navigate("FullStandings", {
+      standings,
+    });
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Liga 1 Romania</Text>
@@ -35,46 +47,12 @@ const Standings = ({ standings }: StandingsProps) => {
           </DataTable.Row>
         ))}
       </DataTable>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.details}>Statistici detaliate</Text>
+      <TouchableOpacity style={styles.button} onPress={showFullStandings}>
+        <Text style={styles.details}>Tabel complet</Text>
         <FontAwesome5 name="arrow-right" size={15} color="grey" />
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 9,
-    width: "100%",
-    backgroundColor: "white",
-  },
-  title: {
-    fontWeight: "bold",
-    paddingVertical: 9,
-    fontSize: 18,
-  },
-  header: {
-    backgroundColor: "lightgrey",
-  },
-  row: {
-    borderColor: "grey",
-    borderBottomWidth: 1,
-  },
-  club: {
-    flex: 3,
-  },
-  button: {
-    flexDirection: "row",
-    paddingVertical: 6,
-    justifyContent: "flex-end",
-    alignItems: "center",
-  },
-  details: {
-    paddingRight: 9,
-    fontWeight: "bold",
-    color: "grey",
-  },
-});
 
 export default Standings;

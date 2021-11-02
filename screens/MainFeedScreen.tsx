@@ -1,7 +1,8 @@
 import React, { Component, useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 
-import { Table, Row, Rows } from "react-native-table-component";
+// import LinearGradient from "react-native-linear-gradient";
+import { LinearGradient } from "expo-linear-gradient";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
@@ -10,7 +11,7 @@ import Standings from "../components/StandingsComponent";
 
 export default function MainFeedScreen({
   navigation,
-}: RootTabScreenProps<"TabOne">) {
+}: RootTabScreenProps<"MainFeed">) {
   const [standings, setStandings] = useState([]);
 
   const [shouldFetch, setShouldFetch] = useState(true);
@@ -21,33 +22,22 @@ export default function MainFeedScreen({
   }
 
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={["#4A9B7F", "#0A3431"]}
+      start={{ x: 0.1, y: 0.1 }}
+      end={{ x: 1.0, y: 1.0 }}
+      locations={[0, 0.3]}
+      style={styles.container}
+    >
       <Standings standings={standings} />
-      <TouchableOpacity style={styles.button} onPress={handleHelpPress}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("FullStandings")}
+      >
         <Text>Statistici detaliate</Text>
       </TouchableOpacity>
-    </View>
+    </LinearGradient>
   );
-}
-
-function handleHelpPress() {
-  console.log("pressed");
-  fetch("https://v3.football.api-sports.io/standings?league=283&season=2021", {
-    method: "GET",
-    headers: {
-      "x-rapidapi-host": "v3.football.api-sports.io",
-      "x-rapidapi-key": "ed6904705c97fe6a528acacb4a32511b",
-    },
-  })
-    .then((response) => response.json())
-    .then((json) => {
-      console.log("\nSTART\n");
-      var standings = json.response[0].league.standings[0];
-      console.log(standings[0]);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
 }
 
 function getStandtings(setStandings: {
@@ -79,7 +69,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#8F1600",
   },
   title: {
     fontSize: 20,

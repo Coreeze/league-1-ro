@@ -3,7 +3,7 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from "@expo/vector-icons";
+import { Entypo, FontAwesome } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   NavigationContainer,
@@ -20,6 +20,8 @@ import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import MainFeedScreen from "../screens/MainFeedScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
+import FullStandings from "../components/FullStandingsComponent";
+
 import {
   RootStackParamList,
   RootTabParamList,
@@ -57,6 +59,21 @@ function RootNavigator() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name="FullStandings"
+        component={FullStandings}
+        options={{
+          headerShown: true,
+          title: "Tabel complet",
+          headerStyle: {
+            backgroundColor: "#0A3431",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "bold",
+          },
+        }}
+      />
+      <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
@@ -83,41 +100,45 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="MainFeed"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
         headerShown: false,
       }}
     >
       <BottomTab.Screen
-        name="TabOne"
-        // options={{ headerShown: false }}
+        name="MainFeed"
         component={MainFeedScreen}
-        options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
-          title: "Tab One",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate("Modal")}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
+        options={({ navigation }: RootTabScreenProps<"MainFeed">) => ({
+          title: "Actual",
+          tabBarIcon: ({ color }) => (
+            <Entypo name="news" size={24} color={color} />
           ),
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
+        name="Stats"
         component={TabTwoScreen}
         options={{
-          title: "Tab Two",
+          title: "Statistici",
+          tabBarIcon: ({ color }) => (
+            <Entypo name="line-graph" size={24} color={color} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="History"
+        component={TabTwoScreen}
+        options={{
+          title: "Istorie",
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="More"
+        component={TabTwoScreen}
+        options={{
+          title: "Mai mult",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
