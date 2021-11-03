@@ -23,10 +23,10 @@ export default function MainFeedScreen({
 
   return (
     <LinearGradient
-      colors={["#4A9B7F", "#0A3431"]}
-      start={{ x: 0.1, y: 0.1 }}
-      end={{ x: 1.0, y: 1.0 }}
-      locations={[0, 0.3]}
+      colors={["#0E1C26", "#294861"]}
+      start={{ x: 0.4, y: 0.7 }}
+      end={{ x: 0.5, y: 1 }}
+      locations={[0, 1]}
       style={styles.container}
     >
       <Standings standings={standings} />

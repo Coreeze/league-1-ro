@@ -12,7 +12,14 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName, Pressable } from "react-native";
+import {
+  ColorSchemeName,
+  ImageBackground,
+  Pressable,
+  View,
+  StyleSheet,
+} from "react-native";
+import { Image, Text } from "react-native";
 
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
@@ -63,14 +70,39 @@ function RootNavigator() {
         component={FullStandings}
         options={{
           headerShown: true,
-          title: "Tabel complet",
+          // title: "Tabel complet",
+          headerTitle: (props) => (
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                style={{
+                  position: "absolute",
+                  width: 300,
+                  height: 150,
+                  left: -50,
+                }}
+                source={require("../assets/images/header3.png")}
+                resizeMode="contain"
+              />
+              <Text
+                style={{
+                  fontFamily: "MontserratBold",
+                  color: "white",
+                  fontSize: 18,
+                }}
+              >
+                Tabel complet
+              </Text>
+            </View>
+          ),
           headerStyle: {
-            backgroundColor: "#0A3431",
+            backgroundColor: "#0E1C26",
           },
           headerTintColor: "#fff",
-          headerTitleStyle: {
-            fontWeight: "bold",
-          },
+          // headerTitleStyle: {
+          //   fontFamily: "MontserratBold",
+          //   color: "black",
+          //   fontSize: 18,
+          // },
         }}
       />
       <Stack.Screen

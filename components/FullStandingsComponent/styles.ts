@@ -1,23 +1,24 @@
 import { StyleSheet } from "react-native";
-import { useFonts } from "expo-font";
-import { useState } from "react";
 
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 9,
     width: "100%",
+  },
+  table: {
     backgroundColor: "white",
+    // paddingVertical: 10,
+    marginTop: 12,
   },
   title: {
     paddingVertical: 9,
+    paddingLeft: 15,
     fontSize: 15,
     fontFamily: "MontserratBold",
     color: "#1C374A",
   },
   header: {
     backgroundColor: "lightgrey",
-    height: 33,
-    alignItems: "center",
   },
   titleText: {
     fontFamily: "MontserratSemiBold",
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   club: {
-    flex: 4,
+    flex: 3,
   },
   avatar: {
     backgroundColor: "white",
@@ -45,10 +46,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   details: {
-    fontFamily: "MontserratBold",
-    paddingRight: 6,
-    paddingVertical: 9,
-    fontSize: 12,
+    paddingRight: 9,
+    fontWeight: "bold",
     color: "grey",
   },
 });

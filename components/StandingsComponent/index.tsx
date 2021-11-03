@@ -43,18 +43,28 @@ const Standings = ({ standings }: StandingsProps) => {
       <DataTable>
         <DataTable.Header style={styles.header}>
           <DataTable.Title>
-            <Text style={{ fontFamily: "Radikal" }}>Poz</Text>
+            <Text style={styles.titleText}>Poz</Text>
           </DataTable.Title>
           <DataTable.Title> </DataTable.Title>
-          <DataTable.Title style={styles.club}>Club</DataTable.Title>
-          <DataTable.Title>MJ</DataTable.Title>
-          <DataTable.Title>G</DataTable.Title>
-          <DataTable.Title>Pct</DataTable.Title>
+          <DataTable.Title style={styles.club}>
+            <Text style={styles.titleText}>Club</Text>
+          </DataTable.Title>
+          <DataTable.Title>
+            <Text style={styles.titleText}>MJ</Text>
+          </DataTable.Title>
+          <DataTable.Title>
+            <Text style={styles.titleText}>G</Text>
+          </DataTable.Title>
+          <DataTable.Title>
+            <Text style={styles.titleText}>Pct</Text>
+          </DataTable.Title>
         </DataTable.Header>
 
         {topFiveStandings.map((team, i) => (
           <DataTable.Row style={styles.row} key={i}>
-            <DataTable.Cell>{team.rank}</DataTable.Cell>
+            <DataTable.Cell>
+              <Text style={styles.tableText}>{team.rank}</Text>
+            </DataTable.Cell>
             <DataTable.Cell>
               <Avatar.Image
                 size={25}
@@ -63,19 +73,25 @@ const Standings = ({ standings }: StandingsProps) => {
               />
             </DataTable.Cell>
             <DataTable.Cell style={styles.club}>
-              <Text style={styles.teamName}>{team.team.name}</Text>
+              <Text style={styles.tableText}>{team.team.name}</Text>
             </DataTable.Cell>
-            <DataTable.Cell>{team.all.played}</DataTable.Cell>
             <DataTable.Cell>
-              {team.all.goals.for - team.all.goals.against}
+              <Text style={styles.tableText}>{team.all.played}</Text>
             </DataTable.Cell>
-            <DataTable.Cell>{team.points}</DataTable.Cell>
+            <DataTable.Cell>
+              <Text style={styles.tableText}>
+                {team.all.goals.for - team.all.goals.against}
+              </Text>
+            </DataTable.Cell>
+            <DataTable.Cell>
+              <Text style={styles.tableText}>{team.points}</Text>
+            </DataTable.Cell>
           </DataTable.Row>
         ))}
       </DataTable>
       <TouchableOpacity style={styles.button} onPress={showFullStandings}>
         <Text style={styles.details}>Tabel complet</Text>
-        <FontAwesome5 name="arrow-right" size={15} color="grey" />
+        <FontAwesome5 name="arrow-right" size={12} color="grey" />
       </TouchableOpacity>
     </View>
   );

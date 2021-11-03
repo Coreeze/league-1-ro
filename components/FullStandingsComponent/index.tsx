@@ -1,13 +1,9 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { Text, ScrollView } from "react-native";
 import { DataTable, Avatar } from "react-native-paper";
+
+import styles from "./styles";
 
 export type StandingsProps = {
   fullStandings: Array<any>;
@@ -21,27 +17,39 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
 
   return (
     <LinearGradient
-      colors={["#4A9B7F", "#0A3431"]}
-      start={{ x: 0.1, y: 0.1 }}
-      end={{ x: 1.0, y: 1.0 }}
-      locations={[0, 0.3]}
+      colors={["#0E1C26", "#294861"]}
+      start={{ x: 0.3, y: 0.3 }}
+      end={{ x: 0.5, y: 0.5 }}
+      locations={[0, 1]}
       style={styles.container}
     >
-      <ScrollView>
+      <ScrollView style={styles.table}>
         <Text style={styles.title}>Liga 1 Romania</Text>
-        <DataTable style={styles.table}>
+        <DataTable>
           <DataTable.Header style={styles.header}>
-            <DataTable.Title>Poz</DataTable.Title>
+            <DataTable.Title>
+              <Text style={styles.titleText}>Poz</Text>
+            </DataTable.Title>
             <DataTable.Title> </DataTable.Title>
-            <DataTable.Title style={styles.club}>Club</DataTable.Title>
-            <DataTable.Title>MJ</DataTable.Title>
-            <DataTable.Title>G</DataTable.Title>
-            <DataTable.Title>Pct</DataTable.Title>
+            <DataTable.Title style={styles.club}>
+              <Text style={styles.titleText}>Club</Text>
+            </DataTable.Title>
+            <DataTable.Title>
+              <Text style={styles.titleText}>MJ</Text>
+            </DataTable.Title>
+            <DataTable.Title>
+              <Text style={styles.titleText}>G</Text>
+            </DataTable.Title>
+            <DataTable.Title>
+              <Text style={styles.titleText}>Pct</Text>
+            </DataTable.Title>
           </DataTable.Header>
 
-          {standings.map((team: Array<any>, i: number) => (
+          {standings.map((team: Object, i: number) => (
             <DataTable.Row style={styles.row} key={i}>
-              <DataTable.Cell>{team.rank}</DataTable.Cell>
+              <DataTable.Cell>
+                <Text style={styles.tableText}>{team.rank}</Text>
+              </DataTable.Cell>
               <DataTable.Cell>
                 <Avatar.Image
                   size={25}
@@ -50,13 +58,19 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
                 />
               </DataTable.Cell>
               <DataTable.Cell style={styles.club}>
-                {team.team.name}
+                <Text style={styles.tableText}>{team.team.name}</Text>
               </DataTable.Cell>
-              <DataTable.Cell>{team.all.played}</DataTable.Cell>
               <DataTable.Cell>
-                {team.all.goals.for - team.all.goals.against}
+                <Text style={styles.tableText}>{team.all.played}</Text>
               </DataTable.Cell>
-              <DataTable.Cell>{team.points}</DataTable.Cell>
+              <DataTable.Cell>
+                <Text style={styles.tableText}>
+                  {team.all.goals.for - team.all.goals.against}
+                </Text>
+              </DataTable.Cell>
+              <DataTable.Cell>
+                <Text style={styles.tableText}>{team.points}</Text>
+              </DataTable.Cell>
             </DataTable.Row>
           ))}
         </DataTable>
@@ -64,45 +78,5 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
     </LinearGradient>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 9,
-    width: "100%",
-  },
-  table: {
-    backgroundColor: "white",
-    paddingVertical: 10,
-  },
-  title: {
-    fontWeight: "bold",
-    paddingVertical: 9,
-    fontSize: 18,
-  },
-  header: {
-    backgroundColor: "lightgrey",
-  },
-  row: {
-    borderColor: "grey",
-    borderBottomWidth: 1,
-  },
-  club: {
-    flex: 3,
-  },
-  avatar: {
-    backgroundColor: "white",
-  },
-  button: {
-    flexDirection: "row",
-    paddingVertical: 6,
-    justifyContent: "flex-end",
-    alignItems: "center",
-  },
-  details: {
-    paddingRight: 9,
-    fontWeight: "bold",
-    color: "grey",
-  },
-});
 
 export default FullStandings;
