@@ -13,7 +13,6 @@ export type StandingsProps = {
 
 const FullStandings = ({ route, navigation }: StandingsProps) => {
   const { standings } = route.params;
-  // console.log(standings);
 
   return (
     <LinearGradient
@@ -24,8 +23,15 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
       style={styles.container}
     >
       <ScrollView style={styles.table}>
-        <Text style={styles.title}>Liga 1 Romania</Text>
+        <LinearGradient
+          colors={["#931F1D", "#465775"]}
+          start={{ x: 0.3, y: 0.3 }}
+          end={{ x: 0.5, y: 0.5 }}
+          locations={[0, 1]}
+          style={{ width: "100%", height: 6 }}
+        ></LinearGradient>
         <DataTable>
+          <Text style={styles.title}>Liga 1 Romania</Text>
           <DataTable.Header style={styles.header}>
             <DataTable.Title>
               <Text style={styles.titleText}>Poz</Text>
@@ -35,7 +41,16 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
               <Text style={styles.titleText}>Club</Text>
             </DataTable.Title>
             <DataTable.Title>
-              <Text style={styles.titleText}>MJ</Text>
+              <Text style={styles.titleText}>M</Text>
+            </DataTable.Title>
+            <DataTable.Title>
+              <Text style={styles.titleText}>V</Text>
+            </DataTable.Title>
+            <DataTable.Title>
+              <Text style={styles.titleText}>E</Text>
+            </DataTable.Title>
+            <DataTable.Title>
+              <Text style={styles.titleText}>Î</Text>
             </DataTable.Title>
             <DataTable.Title>
               <Text style={styles.titleText}>G</Text>
@@ -58,15 +73,26 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
                 />
               </DataTable.Cell>
               <DataTable.Cell style={styles.club}>
-                <Text style={styles.tableText}>{team.team.name}</Text>
+                <Text style={styles.tableText}>
+                  {team.team.name.length > 11
+                    ? team.team.name.substring(0, 12) + "."
+                    : team.team.name}
+                </Text>
               </DataTable.Cell>
               <DataTable.Cell>
                 <Text style={styles.tableText}>{team.all.played}</Text>
               </DataTable.Cell>
               <DataTable.Cell>
-                <Text style={styles.tableText}>
-                  {team.all.goals.for - team.all.goals.against}
-                </Text>
+                <Text style={styles.tableText}>{team.all.win}</Text>
+              </DataTable.Cell>
+              <DataTable.Cell>
+                <Text style={styles.tableText}>{team.all.draw}</Text>
+              </DataTable.Cell>
+              <DataTable.Cell>
+                <Text style={styles.tableText}>{team.all.lose}</Text>
+              </DataTable.Cell>
+              <DataTable.Cell>
+                <Text style={styles.tableText}>{team.goalsDiff}</Text>
               </DataTable.Cell>
               <DataTable.Cell>
                 <Text style={styles.tableText}>{team.points}</Text>

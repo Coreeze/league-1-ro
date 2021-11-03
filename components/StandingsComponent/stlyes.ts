@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 9,
+    // paddingHorizontal: 9,
     width: "100%",
     backgroundColor: "white",
   },

@@ -7,6 +7,7 @@ import AppLoading from "expo-app-loading";
 
 import styles from "./stlyes";
 import useFonts from "../../useFonts";
+import { LinearGradient } from "expo-linear-gradient";
 
 export type StandingsProps = {
   standings: Array<any>;
@@ -39,8 +40,15 @@ const Standings = ({ standings }: StandingsProps) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Liga 1 Romania</Text>
-      <DataTable>
+      <LinearGradient
+        colors={["#931F1D", "#465775"]}
+        start={{ x: 0.3, y: 0.3 }}
+        end={{ x: 0.5, y: 0.5 }}
+        locations={[0, 1]}
+        style={{ width: "100%", height: 6 }}
+      ></LinearGradient>
+      <DataTable style={{ paddingHorizontal: 9 }}>
+        <Text style={styles.title}>Liga 1 Romania</Text>
         <DataTable.Header style={styles.header}>
           <DataTable.Title>
             <Text style={styles.titleText}>Poz</Text>
@@ -73,7 +81,11 @@ const Standings = ({ standings }: StandingsProps) => {
               />
             </DataTable.Cell>
             <DataTable.Cell style={styles.club}>
-              <Text style={styles.tableText}>{team.team.name}</Text>
+              <Text style={styles.tableText}>
+                {team.team.name.length > 18
+                  ? team.team.name.substring(0, 18) + "."
+                  : team.team.name}
+              </Text>
             </DataTable.Cell>
             <DataTable.Cell>
               <Text style={styles.tableText}>{team.all.played}</Text>
@@ -88,11 +100,11 @@ const Standings = ({ standings }: StandingsProps) => {
             </DataTable.Cell>
           </DataTable.Row>
         ))}
+        <TouchableOpacity style={styles.button} onPress={showFullStandings}>
+          <Text style={styles.details}>Tabel complet</Text>
+          <FontAwesome5 name="arrow-right" size={12} color="grey" />
+        </TouchableOpacity>
       </DataTable>
-      <TouchableOpacity style={styles.button} onPress={showFullStandings}>
-        <Text style={styles.details}>Tabel complet</Text>
-        <FontAwesome5 name="arrow-right" size={12} color="grey" />
-      </TouchableOpacity>
     </View>
   );
 };

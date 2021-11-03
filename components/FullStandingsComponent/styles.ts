@@ -7,8 +7,7 @@ const styles = StyleSheet.create({
   },
   table: {
     backgroundColor: "white",
-    // paddingVertical: 10,
-    marginTop: 12,
+    marginTop: 9,
   },
   title: {
     paddingVertical: 9,
@@ -34,7 +33,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   club: {
-    flex: 3,
+    flex: 4,
+    // paddingRight: 5,
   },
   avatar: {
     backgroundColor: "white",
