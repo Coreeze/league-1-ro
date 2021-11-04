@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    marginTop: "27%",
+    marginTop: "3%",
   },
   button: {
     flexDirection: "row",

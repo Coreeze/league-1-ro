@@ -12,6 +12,7 @@ import * as rssParser from "react-native-rss-parser";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import ShortNewsComponent from "../components/ShortNewsComponent";
 import NewsOfTheDayComponent from "../components/NewsOfTheDayComponent";
+import FixturesComponent from "../components/FixturesComponent";
 // import styles from "../components/StandingsComponent/stlyes";
 
 export default function MainFeedScreen({
@@ -30,7 +31,7 @@ export default function MainFeedScreen({
       <ScrollView style={styles.scrollview}>
         <Image
           style={{
-            position: "absolute",
+            position: "relative",
             width: "100%",
             height: 100,
           }}
@@ -38,12 +39,13 @@ export default function MainFeedScreen({
           resizeMode="contain"
         />
         <NewsOfTheDayComponent />
+        <FixturesComponent />
         <ShortStandingsComponent />
         <ShortNewsComponent />
 
-        <TouchableOpacity style={styles.button} onPress={handlePress}>
+        {/* <TouchableOpacity style={styles.button} onPress={handlePress}>
           <Text>Statistici detaliate</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </ScrollView>
     </LinearGradient>
   );
