@@ -69,15 +69,31 @@ const ShortNewsComponent = () => {
         locations={[0, 1]}
         style={{ width: "100%", height: 6 }}
       ></LinearGradient>
-      {
-        // @ts-ignore
-        rssFeed[0]?.links[0]?.url ? (
+      <View style={styles.container2}>
+        {
           // @ts-ignore
-          randomArr.map((randomNo: number, i: number) => (
+          rssFeed[0]?.links[0]?.url ? (
+            // @ts-ignore
+            randomArr.map((randomNo: number, i: number) => (
+              <RNUrlPreview
+                key={i}
+                // @ts-ignore
+                text={rssFeed[randomNo]?.links[0].url}
+                titleStyle={{ fontFamily: "MontserratBold", color: "#1C374A" }}
+                descriptionStyle={{
+                  fontFamily: "MontserratSemiBold",
+                  fontSize: 12,
+                  color: "#42759E",
+                }}
+                descriptionNumberOfLines={2}
+                containerStyle={{ backgroundColor: "#fff" }}
+              />
+            ))
+          ) : (
             <RNUrlPreview
-              key={i}
+              key={1}
               // @ts-ignore
-              text={rssFeed[randomNo]?.links[0].url}
+              text={rssFeed[0]?.links[0].url}
               titleStyle={{ fontFamily: "MontserratBold", color: "#1C374A" }}
               descriptionStyle={{
                 fontFamily: "MontserratSemiBold",
@@ -86,26 +102,13 @@ const ShortNewsComponent = () => {
               }}
               descriptionNumberOfLines={2}
             />
-          ))
-        ) : (
-          <RNUrlPreview
-            key={1}
-            // @ts-ignore
-            text={rssFeed[0]?.links[0].url}
-            titleStyle={{ fontFamily: "MontserratBold", color: "#1C374A" }}
-            descriptionStyle={{
-              fontFamily: "MontserratSemiBold",
-              fontSize: 12,
-              color: "#42759E",
-            }}
-            descriptionNumberOfLines={2}
-          />
-        )
-      }
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.details}>Mai multe stiri</Text>
-        <FontAwesome5 name="arrow-right" size={12} color="grey" />
-      </TouchableOpacity>
+          )
+        }
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.details}>Mai multe stiri</Text>
+          <FontAwesome5 name="arrow-right" size={12} color="grey" />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

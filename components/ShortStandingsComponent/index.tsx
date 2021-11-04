@@ -73,6 +73,7 @@ const ShortStandingsComponent = () => {
 
   return (
     <View style={styles.container}>
+      <View></View>
       <LinearGradient
         colors={["#931F1D", "#465775"]}
         start={{ x: 0.3, y: 0.3 }}
