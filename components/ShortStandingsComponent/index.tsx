@@ -14,7 +14,7 @@ export type StandingsProps = {
   standings2: Array<any>;
 };
 
-const Standings = () => {
+const ShortStandingsComponent = () => {
   const navigation = useNavigation();
 
   const [standings, setStandings] = useState([]);
@@ -142,4 +142,4 @@ const Standings = () => {
   );
 };
 
-export default Standings;
+export default ShortStandingsComponent;

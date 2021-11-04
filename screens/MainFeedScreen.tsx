@@ -7,7 +7,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
-import Standings from "../components/StandingsComponent";
+import ShortStandingsComponent from "../components/ShortStandingsComponent";
 import * as rssParser from "react-native-rss-parser";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import ShortNewsComponent from "../components/ShortNewsComponent";
@@ -38,7 +38,7 @@ export default function MainFeedScreen({
           resizeMode="contain"
         />
         <NewsOfTheDayComponent />
-        <Standings />
+        <ShortStandingsComponent />
         <ShortNewsComponent />
 
         <TouchableOpacity style={styles.button} onPress={handlePress}>
