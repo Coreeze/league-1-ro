@@ -1,4 +1,5 @@
 import AppLoading from "expo-app-loading";
+import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { useState } from "react";
 import { View, Text, Image } from "react-native";
@@ -90,6 +91,13 @@ const FixturesComponent = () => {
 
   return (
     <View style={styles.container}>
+      <LinearGradient
+        colors={["#931F1D", "#465775"]}
+        start={{ x: 0.3, y: 0.3 }}
+        end={{ x: 0.5, y: 0.5 }}
+        locations={[0, 1]}
+        style={{ width: "100%", height: 6 }}
+      ></LinearGradient>
       {fixtures.response?.map((fixture: Object, i: number) => (
         <View style={styles.fixture} key={i}>
           <View style={styles.teamHome}>
