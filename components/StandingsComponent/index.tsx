@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
@@ -10,12 +11,20 @@ import useFonts from "../../useFonts";
 import { LinearGradient } from "expo-linear-gradient";
 
 export type StandingsProps = {
-  standings: Array<any>;
+  standings2: Array<any>;
 };
 
-const Standings = ({ standings }: StandingsProps) => {
-  const topFiveStandings = standings.slice(0, 5);
+const Standings = () => {
   const navigation = useNavigation();
+
+  const [standings, setStandings] = useState([]);
+  const [shouldFetch, setShouldFetch] = useState(true);
+
+  if (shouldFetch) {
+    getStandtings();
+    setShouldFetch(false);
+  }
+  const topFiveStandings = standings.slice(0, 5);
 
   const [IsReady, SetIsReady] = useState(false);
   const LoadFonts = async () => {
@@ -29,6 +38,30 @@ const Standings = ({ standings }: StandingsProps) => {
         onError={() => {}}
       />
     );
+  }
+
+  function getStandtings() {
+    fetch(
+      "https://v3.football.api-sports.io/standings?league=283&season=2021",
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": "ed6904705c97fe6a528acacb4a32511b",
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((json) => {
+        console.log("Fetching");
+        let fetchLeague = json.response[0].league;
+        let fetchStandings = fetchLeague.standings[0];
+        setStandings(fetchStandings);
+        // TODO: add check for what happens when api requests are full
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function showFullStandings(this: any) {

@@ -1,10 +1,9 @@
 import { StyleSheet } from "react-native";
-import { useFonts } from "expo-font";
-import { useState } from "react";
 
 const styles = StyleSheet.create({
   container: {
-    // paddingHorizontal: 9,
+    marginTop: 100,
+    marginBottom: 60,
     width: "100%",
     backgroundColor: "white",
   },

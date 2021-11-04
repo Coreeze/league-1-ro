@@ -76,11 +76,10 @@ function RootNavigator() {
               <Image
                 style={{
                   position: "absolute",
-                  width: 300,
-                  height: 150,
-                  left: -50,
+                  width: 330,
+                  height: 60,
                 }}
-                source={require("../assets/images/header3.png")}
+                source={require("../assets/images/header5.png")}
                 resizeMode="contain"
               />
               <Text
@@ -98,11 +97,6 @@ function RootNavigator() {
             backgroundColor: "#0E1C26",
           },
           headerTintColor: "#fff",
-          // headerTitleStyle: {
-          //   fontFamily: "MontserratBold",
-          //   color: "black",
-          //   fontSize: 18,
-          // },
         }}
       />
       <Stack.Screen

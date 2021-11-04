@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { ScrollView, StyleSheet, TouchableOpacity, Image } from "react-native";
 
 // import LinearGradient from "react-native-linear-gradient";
 import { LinearGradient } from "expo-linear-gradient";
@@ -8,59 +8,54 @@ import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
 import Standings from "../components/StandingsComponent";
+import * as rssParser from "react-native-rss-parser";
+import { getStatusBarHeight } from "react-native-status-bar-height";
+import ShortNewsComponent from "../components/ShortNewsComponent";
+// import styles from "../components/StandingsComponent/stlyes";
 
 export default function MainFeedScreen({
   navigation,
 }: RootTabScreenProps<"MainFeed">) {
-  const [standings, setStandings] = useState([]);
-
   const [shouldFetch, setShouldFetch] = useState(true);
-
-  if (shouldFetch) {
-    getStandtings(setStandings);
-    setShouldFetch(false);
-  }
 
   return (
     <LinearGradient
       colors={["#0E1C26", "#294861"]}
-      start={{ x: 0.4, y: 0.7 }}
-      end={{ x: 0.5, y: 1 }}
+      start={{ x: 0.4, y: 0.5 }}
+      end={{ x: 0.4, y: 1 }}
       locations={[0, 1]}
       style={styles.container}
     >
-      <Standings standings={standings} />
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("FullStandings")}
-      >
-        <Text>Statistici detaliate</Text>
-      </TouchableOpacity>
+      <ScrollView style={styles.scrollview}>
+        <Image
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: 100,
+          }}
+          source={require("../assets/images/header6.png")}
+          resizeMode="contain"
+        />
+        <Standings />
+        <ShortNewsComponent />
+
+        <TouchableOpacity style={styles.button} onPress={handlePress}>
+          <Text>Statistici detaliate</Text>
+        </TouchableOpacity>
+      </ScrollView>
     </LinearGradient>
   );
 }
 
-function getStandtings(setStandings: {
-  (value: React.SetStateAction<never[]>): void;
-  (arg0: any): void;
-}) {
-  fetch("https://v3.football.api-sports.io/standings?league=283&season=2021", {
-    method: "GET",
-    headers: {
-      "x-rapidapi-host": "v3.football.api-sports.io",
-      "x-rapidapi-key": "ed6904705c97fe6a528acacb4a32511b",
-    },
-  })
-    .then((response) => response.json())
-    .then((json) => {
-      console.log("Fetching");
-      let fetchLeague = json.response[0].league;
-      let fetchStandings = fetchLeague.standings[0];
-      setStandings(fetchStandings);
-      // TODO: add check for what happens when api requests are full
-    })
-    .catch((err) => {
-      console.log(err);
+function handlePress() {
+  fetch("https://news.google.com/rss/search?q=fotbal&hl=ro&gl=RO&ceid=RO%3Aro")
+    .then((response) => response.text())
+    .then((responseData) => rssParser.parse(responseData))
+    .then((rss) => {
+      // console.log(rss);
+      // console.log(rss.title);
+      // console.log(rss.item);
+      console.log(rss.items[0]);
     });
 }
 
@@ -69,12 +64,17 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    paddingTop: getStatusBarHeight(),
+  },
+  scrollview: {
+    width: "100%",
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
   },
   button: {
+    marginTop: 10,
     backgroundColor: "cyan",
     width: 200,
     height: 60,
