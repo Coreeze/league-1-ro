@@ -2,10 +2,8 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
     width: "100%",
-    paddingBottom: 10,
-    marginTop: 60,
+    marginTop: "27%",
   },
   button: {
     flexDirection: "row",

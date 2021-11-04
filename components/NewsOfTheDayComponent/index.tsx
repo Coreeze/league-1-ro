@@ -7,10 +7,11 @@ import AppLoading from "expo-app-loading";
 import RNUrlPreview from "react-native-url-preview";
 import * as rssParser from "react-native-rss-parser";
 import useFonts from "../../useFonts";
-import styles from "./styles";
+// import styles from "./styles";
 import { FontAwesome5 } from "@expo/vector-icons";
+import styles from "./styles";
 
-const ShortNewsComponent = () => {
+const NewsOfTheDayComponent = () => {
   const [rssFeed, setRssFeed] = useState([]);
   const [shouldFetch, setShouldFetch] = useState(true);
   var feed = [];
@@ -36,17 +37,6 @@ const ShortNewsComponent = () => {
       });
   }
 
-  if (rssFeed != []) {
-    // console.log("rssFeed: " + rssFeed);
-    var randomArr = [];
-    while (randomArr.length < 4) {
-      var r = Math.floor(Math.random() * 100);
-      if (randomArr.indexOf(r) === -1) randomArr.push(r);
-      // @ts-ignore
-      // console.log(r + " " + rssFeed[r].links[0].url);
-    }
-  }
-
   const [IsReady, SetIsReady] = useState(false);
   const LoadFonts = async () => {
     await useFonts();
@@ -62,52 +52,69 @@ const ShortNewsComponent = () => {
   }
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={["#931F1D", "#465775"]}
-        start={{ x: 0.3, y: 0.3 }}
-        end={{ x: 0.5, y: 0.5 }}
-        locations={[0, 1]}
-        style={{ width: "100%", height: 6 }}
-      ></LinearGradient>
       {
         // @ts-ignore
         rssFeed[0]?.links[0]?.url ? (
-          // @ts-ignore
-          randomArr.map((randomNo: number, i: number) => (
-            <RNUrlPreview
-              key={i}
-              // @ts-ignore
-              text={rssFeed[randomNo]?.links[0].url}
-              titleStyle={{ fontFamily: "MontserratBold", color: "#1C374A" }}
-              descriptionStyle={{
-                fontFamily: "MontserratSemiBold",
-                fontSize: 12,
-                color: "#42759E",
-              }}
-              descriptionNumberOfLines={2}
-            />
-          ))
-        ) : (
           <RNUrlPreview
-            key={1}
             // @ts-ignore
             text={rssFeed[0]?.links[0].url}
-            titleStyle={{ fontFamily: "MontserratBold", color: "#1C374A" }}
+            titleStyle={{ fontFamily: "MontserratBold", color: "#E2EBF3" }}
             descriptionStyle={{
               fontFamily: "MontserratSemiBold",
               fontSize: 12,
-              color: "#42759E",
+              color: "#8CB0CF",
             }}
-            descriptionNumberOfLines={2}
+            descriptionNumberOfLines={1}
+            containerStyle={{
+              backgroundColor: "rgba(52, 52, 52, 0)",
+              flexDirection: "column",
+            }}
+            imageStyle={{
+              width: "100%",
+              height: 230,
+              paddingHorizontal: 10,
+              //   marginRight: 10,
+            }}
+          />
+        ) : (
+          <RNUrlPreview
+            // @ts-ignore
+            text={
+              "https://www.digisport.ro/fotbal/euro-2021/am-construit-degeaba-stadioane-pentru-euro-2021-unde-ar-urma-sa-aiba-loc-competitia-si-ce-va-decide-uefa-1015077"
+            }
+            titleStyle={{ fontFamily: "MontserratBold", color: "#fff" }}
+            descriptionStyle={{
+              fontFamily: "MontserratSemiBold",
+              fontSize: 12,
+              color: "#fff",
+            }}
+            descriptionNumberOfLines={1}
+            containerStyle={{
+              backgroundColor: "rgba(52, 52, 52, 0)",
+              flexDirection: "column",
+            }}
+            imageStyle={{
+              width: "100%",
+              height: 230,
+              paddingHorizontal: 10,
+              //   marginRight: 10,
+            }}
           />
         )
       }
-      <TouchableOpacity style={styles.button}>
+      <LinearGradient
+        colors={["#465775", "#931F1D"]}
+        start={{ x: 0.3, y: 0.3 }}
+        end={{ x: 0.5, y: 0.5 }}
+        locations={[0, 1]}
+        style={{ width: "100%", height: 3 }}
+      ></LinearGradient>
+      {/* <TouchableOpacity style={styles.button}>
         <Text style={styles.details}>Mai multe stiri</Text>
         <FontAwesome5 name="arrow-right" size={12} color="grey" />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };
 
-export default ShortNewsComponent;
+export default NewsOfTheDayComponent;

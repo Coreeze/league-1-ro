@@ -11,6 +11,7 @@ import Standings from "../components/StandingsComponent";
 import * as rssParser from "react-native-rss-parser";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import ShortNewsComponent from "../components/ShortNewsComponent";
+import NewsOfTheDayComponent from "../components/NewsOfTheDayComponent";
 // import styles from "../components/StandingsComponent/stlyes";
 
 export default function MainFeedScreen({
@@ -21,7 +22,7 @@ export default function MainFeedScreen({
   return (
     <LinearGradient
       colors={["#0E1C26", "#294861"]}
-      start={{ x: 0.4, y: 0.5 }}
+      start={{ x: 0.5, y: 0 }}
       end={{ x: 0.4, y: 1 }}
       locations={[0, 1]}
       style={styles.container}
@@ -36,6 +37,7 @@ export default function MainFeedScreen({
           source={require("../assets/images/header6.png")}
           resizeMode="contain"
         />
+        <NewsOfTheDayComponent />
         <Standings />
         <ShortNewsComponent />
 
