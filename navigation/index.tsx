@@ -12,13 +12,7 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import {
-  ColorSchemeName,
-  ImageBackground,
-  Pressable,
-  View,
-  StyleSheet,
-} from "react-native";
+import { ColorSchemeName, View } from "react-native";
 import { Image, Text } from "react-native";
 
 import Colors from "../constants/Colors";
@@ -26,7 +20,7 @@ import useColorScheme from "../hooks/useColorScheme";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import MainFeedScreen from "../screens/MainFeedScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
+import MoreOptionsScreen from "../screens/MoreOptionsScreen";
 import FullStandings from "../components/FullStandingsComponent";
 
 import {
@@ -35,6 +29,8 @@ import {
   RootTabScreenProps,
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
+import HistoryScreen from "../screens/HistoryScreen";
+import StatsScreen from "../screens/StatsScreen";
 
 export default function Navigation({
   colorScheme,
@@ -137,39 +133,67 @@ function BottomTabNavigator() {
         component={MainFeedScreen}
         options={({ navigation }: RootTabScreenProps<"MainFeed">) => ({
           title: "Actual",
-          tabBarIcon: ({ color }) => (
-            <Entypo name="news" size={24} color={color} />
+          tabBarIcon: ({ color, focused }) => (
+            <Entypo
+              name="news"
+              size={24}
+              color={focused ? "#E2597D" : "grey"}
+            />
           ),
+          tabBarLabelStyle: {
+            color: "#465775",
+          },
         })}
       />
       <BottomTab.Screen
         name="Stats"
-        component={TabTwoScreen}
+        component={StatsScreen}
         options={{
           title: "Statistici",
-          tabBarIcon: ({ color }) => (
-            <Entypo name="line-graph" size={24} color={color} />
+          tabBarIcon: ({ color, focused }) => (
+            <Entypo
+              name="line-graph"
+              size={24}
+              color={focused ? "#E2597D" : "grey"}
+            />
           ),
+          tabBarLabelStyle: {
+            color: "#465775",
+          },
         }}
       />
       <BottomTab.Screen
         name="History"
-        component={TabTwoScreen}
+        component={HistoryScreen}
         options={{
           title: "Istorie",
-          tabBarIcon: ({ color }) => (
-            <FontAwesome name="folder-open-o" size={24} color={color} />
+          tabBarIcon: ({ color, focused }) => (
+            <FontAwesome
+              name="folder-open-o"
+              size={24}
+              color={focused ? "#E2597D" : "grey"}
+            />
           ),
+          tabBarLabelStyle: {
+            color: "#465775",
+          },
         }}
       />
       <BottomTab.Screen
         name="More"
-        component={TabTwoScreen}
+        component={MoreOptionsScreen}
         options={{
           title: "Mai mult",
-          tabBarIcon: ({ color }) => (
-            <Fontisto name="more-v-a" size={24} color={color} />
+          tabBarIcon: ({ color, focused }) => (
+            <Fontisto
+              name="more-v-a"
+              size={24}
+              color={focused ? "#E2597D" : "grey"}
+            />
           ),
+          tabBarLabelStyle: {
+            color: "#465775",
+          },
         }}
       />
     </BottomTab.Navigator>
