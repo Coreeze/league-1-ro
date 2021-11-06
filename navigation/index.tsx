@@ -3,7 +3,7 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { Entypo, FontAwesome } from "@expo/vector-icons";
+import { Entypo, FontAwesome, Fontisto } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   NavigationContainer,
@@ -157,7 +157,9 @@ function BottomTabNavigator() {
         component={TabTwoScreen}
         options={{
           title: "Istorie",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="folder-open-o" size={24} color={color} />
+          ),
         }}
       />
       <BottomTab.Screen
@@ -165,7 +167,9 @@ function BottomTabNavigator() {
         component={TabTwoScreen}
         options={{
           title: "Mai mult",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <Fontisto name="more-v-a" size={24} color={color} />
+          ),
         }}
       />
     </BottomTab.Navigator>

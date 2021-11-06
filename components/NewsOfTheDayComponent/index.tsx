@@ -103,7 +103,7 @@ const NewsOfTheDayComponent = () => {
         )
       }
       <LinearGradient
-        colors={["#465775", "#931F1D"]}
+        colors={["#465775", "#E2597D"]}
         start={{ x: 0.3, y: 0.3 }}
         end={{ x: 0.5, y: 0.5 }}
         locations={[0, 1]}

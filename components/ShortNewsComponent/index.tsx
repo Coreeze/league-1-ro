@@ -63,7 +63,7 @@ const ShortNewsComponent = () => {
   return (
     <View style={styles.container}>
       <LinearGradient
-        colors={["#931F1D", "#465775"]}
+        colors={["#E2597D", "#465775"]}
         start={{ x: 0.3, y: 0.3 }}
         end={{ x: 0.5, y: 0.5 }}
         locations={[0, 1]}
