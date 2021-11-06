@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     fontFamily: "MontserratBold",
     fontSize: 15,
     color: "#1C374A",
-    paddingTop: 12,
+    paddingVertical: 9,
     borderColor: "lightgrey",
     borderBottomWidth: 4,
   },
