@@ -7,7 +7,7 @@ import useFonts from "../../useFonts";
 import styles from "./styles";
 
 const FixturesComponent = () => {
-  const [fixtures, setFixtures] = useState([]);
+  const [fixtures, setFixtures] = useState(Array);
   const [shouldGetFixtures, setShouldGetFixtures] = useState(true);
 
   const [IsReady, SetIsReady] = useState(false);
@@ -23,6 +23,8 @@ const FixturesComponent = () => {
       />
     );
   }
+  getToday();
+  getEndOfWeek();
 
   function getRound() {
     fetch(
@@ -48,17 +50,11 @@ const FixturesComponent = () => {
   }
 
   function getFixtures() {
-    // var today = new Date();
-    // var date =
-    //   today.getFullYear() +
-    //   "-" +
-    //   (today.getMonth() + 1) +
-    //   "-" +
-    //   today.getDate();
-    // console.log("date: " + date);
-
     fetch(
-      "https://v3.football.api-sports.io/fixtures?league=283&season=2021&from=2021-11-04&to=2021-11-06",
+      "https://v3.football.api-sports.io/fixtures?league=283&season=2021&from=" +
+        getToday() +
+        "&to=" +
+        getEndOfWeek(),
       {
         method: "GET",
         headers: {
@@ -69,10 +65,22 @@ const FixturesComponent = () => {
     )
       .then((response) => response.json())
       .then((json) => {
-        console.log("Fetching");
-        // console.log(json);
-        setFixtures(json);
-        // getDateAndTime(json);
+        console.log("Fixtures fetched");
+        var fixtObjs: any[] = [];
+        json.response.map((fixture: any, i: any) => {
+          var fixtureObject = [];
+          fixtObjs.push({
+            timestamp: fixture.fixture.timestamp,
+            date: fixture.fixture.date,
+            teams: fixture.teams,
+          });
+        });
+        // console.log(fixtObjs);
+
+        var sortedFix = fixtObjs.sort(function (x, y) {
+          return x.timestamp - y.timestamp;
+        });
+        setFixtures(sortedFix);
 
         // TODO: add check for what happens when api requests are full
       })
@@ -85,11 +93,11 @@ const FixturesComponent = () => {
   if (shouldGetFixtures) {
     getFixtures();
     setShouldGetFixtures(false);
-    // getDateAndTime(fixtures);
   }
-  // console.log(fixtures);
+  // fixtures.map((obj, i) => console.log(obj));
 
   return (
+    // TODO add check for when there are no fixtures in the next 7 days
     <View style={styles.container}>
       <LinearGradient
         colors={["#931F1D", "#465775"]}
@@ -98,7 +106,7 @@ const FixturesComponent = () => {
         locations={[0, 1]}
         style={{ width: "100%", height: 6 }}
       ></LinearGradient>
-      {fixtures.response?.map((fixture: Object, i: number) => (
+      {fixtures.map((fixture, i: number) => (
         <View style={styles.fixture} key={i}>
           <View style={styles.teamHome}>
             <Image
@@ -114,11 +122,9 @@ const FixturesComponent = () => {
             </Text>
           </View>
           <View style={styles.time}>
+            <Text style={styles.timeText}>{getFixtureDate(fixture.date)}</Text>
             <Text style={styles.timeText}>
-              {getFixtureHour(fixture.fixture.timestamp)}
-            </Text>
-            <Text style={styles.timeText}>
-              {getFixtureDate(fixture.fixture.date)}
+              {getFixtureHour(fixture.timestamp)}
             </Text>
           </View>
           <View style={styles.teamAway}>
@@ -141,27 +147,16 @@ const FixturesComponent = () => {
 };
 
 function getFixtureHour(timestamp: number) {
-  // console.log(timestamp);
   const milliseconds = timestamp * 1000;
   const dateObject = new Date(milliseconds);
   const humanDateFormat = dateObject.toLocaleString();
   const hour = humanDateFormat.slice(11, 16);
 
-  // function convertDate(inputFormat: string) {
-  //   function pad(s: number) {
-  //     return s < 10 ? "0" + s : s;
-  //   }
-  //   var d = new Date(inputFormat);
-  //   return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join("/");
-  // }
-
-  // const date = convertDate(json.response[0].fixture.date);
-  // console.log(dateAndTime);
-
   return hour;
 }
 
 function getFixtureDate(inputFormat: string) {
+  // console.log(inputFormat);
   function pad(s: number) {
     return s < 10 ? "0" + s : s;
   }
@@ -169,11 +164,39 @@ function getFixtureDate(inputFormat: string) {
   return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join("/");
 }
 
-function endOfWeek() {
-  const date = new Date();
+function getToday() {
+  var today = new Date();
 
-  var lastday = date.getDate() - (date.getDay() - 1) + 6;
-  return new Date(date.setDate(lastday));
+  function pad(s: number) {
+    return s < 10 ? "0" + s : s;
+  }
+  var d = new Date(today);
+  let todayString = [
+    d.getFullYear(),
+    pad(d.getMonth() + 1),
+    pad(d.getDate()),
+  ].join("-");
+
+  return todayString;
+}
+
+function getEndOfWeek() {
+  // const today = new Date();
+  var next7days = new Date();
+  next7days.setDate(next7days.getDate() + 7);
+
+  function pad(s: number) {
+    return s < 10 ? "0" + s : s;
+  }
+  var d = new Date(next7days);
+  let next7daysString = [
+    d.getFullYear(),
+    pad(d.getMonth() + 1),
+    pad(d.getDate()),
+  ].join("-");
+
+  // console.log(next7daysString);
+  return next7daysString;
 }
 
 export default FixturesComponent;

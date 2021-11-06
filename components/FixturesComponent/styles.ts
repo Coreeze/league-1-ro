@@ -28,8 +28,10 @@ const styles = StyleSheet.create({
   },
   time: {
     alignItems: "center",
-    width: 50,
     // backgroundColor: "blue",
+    // height: 50,
+    minWidth: 50,
+    maxWidth: 100,
   },
   timeText: {
     borderColor: "grey",
@@ -38,6 +40,15 @@ const styles = StyleSheet.create({
     padding: 5,
     fontFamily: "sans-serif-medium",
     color: "#1C374A",
+  },
+  dateText: {
+    borderColor: "grey",
+    borderRadius: 2,
+    backgroundColor: "lightgrey",
+    padding: 5,
+    fontFamily: "sans-serif-medium",
+    color: "#1C374A",
+    // marginBottom: 15,
   },
   teamAway: {
     // backgroundColor: "yellow",
