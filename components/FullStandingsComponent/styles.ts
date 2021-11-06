@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 9,
     width: "100%",
+    paddingBottom: 20,
   },
   table: {
     backgroundColor: "white",

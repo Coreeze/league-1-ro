@@ -106,6 +106,7 @@ const FixturesComponent = () => {
         locations={[0, 1]}
         style={{ width: "100%", height: 6 }}
       ></LinearGradient>
+      <Text style={styles.title}>Meciuri în următoarele 7 zile</Text>
       {fixtures.map((fixture, i: number) => (
         <View style={styles.fixture} key={i}>
           <View style={styles.teamHome}>

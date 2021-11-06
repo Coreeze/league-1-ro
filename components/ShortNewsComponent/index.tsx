@@ -70,6 +70,7 @@ const ShortNewsComponent = () => {
         style={{ width: "100%", height: 6 }}
       ></LinearGradient>
       <View style={styles.container2}>
+        <Text style={styles.title}>Știri recente</Text>
         {
           // @ts-ignore
           rssFeed[0]?.links[0]?.url ? (
