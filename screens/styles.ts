@@ -37,13 +37,19 @@ const historyScreenSytle = StyleSheet.create({
     marginBottom: 20,
     marginTop: 20,
   },
-  descriptionText: {
+  descriptionText1: {
     color: "#8CB0CF",
     fontFamily: "MontserratSemiBold",
+  },
+  descriptionText2: {
+    color: "#8CB0CF",
+    fontFamily: "MontserratSemiBold",
+    paddingTop: 10,
   },
   menuItem: {
     marginVertical: 2,
     height: 40,
+    backgroundColor: "white",
   },
   menuText: {
     marginVertical: 10,
