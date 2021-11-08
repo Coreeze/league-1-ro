@@ -37,13 +37,10 @@ const ShortNewsComponent = () => {
   }
 
   if (rssFeed != []) {
-    // console.log("rssFeed: " + rssFeed);
     var randomArr = [];
     while (randomArr.length < 4) {
       var r = Math.floor(Math.random() * 100);
       if (randomArr.indexOf(r) === -1) randomArr.push(r);
-      // @ts-ignore
-      // console.log(r + " " + rssFeed[r].links[0].url);
     }
   }
 
@@ -64,10 +61,10 @@ const ShortNewsComponent = () => {
     <View style={styles.container}>
       <LinearGradient
         colors={["#ff4778", "#CEFF00"]}
-        start={{ x: 0.3, y: 0.3 }}
-        end={{ x: 0.5, y: 0.5 }}
-        locations={[0, 1]}
-        style={{ width: "90%", height: 3, alignSelf: "center" }}
+        start={{ x: 0.3, y: 0.9 }}
+        end={{ x: 0.8, y: 1.0 }}
+        locations={[0.6, 1]}
+        style={{ width: "90%", height: 4, alignSelf: "center" }}
       ></LinearGradient>
       <View style={styles.container2}>
         <Text style={styles.title}>Știri recente</Text>

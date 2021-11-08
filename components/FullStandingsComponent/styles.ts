@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
   table: {
     backgroundColor: "white",
     marginTop: 9,
+    borderRadius: 15,
   },
   title: {
     paddingVertical: 9,

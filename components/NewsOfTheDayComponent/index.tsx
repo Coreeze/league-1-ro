@@ -58,11 +58,11 @@ const NewsOfTheDayComponent = () => {
           <RNUrlPreview
             // @ts-ignore
             text={rssFeed[0]?.links[0].url}
-            titleStyle={{ fontFamily: "MontserratBold", color: "#E2EBF3" }}
+            titleStyle={{ fontFamily: "MontserratBold", color: "#fff" }}
             descriptionStyle={{
               fontFamily: "MontserratSemiBold",
               fontSize: 12,
-              color: "#8CB0CF",
+              color: "#e6e6e6",
             }}
             descriptionNumberOfLines={1}
             containerStyle={{
@@ -71,7 +71,7 @@ const NewsOfTheDayComponent = () => {
             }}
             imageStyle={{
               width: "100%",
-              height: 230,
+              height: 260,
               paddingHorizontal: 10,
               borderRadius: 15,
               //   marginRight: 10,
@@ -81,7 +81,7 @@ const NewsOfTheDayComponent = () => {
           <RNUrlPreview
             // @ts-ignore
             text={
-              "https://www.digisport.ro/fotbal/euro-2021/am-construit-degeaba-stadioane-pentru-euro-2021-unde-ar-urma-sa-aiba-loc-competitia-si-ce-va-decide-uefa-1015077"
+              "https://www.digisport.ro/fotbal/premier-league/ronaldo-a-decis-de-unde-se-va-retrage-din-fotbal-anuntul-jurnalistilor-din-anglia-1355391"
             }
             titleStyle={{ fontFamily: "MontserratBold", color: "#fff" }}
             descriptionStyle={{

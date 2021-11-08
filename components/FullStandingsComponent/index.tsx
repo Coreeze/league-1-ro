@@ -16,7 +16,7 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
 
   return (
     <LinearGradient
-      colors={["#CEFF00", "#000"]}
+      colors={["#0E1C26", "#CEFF00"]}
       start={{ x: 0.3, y: 0.3 }}
       end={{ x: 0.5, y: 0.5 }}
       locations={[0, 1]}
@@ -28,7 +28,7 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
           start={{ x: 0.3, y: 0.3 }}
           end={{ x: 0.5, y: 0.5 }}
           locations={[0, 1]}
-          style={{ width: "100%", height: 6 }}
+          style={{ width: "90%", height: 4, alignSelf: "center" }}
         ></LinearGradient>
         <DataTable>
           <Text style={styles.title}>Liga 1 Romania</Text>

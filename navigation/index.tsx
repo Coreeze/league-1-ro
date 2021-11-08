@@ -75,7 +75,7 @@ function RootNavigator() {
                   width: 330,
                   height: 60,
                 }}
-                source={require("../assets/images/header5.png")}
+                source={require("../assets/images/header13.png")}
                 resizeMode="contain"
               />
               <Text
@@ -90,7 +90,7 @@ function RootNavigator() {
             </View>
           ),
           headerStyle: {
-            backgroundColor: "#CEFF00",
+            backgroundColor: "#0E1C26",
           },
           headerTintColor: "#fff",
         }}

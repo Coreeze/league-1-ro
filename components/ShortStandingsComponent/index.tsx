@@ -75,10 +75,10 @@ const ShortStandingsComponent = () => {
     <View style={styles.container}>
       <LinearGradient
         colors={["#ff4778", "#CEFF00"]}
-        start={{ x: 0.3, y: 0.3 }}
-        end={{ x: 0.5, y: 0.5 }}
-        locations={[0, 1]}
-        style={{ width: "90%", height: 3 }}
+        start={{ x: 0.3, y: 0.9 }}
+        end={{ x: 0.8, y: 1.0 }}
+        locations={[0.6, 1]}
+        style={{ width: "90%", height: 4 }}
       ></LinearGradient>
       <DataTable style={{ paddingHorizontal: 9 }}>
         <Text style={styles.title}>Liga 1 Romania</Text>

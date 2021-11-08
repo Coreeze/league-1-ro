@@ -40,7 +40,7 @@ export default function HistoryScreen() {
               width: "100%",
               height: 100,
             }}
-            source={require("../assets/images/header10.png")}
+            source={require("../assets/images/header12.png")}
             resizeMode="contain"
           />
           <View style={historyScreenSytle.writingContainer}>
@@ -60,7 +60,7 @@ export default function HistoryScreen() {
                 Istoria fotbalului românesc
               </Text>
               <Text style={historyScreenSytle.subTitleText}>
-                - din 1890 până în prezent -
+                din 1890 până în prezent
               </Text>
             </View>
             <View style={historyScreenSytle.descriptionContainer}>
@@ -83,11 +83,11 @@ export default function HistoryScreen() {
                 }}
               >
                 <LinearGradient
-                  colors={["#CEFF00", "#ff4778"]}
-                  start={{ x: 0.3, y: 0.3 }}
-                  end={{ x: 0.5, y: 0.5 }}
-                  locations={[0, 1]}
-                  style={{ width: "90%", height: 3 }}
+                  colors={["#ff4778", "#CEFF00"]}
+                  start={{ x: 0.3, y: 0.9 }}
+                  end={{ x: 0.8, y: 1.0 }}
+                  locations={[0.6, 1]}
+                  style={{ width: "90%", height: 4 }}
                 ></LinearGradient>
                 <Text style={historyScreenSytle.menuText}>{item.title}</Text>
                 {i === dataIndex && (
@@ -107,11 +107,11 @@ export default function HistoryScreen() {
                 }}
               >
                 <LinearGradient
-                  colors={["#CEFF00", "#ff4778"]}
-                  start={{ x: 0.3, y: 0.3 }}
-                  end={{ x: 0.5, y: 0.5 }}
-                  locations={[0, 1]}
-                  style={{ width: "90%", height: 3 }}
+                  colors={["#ff4778", "#CEFF00"]}
+                  start={{ x: 0.3, y: 0.9 }}
+                  end={{ x: 0.8, y: 1.0 }}
+                  locations={[0.6, 1]}
+                  style={{ width: "90%", height: 4 }}
                 ></LinearGradient>
                 <Text style={historyScreenSytle.menuText}>{item.title}</Text>
                 {i === teamIndex && (
