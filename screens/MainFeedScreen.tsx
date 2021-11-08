@@ -22,7 +22,7 @@ export default function MainFeedScreen({
 
   return (
     <LinearGradient
-      colors={["#0E1C26", "#294861"]}
+      colors={["#CEFF00", "#000"]}
       start={{ x: 0.5, y: 0 }}
       end={{ x: 0.4, y: 1 }}
       locations={[0, 1]}
@@ -35,7 +35,7 @@ export default function MainFeedScreen({
             width: "100%",
             height: 100,
           }}
-          source={require("../assets/images/header6.png")}
+          source={require("../assets/images/header11.png")}
           resizeMode="contain"
         />
         <NewsOfTheDayComponent />

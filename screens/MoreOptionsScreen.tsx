@@ -8,7 +8,7 @@ import { Text, View } from "../components/Themed";
 export default function MoreOptionsScreen() {
   return (
     <LinearGradient
-      colors={["#0E1C26", "#294861"]}
+      colors={["#CEFF00", "#000"]}
       start={{ x: 0.5, y: 0 }}
       end={{ x: 0.4, y: 1 }}
       locations={[0, 1]}

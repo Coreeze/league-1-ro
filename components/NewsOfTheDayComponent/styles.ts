@@ -4,6 +4,9 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     marginTop: "3%",
+    paddingHorizontal: 10,
+    // alignItems: "center",
+    justifyContent: "center",
   },
   button: {
     flexDirection: "row",

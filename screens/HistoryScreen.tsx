@@ -25,7 +25,7 @@ export default function HistoryScreen() {
 
   return (
     <LinearGradient
-      colors={["#0E1C26", "#294861"]}
+      colors={["#CEFF00", "#000"]}
       start={{ x: 0.5, y: 0 }}
       end={{ x: 0.4, y: 1 }}
       locations={[0, 1]}
@@ -50,6 +50,7 @@ export default function HistoryScreen() {
                 position: "relative",
                 width: "100%",
                 height: 200,
+                borderRadius: 15,
               }}
               source={require("../assets/images/istoric.jpg")}
               resizeMode="contain"
@@ -62,19 +63,7 @@ export default function HistoryScreen() {
                 - din 1890 până în prezent -
               </Text>
             </View>
-            <LinearGradient
-              colors={["#E2597D", "#0E1C26"]}
-              start={{ x: 0.3, y: 0.3 }}
-              end={{ x: 0.5, y: 0.5 }}
-              locations={[0, 1]}
-              style={{ width: "100%", height: 6 }}
-            ></LinearGradient>
             <View style={historyScreenSytle.descriptionContainer}>
-              <Text style={historyScreenSytle.descriptionText1}>
-                Fotbalul este cel mai popular sport în România. Federația Română
-                de Fotbal (FRF), membră a UEFA, este forul național de guvernare
-                al sportului.
-              </Text>
               <Text style={historyScreenSytle.descriptionText2}>
                 Se spune că la Arad, în 1888, un grup de tineri bătea mingea.
                 Aradul nu era în graniţele României atunci şi nici cuvântul
@@ -94,11 +83,11 @@ export default function HistoryScreen() {
                 }}
               >
                 <LinearGradient
-                  colors={["#0E1C26", "#E2597D"]}
+                  colors={["#CEFF00", "#ff4778"]}
                   start={{ x: 0.3, y: 0.3 }}
                   end={{ x: 0.5, y: 0.5 }}
                   locations={[0, 1]}
-                  style={{ width: "100%", height: 3 }}
+                  style={{ width: "90%", height: 3 }}
                 ></LinearGradient>
                 <Text style={historyScreenSytle.menuText}>{item.title}</Text>
                 {i === dataIndex && (
@@ -118,11 +107,11 @@ export default function HistoryScreen() {
                 }}
               >
                 <LinearGradient
-                  colors={["#0E1C26", "#E2597D"]}
+                  colors={["#CEFF00", "#ff4778"]}
                   start={{ x: 0.3, y: 0.3 }}
                   end={{ x: 0.5, y: 0.5 }}
                   locations={[0, 1]}
-                  style={{ width: "100%", height: 3 }}
+                  style={{ width: "90%", height: 3 }}
                 ></LinearGradient>
                 <Text style={historyScreenSytle.menuText}>{item.title}</Text>
                 {i === teamIndex && (

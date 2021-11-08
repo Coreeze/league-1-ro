@@ -16,7 +16,7 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
 
   return (
     <LinearGradient
-      colors={["#0E1C26", "#294861"]}
+      colors={["#CEFF00", "#000"]}
       start={{ x: 0.3, y: 0.3 }}
       end={{ x: 0.5, y: 0.5 }}
       locations={[0, 1]}
@@ -24,7 +24,7 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
     >
       <ScrollView style={styles.table}>
         <LinearGradient
-          colors={["#E2597D", "#465775"]}
+          colors={["#ff4778", "#CEFF00"]}
           start={{ x: 0.3, y: 0.3 }}
           end={{ x: 0.5, y: 0.5 }}
           locations={[0, 1]}

@@ -100,11 +100,11 @@ const FixturesComponent = () => {
     // TODO add check for when there are no fixtures in the next 7 days
     <View style={styles.container}>
       <LinearGradient
-        colors={["#E2597D", "#465775"]}
+        colors={["#ff4778", "#CEFF00"]}
         start={{ x: 0.3, y: 0.3 }}
         end={{ x: 0.5, y: 0.5 }}
         locations={[0, 1]}
-        style={{ width: "100%", height: 6 }}
+        style={{ width: "90%", height: 3 }}
       ></LinearGradient>
       <Text style={styles.title}>Meciuri în următoarele 7 zile</Text>
       {fixtures.map((fixture, i: number) => (

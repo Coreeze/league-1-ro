@@ -25,29 +25,28 @@ const historyScreenSytle = StyleSheet.create({
   titleText: {
     fontSize: 23,
     fontFamily: "MontserratBold",
-    color: "#8CB0CF",
+    color: "#fff",
   },
   subTitleText: {
     fontSize: 17,
     fontFamily: "MontserratSemiBold",
-    color: "#8CB0CF",
+    color: "#fff",
   },
   descriptionContainer: {
-    backgroundColor: "transparent",
+    backgroundColor: "white",
+    paddingHorizontal: 10,
+    borderRadius: 15,
     marginBottom: 20,
-    marginTop: 20,
-  },
-  descriptionText1: {
-    color: "#8CB0CF",
-    fontFamily: "MontserratSemiBold",
   },
   descriptionText2: {
-    color: "#8CB0CF",
+    color: "#000",
     fontFamily: "MontserratSemiBold",
-    paddingTop: 10,
+    padding: 10,
   },
   menuItem: {
+    alignItems: "center",
     flexGrow: 1,
+    borderRadius: 15,
     marginVertical: 2.5,
     // height: 50,
     backgroundColor: "white",
@@ -57,7 +56,7 @@ const historyScreenSytle = StyleSheet.create({
     marginLeft: 10,
     fontSize: 15,
     fontFamily: "MontserratBold",
-    color: "#294861",
+    color: "#000",
   },
   containerTeams: {
     backgroundColor: "transparent",
@@ -65,10 +64,11 @@ const historyScreenSytle = StyleSheet.create({
   },
   containerTeamsTitle: {
     fontFamily: "MontserratBold",
-    fontSize: 15,
-    color: "#8CB0CF",
+    fontSize: 20,
+    color: "#fff",
     paddingBottom: 10,
     paddingTop: 20,
+    alignSelf: "center",
   },
 });
 

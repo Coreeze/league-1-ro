@@ -3,10 +3,15 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
-    width: "100%",
-    marginTop: 60,
-    paddingBottom: 10,
+    marginTop: "9%",
+    borderRadius: 15,
+    flex: 1,
+    // alignItems: "center",
+    // justifyContent: "center",
+    marginHorizontal: 6,
+    paddingHorizontal: 10,
     marginBottom: 20,
+    paddingBottom: 10,
   },
   container2: {
     paddingLeft: 10,
@@ -14,6 +19,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: "MontserratBold",
+    alignSelf: "center",
     fontSize: 15,
     color: "#1C374A",
     paddingVertical: 9,

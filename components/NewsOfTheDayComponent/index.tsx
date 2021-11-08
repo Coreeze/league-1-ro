@@ -73,6 +73,7 @@ const NewsOfTheDayComponent = () => {
               width: "100%",
               height: 230,
               paddingHorizontal: 10,
+              borderRadius: 15,
               //   marginRight: 10,
             }}
           />
@@ -102,13 +103,13 @@ const NewsOfTheDayComponent = () => {
           />
         )
       }
-      <LinearGradient
-        colors={["#465775", "#E2597D"]}
+      {/* <LinearGradient
+        colors={["#ff4778", "#CEFF00"]}
         start={{ x: 0.3, y: 0.3 }}
         end={{ x: 0.5, y: 0.5 }}
         locations={[0, 1]}
         style={{ width: "100%", height: 3 }}
-      ></LinearGradient>
+      ></LinearGradient> */}
       {/* <TouchableOpacity style={styles.button}>
         <Text style={styles.details}>Mai multe stiri</Text>
         <FontAwesome5 name="arrow-right" size={12} color="grey" />

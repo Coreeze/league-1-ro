@@ -90,7 +90,7 @@ function RootNavigator() {
             </View>
           ),
           headerStyle: {
-            backgroundColor: "#0E1C26",
+            backgroundColor: "#CEFF00",
           },
           headerTintColor: "#fff",
         }}
@@ -137,11 +137,11 @@ function BottomTabNavigator() {
             <Entypo
               name="news"
               size={24}
-              color={focused ? "#E2597D" : "grey"}
+              color={focused ? "#ff4778" : "grey"}
             />
           ),
           tabBarLabelStyle: {
-            color: "#465775",
+            color: "#000",
           },
         })}
       />
@@ -154,11 +154,11 @@ function BottomTabNavigator() {
             <Entypo
               name="line-graph"
               size={24}
-              color={focused ? "#E2597D" : "grey"}
+              color={focused ? "#ff4778" : "grey"}
             />
           ),
           tabBarLabelStyle: {
-            color: "#465775",
+            color: "#000",
           },
         }}
       />
@@ -171,11 +171,11 @@ function BottomTabNavigator() {
             <FontAwesome
               name="folder-open-o"
               size={24}
-              color={focused ? "#E2597D" : "grey"}
+              color={focused ? "#ff4778" : "grey"}
             />
           ),
           tabBarLabelStyle: {
-            color: "#465775",
+            color: "#000",
           },
         }}
       />
@@ -188,11 +188,11 @@ function BottomTabNavigator() {
             <Fontisto
               name="more-v-a"
               size={24}
-              color={focused ? "#E2597D" : "grey"}
+              color={focused ? "#ff4778" : "grey"}
             />
           ),
           tabBarLabelStyle: {
-            color: "#465775",
+            color: "#000",
           },
         }}
       />
