@@ -47,8 +47,9 @@ const historyScreenSytle = StyleSheet.create({
     paddingTop: 10,
   },
   menuItem: {
-    marginVertical: 2,
-    height: 40,
+    flexGrow: 1,
+    marginVertical: 2.5,
+    // height: 50,
     backgroundColor: "white",
   },
   menuText: {

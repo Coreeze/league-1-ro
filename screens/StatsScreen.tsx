@@ -1,6 +1,10 @@
 import { LinearGradient } from "expo-linear-gradient";
 import * as React from "react";
 import { StyleSheet } from "react-native";
+import {
+  Accordion,
+  Item,
+} from "react-native-paper/lib/typescript/components/List/List";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";

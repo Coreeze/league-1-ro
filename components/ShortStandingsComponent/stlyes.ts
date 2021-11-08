@@ -50,6 +50,14 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "grey",
   },
+
+  itemDescription: {
+    paddingHorizontal: 10,
+    paddingBottom: 10,
+    fontFamily: "MontserratSemiBold",
+    fontSize: 13,
+    color: "#1C374A",
+  },
 });
 
 export default styles;
