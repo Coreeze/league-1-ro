@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import * as React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import {
   Accordion,
   Item,
@@ -10,6 +10,29 @@ import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 
 export default function StatsScreen() {
+  function getTopScorers() {
+    fetch("https://football.elenasport.io/v2/seasons/:id/topscorers", {
+      method: "GET",
+      headers: {
+        Authorization:
+          "Basic MjdjYTR1ZDQyamZzdjA1Y28xNmM2OThpYzk6MXJhb2Joa3NmZGl2ZzQ5ZjAxZmZ0azAyaWpib3RkMm1nY282MDNjNzZzYWsxb3JsM3N2cw==",
+        // "x-rapidapi-key": "ed6904705c97fe6a528acacb4a32511b",
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        console.log("Fetching");
+        console.log(json);
+        // let fetchLeague = json.response[0].league;
+        // let fetchStandings = fetchLeague.standings[0];
+        // setStandings(fetchStandings);
+        // TODO: add check for what happens when api requests are full
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <LinearGradient
       colors={["#CEFF00", "#000"]}
@@ -18,7 +41,9 @@ export default function StatsScreen() {
       locations={[0, 1]}
       style={styles.container}
     >
-      <Text>Statistici</Text>
+      <TouchableOpacity onPress={getTopScorers}>
+        <Text>Statistici</Text>
+      </TouchableOpacity>
     </LinearGradient>
   );
 }

@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     marginTop: "9%",
     flex: 1,
     // flexDirection: "row",
-    alignItems: "center",
+    // alignItems: "center",
     justifyContent: "center",
     backgroundColor: "rgba(255,255,255,1)",
     borderRadius: 15,
@@ -22,6 +22,15 @@ const styles = StyleSheet.create({
     fontFamily: "MontserratBold",
     borderColor: "lightgrey",
     borderBottomWidth: 4,
+  },
+  subTitle: {
+    width: "100%",
+    textAlign: "center",
+    paddingLeft: 12,
+    color: "#1C374A",
+    paddingVertical: 9,
+    fontSize: 13,
+    fontFamily: "MontserratSemiBold",
   },
   fixture: {
     flexDirection: "row",
@@ -87,6 +96,21 @@ const styles = StyleSheet.create({
     fontFamily: "MontserratSemiBold",
     fontSize: 15,
     color: "#1C374A",
+  },
+  button: {
+    flexDirection: "row",
+    paddingVertical: 6,
+    paddingRight: 9,
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
+  details: {
+    alignSelf: "flex-end",
+    fontFamily: "MontserratBold",
+    paddingRight: 6,
+    paddingVertical: 9,
+    fontSize: 12,
+    color: "grey",
   },
 });
 

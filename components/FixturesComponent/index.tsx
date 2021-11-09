@@ -1,14 +1,17 @@
+import { FontAwesome5 } from "@expo/vector-icons";
 import AppLoading from "expo-app-loading";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { useState } from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
+import { configureFonts } from "react-native-paper";
 import useFonts from "../../useFonts";
 import styles from "./styles";
 
 const FixturesComponent = () => {
   const [fixtures, setFixtures] = useState(Array);
   const [shouldGetFixtures, setShouldGetFixtures] = useState(true);
+  const [areThereFixtures, setAreThereFixtures] = useState(true);
 
   const [IsReady, SetIsReady] = useState(false);
   const LoadFonts = async () => {
@@ -25,29 +28,6 @@ const FixturesComponent = () => {
   }
   getToday();
   getEndOfWeek();
-
-  function getRound() {
-    fetch(
-      "https://v3.football.api-sports.io/fixtures/rounds?season=2021&league=283&current=true",
-      {
-        method: "GET",
-        headers: {
-          "x-rapidapi-host": "v3.football.api-sports.io",
-          "x-rapidapi-key": "ed6904705c97fe6a528acacb4a32511b",
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((json) => {
-        console.log("Fetching");
-
-        // console.log(json.response[0]);
-        // TODO: add check for what happens when api requests are full
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
 
   function getFixtures() {
     fetch(
@@ -66,21 +46,30 @@ const FixturesComponent = () => {
       .then((response) => response.json())
       .then((json) => {
         console.log("Fixtures fetched");
-        var fixtObjs: any[] = [];
-        json.response.map((fixture: any, i: any) => {
-          var fixtureObject = [];
-          fixtObjs.push({
-            timestamp: fixture.fixture.timestamp,
-            date: fixture.fixture.date,
-            teams: fixture.teams,
-          });
-        });
-        // console.log(fixtObjs);
+        console.log(json);
+        console.log("=0? ");
+        console.log(json.results == 0);
 
-        var sortedFix = fixtObjs.sort(function (x, y) {
-          return x.timestamp - y.timestamp;
-        });
-        setFixtures(sortedFix);
+        if (json.results == 0) {
+          setAreThereFixtures(false);
+        } else {
+          var fixtObjs: any[] = [];
+          json.response.map((fixture: any, i: any) => {
+            var fixtureObject = [];
+            fixtObjs.push({
+              timestamp: fixture.fixture.timestamp,
+              date: fixture.fixture.date,
+              teams: fixture.teams,
+            });
+          });
+          // console.log(fixtObjs);
+
+          var sortedFix = fixtObjs.sort(function (x, y) {
+            return x.timestamp - y.timestamp;
+          });
+          setAreThereFixtures(false);
+          console.log("hello");
+        }
 
         // TODO: add check for what happens when api requests are full
       })
@@ -89,7 +78,8 @@ const FixturesComponent = () => {
       });
   }
 
-  //   getRound();
+  console.log("areThereFixtures: " + areThereFixtures);
+
   if (shouldGetFixtures) {
     getFixtures();
     setShouldGetFixtures(false);
@@ -104,48 +94,62 @@ const FixturesComponent = () => {
         start={{ x: 0.3, y: 0.9 }}
         end={{ x: 0.8, y: 1.0 }}
         locations={[0.6, 1]}
-        style={{ width: "90%", height: 4 }}
+        style={{ width: "90%", height: 4, alignSelf: "center" }}
       ></LinearGradient>
       <Text style={styles.title}>Meciuri în următoarele 7 zile</Text>
-      {fixtures.map((fixture, i: number) => (
-        <View style={styles.fixture} key={i}>
-          <View style={styles.teamHome}>
-            <Image
-              source={{
-                uri: fixture.teams.home.logo,
-              }}
-              style={styles.logoHome}
-            />
-            <Text style={styles.teamText}>
-              {fixture.teams.home.name.length > 10
-                ? fixture.teams.home.name.substring(0, 11) + "."
-                : fixture.teams.home.name}
-            </Text>
+      {areThereFixtures ? (
+        fixtures.map((fixture, i: number) => (
+          <View style={styles.fixture} key={i}>
+            <View style={styles.teamHome}>
+              <Image
+                source={{
+                  uri: fixture.teams.home.logo,
+                }}
+                style={styles.logoHome}
+              />
+              <Text style={styles.teamText}>
+                {fixture.teams.home.name.length > 10
+                  ? fixture.teams.home.name.substring(0, 11) + "."
+                  : fixture.teams.home.name}
+              </Text>
+            </View>
+            <View style={styles.time}>
+              <Text style={styles.timeText}>
+                {getFixtureDate(fixture.date)}
+              </Text>
+              <Text style={styles.timeText}>
+                {getFixtureHour(fixture.timestamp)}
+              </Text>
+            </View>
+            <View style={styles.teamAway}>
+              <Image
+                source={{
+                  uri: fixture.teams.away.logo,
+                }}
+                style={styles.logoAway}
+              />
+              <Text style={styles.teamText}>
+                {fixture.teams.away.name.length > 10
+                  ? fixture.teams.away.name.substring(0, 11) + "."
+                  : fixture.teams.away.name}
+              </Text>
+            </View>
           </View>
-          <View style={styles.time}>
-            <Text style={styles.timeText}>{getFixtureDate(fixture.date)}</Text>
-            <Text style={styles.timeText}>
-              {getFixtureHour(fixture.timestamp)}
-            </Text>
-          </View>
-          <View style={styles.teamAway}>
-            <Image
-              source={{
-                uri: fixture.teams.away.logo,
-              }}
-              style={styles.logoAway}
-            />
-            <Text style={styles.teamText}>
-              {fixture.teams.away.name.length > 10
-                ? fixture.teams.away.name.substring(0, 11) + "."
-                : fixture.teams.away.name}
-            </Text>
-          </View>
-        </View>
-      ))}
+        ))
+      ) : (
+        <Text style={styles.subTitle}>Nu sunt meciuri</Text>
+      )}
+      <TouchableOpacity style={styles.button} onPress={showMoreFixtures}>
+        <Text style={styles.details}>Mai mult</Text>
+        <FontAwesome5 name="arrow-right" size={12} color="grey" />
+      </TouchableOpacity>
     </View>
   );
 };
+
+function showMoreFixtures() {
+  console.log("show more fixtures");
+}
 
 function getFixtureHour(timestamp: number) {
   const milliseconds = timestamp * 1000;
