@@ -31,6 +31,7 @@ import {
 import LinkingConfiguration from "./LinkingConfiguration";
 import HistoryScreen from "../screens/HistoryScreen";
 import StatsScreen from "../screens/StatsScreen";
+import MoreFixturesComponent from "../components/MoreFixturesComponent";
 
 export default function Navigation({
   colorScheme,
@@ -66,7 +67,6 @@ function RootNavigator() {
         component={FullStandings}
         options={{
           headerShown: true,
-          // title: "Tabel complet",
           headerTitle: (props) => (
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Image
@@ -86,6 +86,39 @@ function RootNavigator() {
                 }}
               >
                 Tabel complet
+              </Text>
+            </View>
+          ),
+          headerStyle: {
+            backgroundColor: "#0E1C26",
+          },
+          headerTintColor: "#fff",
+        }}
+      />
+      <Stack.Screen
+        name="MoreFixtures"
+        component={MoreFixturesComponent}
+        options={{
+          headerShown: true,
+          headerTitle: (props) => (
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                style={{
+                  position: "absolute",
+                  width: 330,
+                  height: 60,
+                }}
+                source={require("../assets/images/header13.png")}
+                resizeMode="contain"
+              />
+              <Text
+                style={{
+                  fontFamily: "MontserratBold",
+                  color: "white",
+                  fontSize: 18,
+                }}
+              >
+                Meciuri
               </Text>
             </View>
           ),

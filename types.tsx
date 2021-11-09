@@ -22,6 +22,7 @@ export type RootStackParamList = {
   NotFound: undefined;
   FullStandings: undefined;
   History: undefined;
+  MoreFixtures: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
