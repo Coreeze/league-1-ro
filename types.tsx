@@ -23,6 +23,7 @@ export type RootStackParamList = {
   FullStandings: undefined;
   History: undefined;
   MoreFixtures: undefined;
+  Chat: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -30,7 +31,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 
 export type RootTabParamList = {
   MainFeed: undefined;
-  Stats: undefined;
+  Chat: undefined;
   History: undefined;
   More: undefined;
 };

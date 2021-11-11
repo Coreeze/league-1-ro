@@ -30,9 +30,10 @@ import {
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import HistoryScreen from "../screens/HistoryScreen";
-import StatsScreen from "../screens/StatsScreen";
+import StatsScreen from "../screens/ChatScreen";
 import MoreFixturesComponent from "../components/MoreFixturesComponent";
-
+import DiscussionsScreen from "../screens/ChatScreen";
+import ChatScreen from "../screens/ChatScreen";
 export default function Navigation({
   colorScheme,
 }: {
@@ -128,11 +129,6 @@ function RootNavigator() {
           headerTintColor: "#fff",
         }}
       />
-      <Stack.Screen
-        name="NotFound"
-        component={NotFoundScreen}
-        options={{ title: "Oops!" }}
-      />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen
           name="Modal"
@@ -179,13 +175,13 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="Stats"
-        component={StatsScreen}
+        name="Chat"
+        component={ChatScreen}
         options={{
-          title: "Statistici",
+          title: "Discutii",
           tabBarIcon: ({ color, focused }) => (
             <Entypo
-              name="line-graph"
+              name="chat"
               size={24}
               color={focused ? "#ff4778" : "grey"}
             />

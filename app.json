@@ -15,9 +15,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -29,7 +27,18 @@
       "package": "com.coreeze.liga1romania.preAlpha"
     },
     "web": {
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/favicon.png",
+      "config": {
+        "firebase": {
+          "apiKey": "AIzaSyDDQKoZYTxpvE3aHPhop6buG0aYZXYv0IU",
+          "authDomain": "football-app-32bb9.firebaseapp.com",
+          "projectId": "football-app-32bb9",
+          "storageBucket": "football-app-32bb9.appspot.com",
+          "messagingSenderId": "632067557113",
+          "appId": "1:632067557113:web:dfabd8d2f45072ff8d0428",
+          "measurementId": "G-07RETPKL8Y"
+        }
+      }
     }
   }
 }
