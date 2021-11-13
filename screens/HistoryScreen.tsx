@@ -1,14 +1,15 @@
 import { LinearGradient } from "expo-linear-gradient";
 import * as React from "react";
 import { useState } from "react";
-import { ScrollView, Image, TouchableOpacity } from "react-native";
+import { ScrollView, Image, TouchableOpacity, Dimensions } from "react-native";
 import { Transition, Transitioning } from "react-native-reanimated";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import styles from "../components/ShortStandingsComponent/stlyes";
 import { Text, View } from "../components/Themed";
 import { historyData, historyTeams } from "../data/history";
-import historyScreenSytle from "./styles";
+// import historyScreenSytle from "./styles";
+import { historyScreenSytle } from "./styles";
 
 const transition = (
   <Transition.Together>
@@ -23,9 +24,14 @@ export default function HistoryScreen() {
   const [teamIndex, setTeamIndex] = useState(null);
   const ref = React.useRef();
 
+  const dimensions = Dimensions.get("window");
+  const imageWidth = dimensions.width;
+
+  console.log(dimensions);
+
   return (
     <LinearGradient
-      colors={["#CEFF00", "#000"]}
+      colors={["#CEFF00", "#0E1C26"]}
       start={{ x: 0.5, y: 0 }}
       end={{ x: 0.4, y: 1 }}
       locations={[0, 1]}
@@ -37,11 +43,11 @@ export default function HistoryScreen() {
           <Image
             style={{
               position: "relative",
-              width: "100%",
+              width: imageWidth,
               height: 100,
             }}
             source={require("../assets/images/header12.png")}
-            resizeMode="contain"
+            resizeMode="cover"
           />
           <View style={historyScreenSytle.writingContainer}>
             <Image

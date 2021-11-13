@@ -4,7 +4,9 @@ const styles = StyleSheet.create({
   container: {
     marginTop: "9%",
     flex: 1,
-    // flexDirection: "row",
+    flexGrow: 1,
+
+    // flexDirection: "column",
     // alignItems: "center",
     justifyContent: "center",
     backgroundColor: "rgba(255,255,255,1)",
@@ -47,6 +49,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     // backgroundColor: "red",
+    height: "80%",
     paddingRight: 5,
   },
   time: {
@@ -75,6 +78,7 @@ const styles = StyleSheet.create({
   },
   teamAway: {
     // backgroundColor: "yellow",
+    height: "80%",
     flexDirection: "row",
     alignItems: "center",
     width: 130,
@@ -103,6 +107,10 @@ const styles = StyleSheet.create({
     paddingRight: 9,
     justifyContent: "flex-end",
     alignItems: "center",
+  },
+  detailsMenu: {
+    borderColor: "lightgrey",
+    borderBottomWidth: 5,
   },
   details: {
     alignSelf: "flex-end",

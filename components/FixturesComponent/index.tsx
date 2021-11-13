@@ -15,6 +15,8 @@ const FixturesComponent = () => {
   const [fixtures, setFixtures] = useState(Array);
   const [shouldGetFixtures, setShouldGetFixtures] = useState(true);
 
+  const [showDetailsMenu, setShowDetailsMenu] = useState(null);
+
   const [IsReady, SetIsReady] = useState(false);
   const LoadFonts = async () => {
     await useFonts();
@@ -47,21 +49,20 @@ const FixturesComponent = () => {
     )
       .then((response) => response.json())
       .then((json) => {
-        console.log("Fixtures fetched");
+        console.log("Fixtures component fetch");
         var fixtObjs: any[] = [];
         json.response.map((fixture: any, i: any) => {
-          var fixtureObject = [];
           fixtObjs.push({
             timestamp: fixture.fixture.timestamp,
             date: fixture.fixture.date,
             teams: fixture.teams,
           });
         });
-        // console.log(fixtObjs);
         var sortedFix = fixtObjs.sort(function (x, y) {
           return x.timestamp - y.timestamp;
         });
         setFixtures(sortedFix);
+        // console.log(sortedFix);
 
         // TODO: add check for what happens when api requests are full
       })
@@ -79,9 +80,14 @@ const FixturesComponent = () => {
     // @ts-ignore: Unreachable code error
     navigation.navigate("MoreFixtures");
   }
+  function showTeamDetails(team: undefined) {
+    // @ts-ignore: Unreachable code error
+    navigation.navigate("TeamDetails", { team });
+  }
 
   return (
-    // TODO add check for when there are no fixtures in the next 7 days
+    // TODO add more details on click
+    // TODO add last 7 days matches
     <View style={styles.container}>
       <LinearGradient
         colors={["#ff4778", "#CEFF00"]}
@@ -93,41 +99,69 @@ const FixturesComponent = () => {
       <Text style={styles.title}>Meciuri în următoarele 7 zile</Text>
       {fixtures.length != 0 ? (
         fixtures.map((fixture, i: number) => (
-          <View style={styles.fixture} key={i}>
-            <View style={styles.teamHome}>
-              <Image
-                source={{
-                  uri: fixture.teams.home.logo,
+          <View>
+            <TouchableOpacity
+              style={styles.fixture}
+              key={i}
+              activeOpacity={0.7}
+              onPress={() => {
+                setShowDetailsMenu(i === showDetailsMenu ? null : i);
+              }}
+            >
+              <TouchableOpacity
+                style={styles.teamHome}
+                activeOpacity={0.7}
+                onPress={() => {
+                  showTeamDetails(fixture.teams.home);
                 }}
-                style={styles.logoHome}
-              />
-              <Text style={styles.teamText}>
-                {fixture.teams.home.name.length > 10
-                  ? fixture.teams.home.name.substring(0, 11) + "."
-                  : fixture.teams.home.name}
-              </Text>
-            </View>
-            <View style={styles.time}>
-              <Text style={styles.timeText}>
-                {getFixtureDate(fixture.date)}
-              </Text>
-              <Text style={styles.timeText}>
-                {getFixtureHour(fixture.timestamp)}
-              </Text>
-            </View>
-            <View style={styles.teamAway}>
-              <Image
-                source={{
-                  uri: fixture.teams.away.logo,
+                key={fixture.timestamp}
+              >
+                <Image
+                  source={{
+                    uri: fixture.teams.home.logo,
+                  }}
+                  style={styles.logoHome}
+                />
+                <Text style={styles.teamText}>
+                  {fixture.teams.home.name.length > 10
+                    ? fixture.teams.home.name.substring(0, 11) + "."
+                    : fixture.teams.home.name}
+                </Text>
+              </TouchableOpacity>
+              <View style={styles.time}>
+                <Text style={styles.timeText}>
+                  {getFixtureDate(fixture.date)}
+                </Text>
+                <Text style={styles.timeText}>
+                  {getFixtureHour(fixture.timestamp)}
+                </Text>
+              </View>
+              <TouchableOpacity
+                style={styles.teamAway}
+                activeOpacity={0.7}
+                onPress={() => {
+                  showTeamDetails(fixture.teams.away);
                 }}
-                style={styles.logoAway}
-              />
-              <Text style={styles.teamText}>
-                {fixture.teams.away.name.length > 10
-                  ? fixture.teams.away.name.substring(0, 11) + "."
-                  : fixture.teams.away.name}
-              </Text>
-            </View>
+                key={fixture.timestamp + 1}
+              >
+                <Image
+                  source={{
+                    uri: fixture.teams.away.logo,
+                  }}
+                  style={styles.logoAway}
+                />
+                <Text style={styles.teamText}>
+                  {fixture.teams.away.name.length > 10
+                    ? fixture.teams.away.name.substring(0, 11) + "."
+                    : fixture.teams.away.name}
+                </Text>
+              </TouchableOpacity>
+            </TouchableOpacity>
+            {/* {i === showDetailsMenu && (
+              <View style={styles.detailsMenu} key={i}>
+                <Text>TEST</Text>
+              </View>
+            )} */}
           </View>
         ))
       ) : (

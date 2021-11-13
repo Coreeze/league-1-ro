@@ -1,5 +1,11 @@
 import React, { Component, useState } from "react";
-import { ScrollView, StyleSheet, TouchableOpacity, Image } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+} from "react-native";
 
 // import LinearGradient from "react-native-linear-gradient";
 import { LinearGradient } from "expo-linear-gradient";
@@ -20,9 +26,31 @@ export default function MainFeedScreen({
 }: RootTabScreenProps<"MainFeed">) {
   const [shouldFetch, setShouldFetch] = useState(true);
 
+  const dimensions = Dimensions.get("window");
+  const imageWidth = dimensions.width;
+
+  function fetchTest() {
+    fetch("https://v3.football.api-sports.io/teams?id=2603", {
+      method: "GET",
+      headers: {
+        "x-rapidapi-host": "v3.football.api-sports.io",
+        "x-rapidapi-key": "ed6904705c97fe6a528acacb4a32511b",
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        console.log("fetchTest");
+        console.log(json);
+        // let fetchLeague = json.response[0].league;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <LinearGradient
-      colors={["#CEFF00", "#000"]}
+      colors={["#CEFF00", "#0E1C26"]}
       start={{ x: 0.5, y: 0 }}
       end={{ x: 0.4, y: 1 }}
       locations={[0, 1]}
@@ -36,8 +64,11 @@ export default function MainFeedScreen({
             height: 100,
           }}
           source={require("../assets/images/header11.png")}
-          resizeMode="contain"
+          resizeMode="cover"
         />
+        {/* <TouchableOpacity onPress={fetchTest}>
+          <Text>BUTTON</Text>
+        </TouchableOpacity> */}
         <NewsOfTheDayComponent />
         <FixturesComponent />
         <ShortStandingsComponent />

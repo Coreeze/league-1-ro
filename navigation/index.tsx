@@ -34,6 +34,7 @@ import StatsScreen from "../screens/ChatScreen";
 import MoreFixturesComponent from "../components/MoreFixturesComponent";
 import DiscussionsScreen from "../screens/ChatScreen";
 import ChatScreen from "../screens/ChatScreen";
+import TeamDetails from "../screens/TeamDetailsScreen";
 export default function Navigation({
   colorScheme,
 }: {
@@ -121,6 +122,30 @@ function RootNavigator() {
               >
                 Meciuri
               </Text>
+            </View>
+          ),
+          headerStyle: {
+            backgroundColor: "#0E1C26",
+          },
+          headerTintColor: "#fff",
+        }}
+      />
+      <Stack.Screen
+        name="TeamDetails"
+        component={TeamDetails}
+        options={{
+          headerShown: true,
+          headerTitle: (props) => (
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                style={{
+                  position: "absolute",
+                  width: 330,
+                  height: 60,
+                }}
+                source={require("../assets/images/header13.png")}
+                resizeMode="contain"
+              />
             </View>
           ),
           headerStyle: {

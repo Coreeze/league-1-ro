@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
   },
 
   itemDescription: {
-    paddingHorizontal: 10,
-    paddingBottom: 10,
+    paddingHorizontal: 20,
+    paddingBottom: 15,
     fontFamily: "MontserratSemiBold",
     fontSize: 13,
     color: "#1C374A",

@@ -23,6 +23,7 @@ export type RootStackParamList = {
   FullStandings: undefined;
   History: undefined;
   MoreFixtures: undefined;
+  TeamDetails: undefined;
   Chat: undefined;
 };
 
