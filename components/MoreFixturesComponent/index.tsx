@@ -92,8 +92,8 @@ const MoreFixturesComponent = () => {
         ></LinearGradient>
         <Text style={styles.title}>Meciuri în următoarele 21 de zile</Text>
         <Text style={styles.subTitle}>
-          Data si ora acestor meciuri este posibil sa nu fie inca stabilite, iar
-          acestea pot varia. Le vom aduce la curent pe masura ce se apropie.
+          Data si ora acestor meciuri este posibil sa nu fie inca la zi in baza
+          noastra de data. Le vom aduce la curent pe masura ce se apropie.
           Vizualizare placuta!
         </Text>
         {fixtures.length != 0 ? (

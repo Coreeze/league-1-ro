@@ -7,10 +7,12 @@ import {
   TextInput,
   Button,
   LogBox,
+  Platform,
+  NativeModules,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Dialog from "react-native-dialog";
-import { StatusBar } from "expo-status-bar";
+import emojiUtils from "emoji-utils";
 
 import { GiftedChat } from "react-native-gifted-chat";
 import "firebase/compat/firestore";
@@ -37,6 +39,8 @@ const firebaseConfig = {
   appId: "1:632067557113:web:dfabd8d2f45072ff8d0428",
   measurementId: "G-07RETPKL8Y",
 };
+
+const { StatusBarManager } = NativeModules;
 
 LogBox.ignoreLogs(["Setting a timer"]);
 
@@ -69,7 +73,7 @@ const ChatScreen = () => {
         .map(({ doc }) => {
           const message = doc.data();
           const _id = Math.random().toString(36).substring(7);
-          console.log(message);
+          // console.log(message);
           return {
             text: message.m.text,
             createdAt: message.m.createdAt.toDate(),
@@ -149,19 +153,49 @@ const ChatScreen = () => {
       : setState({ ...state, visible: true });
   };
 
-  console.log(user);
+  const renderMessage = (props) => {
+    const {
+      currentMessage: { text: currText },
+    } = props;
+
+    let messageTextStyle;
+
+    // Make "pure emoji" messages much bigger than plain text.
+    if (currText && emojiUtils.isPureEmojiString(currText)) {
+      messageTextStyle = {
+        fontSize: 28,
+        // Emoji get clipped if lineHeight isn't increased; make it consistent across platforms.
+        lineHeight: Platform.OS === "android" ? 34 : 30,
+      };
+    }
+
+    return <SlackMessage {...props} messageTextStyle={messageTextStyle} />;
+  };
 
   return (
-    <GiftedChat
-      messages={messages}
-      renderUsernameOnMessage={true}
-      user={user}
-      onSend={handleSend}
-    />
+    <LinearGradient
+      colors={["#CEFF00", "#000"]}
+      start={{ x: 0.5, y: 0 }}
+      end={{ x: 0.4, y: 1 }}
+      locations={[0, 1]}
+      style={styles.gradientContainer}
+    >
+      <GiftedChat
+        messages={messages}
+        renderUsernameOnMessage={true}
+        user={user}
+        onSend={handleSend}
+        // renderMessage={renderMessage}
+      />
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
+  gradientContainer: {
+    flex: 1,
+    paddingTop: Platform.OS === "ios" ? 20 : StatusBarManager.HEIGHT,
+  },
   container: {
     flex: 1,
     backgroundColor: "#fff",
