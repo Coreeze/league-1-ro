@@ -84,6 +84,7 @@ const FixturesComponent = () => {
     // @ts-ignore: Unreachable code error
     navigation.navigate("TeamDetails", { team });
   }
+  // console.log(fixtures[0]);
 
   return (
     // TODO add more details on click
@@ -98,11 +99,10 @@ const FixturesComponent = () => {
       ></LinearGradient>
       <Text style={styles.title}>Meciuri în următoarele 7 zile</Text>
       {fixtures.length != 0 ? (
-        fixtures.map((fixture, i: number) => (
-          <View>
+        fixtures.map((fixture: any, i: number) => (
+          <View key={i}>
             <TouchableOpacity
               style={styles.fixture}
-              key={i}
               activeOpacity={0.7}
               onPress={() => {
                 setShowDetailsMenu(i === showDetailsMenu ? null : i);
@@ -114,7 +114,6 @@ const FixturesComponent = () => {
                 onPress={() => {
                   showTeamDetails(fixture.teams.home);
                 }}
-                key={fixture.timestamp}
               >
                 <Image
                   source={{
@@ -142,7 +141,6 @@ const FixturesComponent = () => {
                 onPress={() => {
                   showTeamDetails(fixture.teams.away);
                 }}
-                key={fixture.timestamp + 1}
               >
                 <Image
                   source={{
