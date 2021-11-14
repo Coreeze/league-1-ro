@@ -95,7 +95,7 @@ export const teamDetailsScreen = StyleSheet.create({
     paddingLeft: 9,
     marginTop: 9,
     paddingBottom: 18,
-    marginHorizontal: 10,
+    marginHorizontal: 9,
     borderRadius: 15,
     paddingVertical: 6,
     backgroundColor: "white",

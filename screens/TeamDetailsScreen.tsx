@@ -9,6 +9,7 @@ import {
   Text,
   View,
 } from "react-native";
+import ShortNewsComponent from "../components/ShortNewsComponent";
 
 import { teamDetailsScreen } from "./styles";
 
@@ -121,6 +122,7 @@ export default function TeamDetails({ route }: any) {
         <View>
           <Text>Stats go here</Text>
         </View>
+        <ShortNewsComponent keyWords={name} title={"Știri despre " + name} />
       </ScrollView>
     </LinearGradient>
   );

@@ -20,6 +20,8 @@ const ShortStandingsComponent = () => {
   const [standings, setStandings] = useState([]);
   const [shouldFetch, setShouldFetch] = useState(true);
 
+  const [showLatestForm, setShowLatestForm] = useState(null);
+
   if (shouldFetch) {
     getStandtings();
     setShouldFetch(false);
@@ -71,6 +73,8 @@ const ShortStandingsComponent = () => {
     });
   }
 
+  console.log(topFiveStandings[0]);
+
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -102,36 +106,125 @@ const ShortStandingsComponent = () => {
         </DataTable.Header>
 
         {topFiveStandings.map((team, i) => (
-          <DataTable.Row style={styles.row} key={i}>
-            <DataTable.Cell>
-              <Text style={styles.tableText}>{team.rank}</Text>
-            </DataTable.Cell>
-            <DataTable.Cell>
-              <Avatar.Image
-                size={25}
-                source={{ uri: team.team.logo }}
-                style={styles.avatar}
-              />
-            </DataTable.Cell>
-            <DataTable.Cell style={styles.club}>
-              <Text style={styles.tableText}>
-                {team.team.name.length > 18
-                  ? team.team.name.substring(0, 18) + "."
-                  : team.team.name}
-              </Text>
-            </DataTable.Cell>
-            <DataTable.Cell>
-              <Text style={styles.tableText}>{team.all.played}</Text>
-            </DataTable.Cell>
-            <DataTable.Cell>
-              <Text style={styles.tableText}>
-                {team.all.goals.for - team.all.goals.against}
-              </Text>
-            </DataTable.Cell>
-            <DataTable.Cell>
-              <Text style={styles.tableText}>{team.points}</Text>
-            </DataTable.Cell>
-          </DataTable.Row>
+          <View>
+            <DataTable.Row
+              style={styles.row}
+              key={i}
+              onPress={() => {
+                setShowLatestForm(i === showLatestForm ? null : i);
+              }}
+            >
+              <DataTable.Cell>
+                <Text style={styles.tableText}>{team.rank}</Text>
+              </DataTable.Cell>
+              <DataTable.Cell>
+                <Avatar.Image
+                  size={25}
+                  source={{ uri: team.team.logo }}
+                  style={styles.avatar}
+                />
+              </DataTable.Cell>
+              <DataTable.Cell style={styles.club}>
+                <Text style={styles.tableText}>
+                  {team.team.name.length > 18
+                    ? team.team.name.substring(0, 18) + "."
+                    : team.team.name}
+                </Text>
+              </DataTable.Cell>
+              <DataTable.Cell>
+                <Text style={styles.tableText}>{team.all.played}</Text>
+              </DataTable.Cell>
+              <DataTable.Cell>
+                <Text style={styles.tableText}>
+                  {team.all.goals.for - team.all.goals.against}
+                </Text>
+              </DataTable.Cell>
+              <DataTable.Cell>
+                <Text style={styles.tableText}>{team.points}</Text>
+              </DataTable.Cell>
+            </DataTable.Row>
+            {i === showLatestForm && (
+              <View
+                style={{
+                  borderColor: "lightgrey",
+                  borderBottomWidth: 2,
+                  // flexDirection: "column",
+                  alignItems: "center",
+                  backgroundColor: "lightgrey",
+                }}
+                key={team.form + team.points}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                  }}
+                >
+                  {/* <Text>Meciuri jucate</Text> */}
+                  <Text style={styles.accordionText}>
+                    Meciuri - {team.all.played}
+                  </Text>
+                  <Text style={styles.accordionText}>|</Text>
+                  <Text style={styles.accordionText}>
+                    Castigate - {team.all.win}
+                  </Text>
+                  <Text style={styles.accordionText}>|</Text>
+                  <Text style={styles.accordionText}>
+                    Pierdute - {team.all.lose}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    borderColor: "white",
+                    borderBottomWidth: 1,
+                    borderTopWidth: 1,
+                  }}
+                >
+                  <Text style={styles.accordionText}>
+                    Goluri marcate - {team.all.goals.for}
+                  </Text>
+                  <Text style={styles.accordionText}>|</Text>
+                  <Text style={styles.accordionText}>
+                    Goluri primite - {team.all.goals.against}
+                  </Text>
+                </View>
+
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <Text
+                    style={{
+                      fontFamily: "MontserratSemiBold",
+                      color: "#1C374A",
+                      fontSize: 13,
+                      padding: 5,
+                    }}
+                  >
+                    Formă
+                  </Text>
+                  {team.form.split("").map((result, i) => (
+                    <Text
+                      style={{
+                        backgroundColor:
+                          result == "W"
+                            ? "#CEFF00"
+                            : result == "D"
+                            ? "grey"
+                            : "#ff4778",
+                        borderRadius: 5,
+                        padding: 5,
+                        color: "white",
+                        margin: 5,
+                        fontFamily: "MontserratSemiBold",
+                        color: "#1e4b6b",
+                        fontSize: 13,
+                      }}
+                    >
+                      {result}
+                    </Text>
+                  ))}
+                </View>
+              </View>
+            )}
+          </View>
         ))}
         <TouchableOpacity style={styles.button} onPress={showFullStandings}>
           <Text style={styles.details}>Tabel complet</Text>

@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "rgba(255,255,255,1)",
     borderRadius: 15,
-    marginHorizontal: 6,
+    marginHorizontal: 9,
     paddingHorizontal: 10,
   },
   title: {
@@ -63,6 +63,12 @@ const styles = StyleSheet.create({
     fontFamily: "MontserratSemiBold",
     fontSize: 13,
     color: "#1C374A",
+  },
+  accordionText: {
+    fontFamily: "MontserratSemiBold",
+    color: "#1C374A",
+    fontSize: 13,
+    padding: 6,
   },
 });
 

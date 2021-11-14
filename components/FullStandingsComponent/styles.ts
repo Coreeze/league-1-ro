@@ -52,6 +52,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "grey",
   },
+  accordionText: {
+    fontFamily: "MontserratSemiBold",
+    color: "#1C374A",
+    fontSize: 13,
+    padding: 6,
+  },
 });
 
 export default styles;

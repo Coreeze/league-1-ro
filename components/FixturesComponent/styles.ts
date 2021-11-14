@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "rgba(255,255,255,1)",
     borderRadius: 15,
-    marginHorizontal: 6,
+    marginHorizontal: 9,
     paddingHorizontal: 10,
   },
   title: {

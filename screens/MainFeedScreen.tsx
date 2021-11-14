@@ -19,6 +19,7 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
 import ShortNewsComponent from "../components/ShortNewsComponent";
 import NewsOfTheDayComponent from "../components/NewsOfTheDayComponent";
 import FixturesComponent from "../components/FixturesComponent";
+import TeamsList from "../components/TeamsListComponent";
 // import styles from "../components/StandingsComponent/stlyes";
 
 export default function MainFeedScreen({
@@ -49,6 +50,7 @@ export default function MainFeedScreen({
   }
 
   return (
+    // TODO: add loading spinner for EVERYTHING
     <LinearGradient
       colors={["#CEFF00", "#0E1C26"]}
       start={{ x: 0.5, y: 0 }}
@@ -70,9 +72,10 @@ export default function MainFeedScreen({
           <Text>BUTTON</Text>
         </TouchableOpacity> */}
         <NewsOfTheDayComponent />
+        <TeamsList />
         <FixturesComponent />
         <ShortStandingsComponent />
-        <ShortNewsComponent />
+        <ShortNewsComponent keyWords={["fotbal"]} title={"Știri recente"} />
 
         {/* <TouchableOpacity style={styles.button} onPress={handlePress}>
           <Text>Statistici detaliate</Text>

@@ -10,21 +10,30 @@ import useFonts from "../../useFonts";
 import styles from "./styles";
 import { FontAwesome5 } from "@expo/vector-icons";
 
-const ShortNewsComponent = () => {
+const ShortNewsComponent = ({ ...props }) => {
   const [rssFeed, setRssFeed] = useState([]);
   const [shouldFetch, setShouldFetch] = useState(true);
   var feed = [];
+  let searchQuery = props.keyWords;
 
   if (shouldFetch) {
-    console.log("shouldFetch");
+    if (searchQuery.length > 1) {
+      searchQuery = searchQuery.split(" ");
+      searchQuery = searchQuery.join("%20");
+    } else {
+      searchQuery = props.keyWords[0];
+    }
+
     getFeed();
     setShouldFetch(false);
   }
 
   function getFeed() {
-    console.log("getFeed: " + shouldFetch);
+    console.log("get news feed");
     fetch(
-      "https://news.google.com/rss/search?q=fotbal&hl=ro&gl=RO&ceid=RO%3Aro"
+      "https://news.google.com/rss/search?q=" +
+        searchQuery +
+        "&hl=ro&gl=RO&ceid=RO%3Aro"
     )
       .then((response) => response.text())
       .then((responseData) => rssParser.parse(responseData))
@@ -67,7 +76,7 @@ const ShortNewsComponent = () => {
         style={{ width: "90%", height: 4, alignSelf: "center" }}
       ></LinearGradient>
       <View style={styles.container2}>
-        <Text style={styles.title}>Știri recente</Text>
+        <Text style={styles.title}>{props.title}</Text>
         {
           // @ts-ignore
           rssFeed[0]?.links[0]?.url ? (
