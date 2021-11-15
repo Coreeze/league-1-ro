@@ -72,6 +72,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
     padding: 6,
   },
+  tableHeader: {
+    backgroundColor: "lightgrey",
+    borderRadius: 9,
+  },
+  tableTitle: {
+    fontFamily: "MontserratSemiBold",
+    fontSize: 15,
+  },
 });
 
 export default styles;

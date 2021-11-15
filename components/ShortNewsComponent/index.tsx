@@ -17,11 +17,11 @@ const ShortNewsComponent = ({ ...props }) => {
   let searchQuery = props.keyWords;
 
   if (shouldFetch) {
-    if (searchQuery.length > 1) {
+    if (searchQuery?.length > 1) {
       searchQuery = searchQuery.split(" ");
       searchQuery = searchQuery.join("%20");
     } else {
-      searchQuery = props.keyWords[0];
+      searchQuery = props?.keyWords[0];
     }
 
     getFeed();
