@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   title: {
     paddingVertical: 9,
     paddingLeft: 15,
-    fontSize: 15,
+    fontSize: 18,
     fontFamily: "MontserratBold",
     color: "#1C374A",
     textAlign: "center",
@@ -25,11 +25,11 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontFamily: "MontserratSemiBold",
-    fontSize: 13,
+    fontSize: 15,
   },
   tableText: {
     fontFamily: "MontserratSemiBold",
-    fontSize: 13,
+    fontSize: 15,
     color: "#1C374A",
   },
   row: {
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   accordionText: {
     fontFamily: "MontserratSemiBold",
     color: "#1C374A",
-    fontSize: 13,
+    fontSize: 15,
     padding: 6,
   },
 });

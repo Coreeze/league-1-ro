@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     paddingLeft: 12,
     color: "#1C374A",
     paddingVertical: 9,
-    fontSize: 15,
+    fontSize: 18,
     fontFamily: "MontserratBold",
     borderColor: "lightgrey",
     borderBottomWidth: 4,
@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     padding: 5,
     fontFamily: "sans-serif-medium",
     color: "#1C374A",
+    fontSize: 15,
   },
   dateText: {
     borderColor: "grey",
@@ -85,20 +86,20 @@ const styles = StyleSheet.create({
   },
   logoHome: {
     // size: 5,
-    width: 20,
-    height: 20,
+    width: 23,
+    height: 23,
     marginRight: 6,
   },
   logoAway: {
     // size: 5,
-    width: 20,
-    height: 20,
+    width: 23,
+    height: 23,
     marginRight: 6,
     marginLeft: 10,
   },
   teamText: {
     fontFamily: "MontserratSemiBold",
-    fontSize: 15,
+    fontSize: 17,
     color: "#1C374A",
   },
   button: {

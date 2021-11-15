@@ -205,6 +205,7 @@ const ShortStandingsComponent = () => {
                   </Text>
                   {team.form.split("").map((result, i) => (
                     <Text
+                      key={Math.random()}
                       style={{
                         backgroundColor:
                           result == "W"

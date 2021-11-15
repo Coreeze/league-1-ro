@@ -123,8 +123,8 @@ const FixturesComponent = () => {
                   style={styles.logoHome}
                 />
                 <Text style={styles.teamText}>
-                  {fixture.teams.home.name.length > 8
-                    ? fixture.teams.home.name.substring(0, 10) + "."
+                  {fixture.teams.home.name.length > 7
+                    ? fixture.teams.home.name.substring(0, 8) + "."
                     : fixture.teams.home.name}
                 </Text>
               </TouchableOpacity>
@@ -150,8 +150,8 @@ const FixturesComponent = () => {
                   style={styles.logoAway}
                 />
                 <Text style={styles.teamText}>
-                  {fixture.teams.away.name.length > 8
-                    ? fixture.teams.away.name.substring(0, 10) + "."
+                  {fixture.teams.away.name.length > 7
+                    ? fixture.teams.away.name.substring(0, 8) + "."
                     : fixture.teams.away.name}
                 </Text>
               </TouchableOpacity>

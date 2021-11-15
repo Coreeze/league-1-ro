@@ -86,10 +86,14 @@ const ShortNewsComponent = ({ ...props }) => {
                 key={i}
                 // @ts-ignore
                 text={rssFeed[randomNo]?.links[0].url}
-                titleStyle={{ fontFamily: "MontserratBold", color: "#1C374A" }}
+                titleStyle={{
+                  fontFamily: "MontserratBold",
+                  color: "#1C374A",
+                  fontSize: 16,
+                }}
                 descriptionStyle={{
                   fontFamily: "MontserratSemiBold",
-                  fontSize: 12,
+                  fontSize: 13,
                   color: "#42759E",
                 }}
                 descriptionNumberOfLines={2}

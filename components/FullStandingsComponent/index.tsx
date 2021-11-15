@@ -37,7 +37,7 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
           <Text style={styles.title}>Liga 1 Romania</Text>
           <DataTable.Header style={styles.header}>
             <DataTable.Title>
-              <Text style={styles.titleText}>Poz</Text>
+              <Text style={styles.titleText}>P</Text>
             </DataTable.Title>
             <DataTable.Title> </DataTable.Title>
             <DataTable.Title style={styles.club}>
@@ -84,8 +84,8 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
                 </DataTable.Cell>
                 <DataTable.Cell style={styles.club}>
                   <Text style={styles.tableText}>
-                    {team.team.name.length > 11
-                      ? team.team.name.substring(0, 12) + "."
+                    {team.team.name.length > 9
+                      ? team.team.name.substring(0, 10) + "."
                       : team.team.name}
                   </Text>
                 </DataTable.Cell>
@@ -120,7 +120,6 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
                     paddingVertical: 3,
                     borderRadius: 15,
                   }}
-                  // key={team.form + team.points}
                 >
                   <View
                     style={{
@@ -129,7 +128,6 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
                       paddingVertical: 3,
                     }}
                   >
-                    {/* <Text>Meciuri jucate</Text> */}
                     <Text style={styles.accordionText}>
                       Total M - {team.all.played}
                     </Text>
@@ -213,7 +211,7 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
                         paddingVertical: 3,
                         fontFamily: "MontserratSemiBold",
                         color: "#1C374A",
-                        fontSize: 13,
+                        fontSize: 15,
                         paddingHorizontal: 6,
                       }}
                     >
@@ -221,6 +219,7 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
                     </Text>
                     {team.form.split("").map((result: any, i: number) => (
                       <Text
+                        key={Math.random()}
                         style={{
                           backgroundColor:
                             result == "W"

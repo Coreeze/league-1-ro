@@ -68,7 +68,7 @@ export default function TeamsList() {
       ></LinearGradient>
       <View style={styles.button}>
         <Text style={styles.text}>Echipe Liga 1</Text>
-        <FontAwesome5 name="arrow-right" size={12} color="#1C374A" />
+        <FontAwesome5 name="arrow-right" size={15} color="#1C374A" />
       </View>
     </TouchableOpacity>
   );
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: "MontserratBold",
     color: "#1C374A",
-    fontSize: 15,
+    fontSize: 18,
     paddingVertical: 10,
     marginRight: 10,
   },

@@ -92,7 +92,7 @@ export const teamDetailsScreen = StyleSheet.create({
     height: imageWidth / 3,
   },
   stadionContainer: {
-    paddingLeft: 9,
+    paddingLeft: 18,
     marginTop: 9,
     paddingBottom: 18,
     marginHorizontal: 9,
@@ -103,12 +103,34 @@ export const teamDetailsScreen = StyleSheet.create({
   title: {
     fontFamily: "MontserratBold",
     color: "#1C374A",
-    paddingVertical: 6,
+    paddingTop: 6,
     fontSize: 24,
   },
   stadionDescription: {
     fontFamily: "MontserratSemiBold",
     fontSize: 15,
     color: "#1C374A",
+  },
+  statsTitle: {
+    fontFamily: "MontserratBold",
+    color: "#1C374A",
+    paddingVertical: 15,
+    fontSize: 24,
+    paddingLeft: 18,
+  },
+  formContainer: {
+    paddingLeft: 18,
+    marginTop: 9,
+    paddingBottom: 18,
+    marginHorizontal: 9,
+    borderRadius: 15,
+    paddingVertical: 6,
+    backgroundColor: "white",
+  },
+  teamForm: {
+    fontFamily: "MontserratBold",
+    fontSize: 20,
+    color: "#1C374A",
+    paddingVertical: 9,
   },
 });

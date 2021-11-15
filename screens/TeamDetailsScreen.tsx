@@ -19,11 +19,12 @@ export default function TeamDetails({ route }: any) {
   const id = route.params.team.id;
 
   const [team, setTeam] = useState([]);
+  const [teamStats, setTeamStats] = useState([]);
   const [shouldFetch, setShouldFetch] = useState(true);
 
   if (shouldFetch) {
-    getTeamDetails();
     setShouldFetch(false);
+    getTeamDetails();
     getTeamStatistics();
   }
 
@@ -38,6 +39,7 @@ export default function TeamDetails({ route }: any) {
       .then((response) => response.json())
       .then((json) => {
         console.log("Fetch team details");
+        // console.log(json);
         setTeam(json?.response[0]);
         // let fetchLeague = json.response[0].league;
       })
@@ -62,8 +64,8 @@ export default function TeamDetails({ route }: any) {
       .then((response) => response.json())
       .then((json) => {
         console.log("Fetch team stats");
-        console.log(json);
-        // setTeam(json);
+        setTeamStats(json);
+        console.log(teamStats.response.form);
         // let fetchLeague = json.response[0].league;
       })
       .catch((err) => {
@@ -97,6 +99,19 @@ export default function TeamDetails({ route }: any) {
         <View style={teamDetailsScreen.stadionContainer}>
           <TouchableOpacity>
             <Text style={teamDetailsScreen.title}>{name}</Text>
+            {team.team?.founded ? (
+              <Text
+                style={{
+                  fontStyle: "italic",
+                  fontWeight: "bold",
+                  color: "#6d889c",
+                  marginTop: -5,
+                  marginBottom: 10,
+                }}
+              >
+                Fondat în anul {team.team?.founded}
+              </Text>
+            ) : null}
           </TouchableOpacity>
           <Text style={teamDetailsScreen.stadionDescription}>
             {team.venue?.name}
@@ -108,19 +123,36 @@ export default function TeamDetails({ route }: any) {
             Capacitate: {team.venue?.capacity} locuri
           </Text>
         </View>
-        <Text
-          style={{
-            fontFamily: "MontserratBold",
-            color: "#1C374A",
-            paddingVertical: 15,
-            fontSize: 24,
-            paddingLeft: 18,
-          }}
-        >
-          Statistici
+        <Text style={teamDetailsScreen.statsTitle}>
+          Statistici - Sezon {teamStats.parameters?.season}
         </Text>
-        <View>
-          <Text>Stats go here</Text>
+        <View style={teamDetailsScreen.formContainer}>
+          <Text style={teamDetailsScreen.teamForm}>Formă</Text>
+          <ScrollView style={{ flexDirection: "row" }} horizontal={true}>
+            {teamStats.response?.form
+              .split("")
+              .map((result: {} | null | undefined, i: any) => (
+                <Text
+                  key={Math.random()}
+                  style={{
+                    backgroundColor:
+                      result == "W"
+                        ? "#CEFF00"
+                        : result == "D"
+                        ? "grey"
+                        : "#ff4778",
+                    borderRadius: 5,
+                    padding: 5,
+                    marginRight: 9,
+                    fontFamily: "MontserratSemiBold",
+                    color: "#1e4b6b",
+                    fontSize: 17,
+                  }}
+                >
+                  {result}
+                </Text>
+              ))}
+          </ScrollView>
         </View>
         <ShortNewsComponent keyWords={name} title={"Știri despre " + name} />
       </ScrollView>

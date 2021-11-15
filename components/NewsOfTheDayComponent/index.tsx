@@ -58,10 +58,14 @@ const NewsOfTheDayComponent = () => {
           <RNUrlPreview
             // @ts-ignore
             text={rssFeed[0]?.links[0].url}
-            titleStyle={{ fontFamily: "MontserratBold", color: "#fff" }}
+            titleStyle={{
+              fontFamily: "MontserratBold",
+              color: "#fff",
+              fontSize: 18,
+            }}
             descriptionStyle={{
               fontFamily: "MontserratSemiBold",
-              fontSize: 12,
+              fontSize: 15,
               color: "#e6e6e6",
             }}
             descriptionNumberOfLines={1}

@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: "MontserratBold",
     alignSelf: "center",
-    fontSize: 15,
+    fontSize: 20,
     color: "#1C374A",
     paddingVertical: 9,
     borderColor: "lightgrey",
