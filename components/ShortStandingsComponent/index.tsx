@@ -106,10 +106,9 @@ const ShortStandingsComponent = () => {
         </DataTable.Header>
 
         {topFiveStandings.map((team, i) => (
-          <View>
+          <View key={i}>
             <DataTable.Row
               style={styles.row}
-              key={i}
               onPress={() => {
                 setShowLatestForm(i === showLatestForm ? null : i);
               }}
@@ -145,6 +144,7 @@ const ShortStandingsComponent = () => {
             </DataTable.Row>
             {i === showLatestForm && (
               <View
+                key={team.team.id}
                 style={{
                   borderColor: "lightgrey",
                   borderBottomWidth: 2,
