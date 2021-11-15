@@ -35,6 +35,7 @@ import MoreFixturesComponent from "../components/MoreFixturesComponent";
 import DiscussionsScreen from "../screens/ChatScreen";
 import ChatScreen from "../screens/ChatScreen";
 import TeamDetails from "../screens/TeamDetailsScreen";
+import MoreNewsComponent from "../components/MoreNewsComponent";
 export default function Navigation({
   colorScheme,
 }: {
@@ -121,6 +122,39 @@ function RootNavigator() {
                 }}
               >
                 Meciuri
+              </Text>
+            </View>
+          ),
+          headerStyle: {
+            backgroundColor: "#0E1C26",
+          },
+          headerTintColor: "#fff",
+        }}
+      />
+      <Stack.Screen
+        name="MoreNews"
+        component={MoreNewsComponent}
+        options={{
+          headerShown: true,
+          headerTitle: (props) => (
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                style={{
+                  position: "absolute",
+                  width: 330,
+                  height: 60,
+                }}
+                source={require("../assets/images/header13.png")}
+                resizeMode="contain"
+              />
+              <Text
+                style={{
+                  fontFamily: "MontserratBold",
+                  color: "white",
+                  fontSize: 18,
+                }}
+              >
+                Știri
               </Text>
             </View>
           ),

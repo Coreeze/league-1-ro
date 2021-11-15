@@ -9,8 +9,11 @@ import * as rssParser from "react-native-rss-parser";
 import useFonts from "../../useFonts";
 import styles from "./styles";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const ShortNewsComponent = ({ ...props }) => {
+  const navigation = useNavigation();
+
   const [rssFeed, setRssFeed] = useState([]);
   const [shouldFetch, setShouldFetch] = useState(true);
   var feed = [];
@@ -26,6 +29,15 @@ const ShortNewsComponent = ({ ...props }) => {
 
     getFeed();
     setShouldFetch(false);
+  }
+
+  function showMoreNews() {
+    // @ts-ignore: Unreachable code error
+    rssFeed
+      ? navigation.navigate("MoreNews", {
+          feed: rssFeed,
+        })
+      : null;
   }
 
   function getFeed() {
@@ -116,7 +128,7 @@ const ShortNewsComponent = ({ ...props }) => {
           )
         }
         <View style={{ borderColor: "lightgrey", borderTopWidth: 4 }}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={showMoreNews}>
             <Text style={styles.details}>Mai multe stiri</Text>
             <FontAwesome5 name="arrow-right" size={12} color="grey" />
           </TouchableOpacity>
