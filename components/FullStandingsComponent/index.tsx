@@ -63,10 +63,9 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
           </DataTable.Header>
 
           {standings.map((team: Object, i: number) => (
-            <View>
+            <View key={i}>
               <DataTable.Row
                 style={styles.row}
-                key={i}
                 onPress={() => {
                   setShowLatestForm(i === showLatestForm ? null : i);
                 }}
@@ -109,6 +108,7 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
               </DataTable.Row>
               {i === showLatestForm && (
                 <View
+                  key={team.team.id}
                   style={{
                     borderColor: "lightgrey",
                     borderBottomWidth: 2,
