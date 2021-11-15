@@ -32,8 +32,6 @@ const styles = StyleSheet.create({
     paddingBottom: 3,
     justifyContent: "flex-end",
     alignItems: "center",
-    borderColor: "lightgrey",
-    borderTopWidth: 4,
   },
   details: {
     fontFamily: "MontserratBold",

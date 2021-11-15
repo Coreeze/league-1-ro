@@ -17,9 +17,11 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontFamily: "MontserratBold",
     color: "#1C374A",
+    textAlign: "center",
   },
   header: {
     backgroundColor: "lightgrey",
+    borderRadius: 9,
   },
   titleText: {
     fontFamily: "MontserratSemiBold",
@@ -33,6 +35,7 @@ const styles = StyleSheet.create({
   row: {
     borderColor: "grey",
     borderBottomWidth: 1,
+    borderRadius: 25,
   },
   club: {
     flex: 4,

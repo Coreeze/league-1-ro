@@ -13,6 +13,7 @@ export type StandingsProps = {
 
 const FullStandings = ({ route, navigation }: StandingsProps) => {
   const { standings } = route.params;
+  console.log(standings);
 
   const [showLatestForm, setShowLatestForm] = useState(null);
 
@@ -32,7 +33,7 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
           locations={[0, 1]}
           style={{ width: "90%", height: 4, alignSelf: "center" }}
         ></LinearGradient>
-        <DataTable>
+        <DataTable style={{ paddingHorizontal: 3 }}>
           <Text style={styles.title}>Liga 1 Romania</Text>
           <DataTable.Header style={styles.header}>
             <DataTable.Title>
@@ -67,6 +68,7 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
               <DataTable.Row
                 style={styles.row}
                 onPress={() => {
+                  // @ts-ignore
                   setShowLatestForm(i === showLatestForm ? null : i);
                 }}
               >
@@ -115,33 +117,85 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
                     // flexDirection: "column",
                     alignItems: "center",
                     backgroundColor: "lightgrey",
+                    paddingVertical: 3,
+                    borderRadius: 15,
                   }}
-                  key={team.form + team.points}
+                  // key={team.form + team.points}
                 >
                   <View
                     style={{
                       flexDirection: "row",
+                      borderBottomWidth: 1,
+                      paddingVertical: 3,
                     }}
                   >
                     {/* <Text>Meciuri jucate</Text> */}
                     <Text style={styles.accordionText}>
-                      Meciuri - {team.all.played}
+                      Total M - {team.all.played}
+                    </Text>
+                    <Text style={styles.accordionText}>|</Text>
+                    <Text style={styles.accordionText}>C - {team.all.win}</Text>
+                    <Text style={styles.accordionText}>|</Text>
+                    <Text style={styles.accordionText}>
+                      P - {team.all.lose}
                     </Text>
                     <Text style={styles.accordionText}>|</Text>
                     <Text style={styles.accordionText}>
-                      Castigate - {team.all.win}
-                    </Text>
-                    <Text style={styles.accordionText}>|</Text>
-                    <Text style={styles.accordionText}>
-                      Pierdute - {team.all.lose}
+                      R - {team.all.draw}
                     </Text>
                   </View>
                   <View
                     style={{
                       flexDirection: "row",
-                      borderColor: "white",
                       borderBottomWidth: 1,
-                      borderTopWidth: 1,
+                      paddingVertical: 3,
+                    }}
+                  >
+                    <Text style={styles.accordionText}>
+                      M acasa - {team.home.played}
+                    </Text>
+                    <Text style={styles.accordionText}>|</Text>
+                    <Text style={styles.accordionText}>
+                      C - {team.home.win}
+                    </Text>
+                    <Text style={styles.accordionText}>|</Text>
+                    <Text style={styles.accordionText}>
+                      P - {team.home.lose}
+                    </Text>
+                    <Text style={styles.accordionText}>|</Text>
+                    <Text style={styles.accordionText}>
+                      R - {team.home.draw}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      borderBottomWidth: 1,
+                      paddingVertical: 3,
+                    }}
+                  >
+                    <Text style={styles.accordionText}>
+                      M depla. - {team.away.played}
+                    </Text>
+                    <Text style={styles.accordionText}>|</Text>
+                    <Text style={styles.accordionText}>
+                      C - {team.away.win}
+                    </Text>
+                    <Text style={styles.accordionText}>|</Text>
+                    <Text style={styles.accordionText}>
+                      P - {team.away.lose}
+                    </Text>
+                    <Text style={styles.accordionText}>|</Text>
+                    <Text style={styles.accordionText}>
+                      R - {team.away.draw}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      paddingVertical: 3,
+                      flexDirection: "row",
+                      borderColor: "#1C374A",
+                      borderBottomWidth: 1,
                     }}
                   >
                     <Text style={styles.accordionText}>
@@ -156,10 +210,11 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
                     <Text
                       style={{
+                        paddingVertical: 3,
                         fontFamily: "MontserratSemiBold",
                         color: "#1C374A",
                         fontSize: 13,
-                        padding: 5,
+                        paddingHorizontal: 6,
                       }}
                     >
                       Formă

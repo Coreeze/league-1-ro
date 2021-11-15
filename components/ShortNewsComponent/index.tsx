@@ -111,10 +111,12 @@ const ShortNewsComponent = ({ ...props }) => {
             />
           )
         }
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.details}>Mai multe stiri</Text>
-          <FontAwesome5 name="arrow-right" size={12} color="grey" />
-        </TouchableOpacity>
+        <View style={{ borderColor: "lightgrey", borderTopWidth: 4 }}>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.details}>Mai multe stiri</Text>
+            <FontAwesome5 name="arrow-right" size={12} color="grey" />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

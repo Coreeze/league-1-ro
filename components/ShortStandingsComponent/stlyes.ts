@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     backgroundColor: "lightgrey",
     height: 33,
     alignItems: "center",
+    borderRadius: 9,
   },
   titleText: {
     fontFamily: "MontserratSemiBold",
@@ -36,6 +37,7 @@ const styles = StyleSheet.create({
   row: {
     borderColor: "grey",
     borderBottomWidth: 1,
+    borderRadius: 15,
   },
   club: {
     flex: 4,

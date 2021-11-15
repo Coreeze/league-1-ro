@@ -73,8 +73,6 @@ const ShortStandingsComponent = () => {
     });
   }
 
-  console.log(topFiveStandings[0]);
-
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -151,15 +149,16 @@ const ShortStandingsComponent = () => {
                   // flexDirection: "column",
                   alignItems: "center",
                   backgroundColor: "lightgrey",
+                  paddingVertical: 3,
+                  borderRadius: 15,
                 }}
-                key={team.form + team.points}
               >
                 <View
+                  // key={Math.random()}
                   style={{
                     flexDirection: "row",
                   }}
                 >
-                  {/* <Text>Meciuri jucate</Text> */}
                   <Text style={styles.accordionText}>
                     Meciuri - {team.all.played}
                   </Text>
@@ -173,6 +172,7 @@ const ShortStandingsComponent = () => {
                   </Text>
                 </View>
                 <View
+                  // key={Math.random()}
                   style={{
                     flexDirection: "row",
                     borderColor: "white",
@@ -189,7 +189,10 @@ const ShortStandingsComponent = () => {
                   </Text>
                 </View>
 
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <View
+                  // key={Math.random()}
+                  style={{ flexDirection: "row", alignItems: "center" }}
+                >
                   <Text
                     style={{
                       fontFamily: "MontserratSemiBold",

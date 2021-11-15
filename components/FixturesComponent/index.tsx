@@ -105,6 +105,7 @@ const FixturesComponent = () => {
               style={styles.fixture}
               activeOpacity={0.7}
               onPress={() => {
+                // @ts-ignore
                 setShowDetailsMenu(i === showDetailsMenu ? null : i);
               }}
             >
@@ -122,8 +123,8 @@ const FixturesComponent = () => {
                   style={styles.logoHome}
                 />
                 <Text style={styles.teamText}>
-                  {fixture.teams.home.name.length > 10
-                    ? fixture.teams.home.name.substring(0, 11) + "."
+                  {fixture.teams.home.name.length > 8
+                    ? fixture.teams.home.name.substring(0, 10) + "."
                     : fixture.teams.home.name}
                 </Text>
               </TouchableOpacity>
@@ -149,8 +150,8 @@ const FixturesComponent = () => {
                   style={styles.logoAway}
                 />
                 <Text style={styles.teamText}>
-                  {fixture.teams.away.name.length > 10
-                    ? fixture.teams.away.name.substring(0, 11) + "."
+                  {fixture.teams.away.name.length > 8
+                    ? fixture.teams.away.name.substring(0, 10) + "."
                     : fixture.teams.away.name}
                 </Text>
               </TouchableOpacity>
