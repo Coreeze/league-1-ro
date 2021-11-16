@@ -64,24 +64,24 @@ const TeamsListComponent = () => {
     navigation.navigate("TeamDetails", { team });
   }
 
-  console.log(teams);
-
   return (
     <LinearGradient
-      colors={["#0E1C26", "#CEFF00"]}
+      colors={["#113b59", "#CEFF00"]}
       start={{ x: 0.3, y: 0.3 }}
-      end={{ x: 0.5, y: 0.5 }}
+      end={{ x: 0.5, y: 0.7 }}
       locations={[0, 1]}
       style={{ flex: 1 }}
     >
-      <ScrollView style={{ backgroundColor: "rgba(255,255,255,0)" }}>
-        <LinearGradient
-          colors={["#ff4778", "#CEFF00"]}
-          start={{ x: 0.3, y: 0.9 }}
-          end={{ x: 0.8, y: 1.0 }}
-          locations={[0.6, 1]}
-          style={{ width: "90%", height: 4, alignSelf: "center" }}
-        ></LinearGradient>
+      <LinearGradient
+        colors={["#ff4778", "#CEFF00"]}
+        start={{ x: 0.3, y: 0.9 }}
+        end={{ x: 0.8, y: 1.0 }}
+        locations={[0.6, 1]}
+        style={{ width: "100%", height: 4, alignSelf: "center" }}
+      ></LinearGradient>
+      <ScrollView
+        style={{ backgroundColor: "rgba(255,255,255,0)", marginTop: "3%" }}
+      >
         {teams.map((obj: any, i) => (
           <TouchableOpacity
             key={obj.team.name}
@@ -143,9 +143,9 @@ const styles = StyleSheet.create({
     paddingLeft: 18,
     paddingTop: 10,
     paddingBottom: 6,
-    backgroundColor: "rgba(255,255,255,0.5)",
-    marginTop: 6,
-    marginBottom: 6,
+    backgroundColor: "rgba(255,255,255,0.6)",
+    marginTop: 3,
+    marginBottom: 3,
     marginHorizontal: 10,
     borderRadius: 15,
   },

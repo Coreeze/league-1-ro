@@ -89,12 +89,19 @@ export default function TeamDetails({ route }: any) {
 
   return (
     <LinearGradient
-      colors={["#0E1C26", "#CEFF00"]}
-      start={{ x: 0.5, y: 0 }}
-      end={{ x: 0.4, y: 1 }}
+      colors={["#113b59", "#CEFF00"]}
+      start={{ x: 0.3, y: 0.3 }}
+      end={{ x: 0.5, y: 0.7 }}
       locations={[0, 1]}
       style={teamDetailsScreen.container}
     >
+      <LinearGradient
+        colors={["#ff4778", "#CEFF00"]}
+        start={{ x: 0.3, y: 0.9 }}
+        end={{ x: 0.8, y: 1.0 }}
+        locations={[0.6, 1]}
+        style={{ width: "100%", height: 4, alignSelf: "center" }}
+      ></LinearGradient>
       <ScrollView style={{ flex: 1, width: "100%" }}>
         <Image
           style={teamDetailsScreen.stadionImg}
@@ -111,6 +118,13 @@ export default function TeamDetails({ route }: any) {
           style={teamDetailsScreen.logo}
         />
         <View style={teamDetailsScreen.stadionContainer}>
+          <LinearGradient
+            colors={["#ff4778", "#CEFF00"]}
+            start={{ x: 0.3, y: 0.9 }}
+            end={{ x: 0.8, y: 1.0 }}
+            locations={[0.6, 1]}
+            style={{ width: "90%", height: 4 }}
+          ></LinearGradient>
           <TouchableOpacity>
             <Text style={teamDetailsScreen.title}>{team.team?.name}</Text>
             {team.team?.founded ? (
@@ -251,7 +265,7 @@ export default function TeamDetails({ route }: any) {
               </DataTable.Title>
             </DataTable.Header>
 
-            <DataTable.Row>
+            <DataTable.Row style={{ borderBottomWidth: 0 }}>
               <DataTable.Cell style={{ flex: 2 }}>
                 <Text style={styles.tableText}>Acasă</Text>
               </DataTable.Cell>
@@ -279,11 +293,10 @@ export default function TeamDetails({ route }: any) {
             <DataTable style={{ paddingHorizontal: 15 }}>
               <DataTable.Header
                 style={{
-                  backgroundColor: "lightgrey",
+                  backgroundColor: "white",
                   borderRadius: 9,
                   paddingLeft: 40,
-                  // alignSelf: "center",
-                  // justifyContent: "center",
+                  borderBottomWidth: 0,
                 }}
               >
                 <DataTable.Title style={{ flex: 1 }}>

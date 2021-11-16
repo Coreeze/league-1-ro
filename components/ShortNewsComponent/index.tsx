@@ -109,7 +109,7 @@ const ShortNewsComponent = ({ ...props }) => {
                   color: "#42759E",
                 }}
                 descriptionNumberOfLines={2}
-                containerStyle={{ backgroundColor: "#fff" }}
+                containerStyle={{ backgroundColor: "#ffffff" }}
               />
             ))
           ) : (
@@ -127,10 +127,10 @@ const ShortNewsComponent = ({ ...props }) => {
             />
           )
         }
-        <View style={{ borderColor: "lightgrey", borderTopWidth: 4 }}>
+        <View>
           <TouchableOpacity style={styles.button} onPress={showMoreNews}>
             <Text style={styles.details}>Mai multe stiri</Text>
-            <FontAwesome5 name="arrow-right" size={12} color="grey" />
+            <FontAwesome5 name="arrow-right" size={12} color="#1C374A" />
           </TouchableOpacity>
         </View>
       </View>

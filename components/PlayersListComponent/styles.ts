@@ -1,10 +1,10 @@
 import { StyleSheet } from "react-native";
+import constants from "../../constants/Colors";
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: "9%",
-    flex: 1,
-    backgroundColor: "rgba(255,255,255,1)",
+    marginTop: "3%",
+    backgroundColor: "rgba(255,255,255,0)",
     borderRadius: 15,
     marginHorizontal: 9,
     paddingHorizontal: 10,
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   gamesText: {
     fontFamily: "MontserratBold",
     fontSize: 20,
-    color: "#1C374A",
+    color: "#5685a6",
     paddingLeft: 18,
     paddingRight: 12,
   },
@@ -26,8 +26,9 @@ const styles = StyleSheet.create({
     paddingLeft: 18,
     paddingTop: 10,
     paddingBottom: 6,
-    borderBottomWidth: 1,
-    borderBottomColor: "lightgrey",
+    backgroundColor: constants.cardBlurBackground,
+    borderRadius: 15,
+    marginTop: 6,
   },
   playerDescription: {
     paddingLeft: 12,

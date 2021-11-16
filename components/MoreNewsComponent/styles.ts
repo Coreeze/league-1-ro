@@ -1,24 +1,19 @@
 import { StyleSheet } from "react-native";
+import constants from "../../constants/Colors";
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
     flex: 1,
-    // alignItems: "center",
-    // justifyContent: "center",
-    // marginHorizontal: 9,
     paddingHorizontal: 10,
-    // marginBottom: 20,
-    // paddingBottom: 10,
   },
   container2: {
-    // marginTop: "6%",
     marginVertical: "6%",
-    // margin: 30,
     borderRadius: 15,
-    backgroundColor: "white",
+    backgroundColor: constants.cardBlurBackground,
     paddingLeft: 10,
     paddingRight: 10,
+    paddingBottom: 20,
   },
   title: {
     fontFamily: "MontserratBold",
@@ -42,7 +37,6 @@ const styles = StyleSheet.create({
     marginRight: 6,
     fontSize: 12,
     color: "grey",
-    // width: "100%",
   },
 });
 

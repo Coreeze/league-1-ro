@@ -144,11 +144,8 @@ const ShortStandingsComponent = () => {
               <View
                 key={team.team.id}
                 style={{
-                  borderColor: "lightgrey",
-                  borderBottomWidth: 2,
-                  // flexDirection: "column",
                   alignItems: "center",
-                  backgroundColor: "lightgrey",
+                  backgroundColor: "rgba(255,255,255,0.5)",
                   paddingVertical: 3,
                   borderRadius: 15,
                 }}
@@ -211,7 +208,7 @@ const ShortStandingsComponent = () => {
                           result == "W"
                             ? "#CEFF00"
                             : result == "D"
-                            ? "grey"
+                            ? "lightgrey"
                             : "#ff4778",
                         borderRadius: 5,
                         padding: 5,
@@ -232,7 +229,7 @@ const ShortStandingsComponent = () => {
         ))}
         <TouchableOpacity style={styles.button} onPress={showFullStandings}>
           <Text style={styles.details}>Tabel complet</Text>
-          <FontAwesome5 name="arrow-right" size={12} color="grey" />
+          <FontAwesome5 name="arrow-right" size={12} color="#1C374A" />
         </TouchableOpacity>
       </DataTable>
     </View>

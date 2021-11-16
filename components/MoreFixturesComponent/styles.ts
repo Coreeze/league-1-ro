@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import constants from "../../constants/Colors";
 
 const styles = StyleSheet.create({
   container: {
@@ -7,7 +8,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     borderRadius: 15,
-    backgroundColor: "rgba(255,255,255,1)",
+    backgroundColor: constants.cardBlurBackground,
     marginTop: "9%",
     marginBottom: "3%",
   },
@@ -17,10 +18,8 @@ const styles = StyleSheet.create({
     paddingLeft: 12,
     color: "#1C374A",
     paddingVertical: 9,
-    fontSize: 15,
+    fontSize: 18,
     fontFamily: "MontserratBold",
-    borderColor: "lightgrey",
-    borderBottomWidth: 4,
   },
   subTitle: {
     width: "100%",
@@ -34,8 +33,6 @@ const styles = StyleSheet.create({
   fixture: {
     flexDirection: "row",
     paddingVertical: 9,
-    borderColor: "lightgrey",
-    borderBottomWidth: 1,
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
@@ -50,18 +47,17 @@ const styles = StyleSheet.create({
   },
   time: {
     alignItems: "center",
-    // backgroundColor: "blue",
-    // height: 50,
     minWidth: 50,
     maxWidth: 100,
   },
   timeText: {
     borderColor: "grey",
     borderRadius: 2,
-    backgroundColor: "lightgrey",
+    backgroundColor: "white",
     padding: 5,
     fontFamily: "sans-serif-medium",
     color: "#1C374A",
+    fontSize: 15,
   },
   dateText: {
     borderColor: "grey",
@@ -93,7 +89,7 @@ const styles = StyleSheet.create({
   },
   teamText: {
     fontFamily: "MontserratSemiBold",
-    fontSize: 15,
+    fontSize: 17,
     color: "#1C374A",
   },
   button: {

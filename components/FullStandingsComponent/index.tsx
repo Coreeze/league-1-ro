@@ -18,20 +18,20 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
 
   return (
     <LinearGradient
-      colors={["#0E1C26", "#CEFF00"]}
+      colors={["#113b59", "#CEFF00"]}
       start={{ x: 0.3, y: 0.3 }}
-      end={{ x: 0.5, y: 0.5 }}
+      end={{ x: 0.5, y: 0.7 }}
       locations={[0, 1]}
       style={styles.container}
     >
+      <LinearGradient
+        colors={["#ff4778", "#CEFF00"]}
+        start={{ x: 0.3, y: 0.9 }}
+        end={{ x: 0.8, y: 1.0 }}
+        locations={[0.6, 1]}
+        style={{ width: "100%", height: 4, alignSelf: "center" }}
+      ></LinearGradient>
       <ScrollView style={styles.table}>
-        <LinearGradient
-          colors={["#ff4778", "#CEFF00"]}
-          start={{ x: 0.3, y: 0.3 }}
-          end={{ x: 0.5, y: 0.5 }}
-          locations={[0, 1]}
-          style={{ width: "90%", height: 4, alignSelf: "center" }}
-        ></LinearGradient>
         <DataTable style={{ paddingHorizontal: 3 }}>
           <Text style={styles.title}>Liga 1 Romania</Text>
           <DataTable.Header style={styles.header}>
@@ -111,11 +111,9 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
                 <View
                   key={team.team.id}
                   style={{
-                    borderColor: "lightgrey",
-                    borderBottomWidth: 2,
                     // flexDirection: "column",
                     alignItems: "center",
-                    backgroundColor: "lightgrey",
+                    backgroundColor: "rgba(255,255,255,0.5)",
                     paddingVertical: 3,
                     borderRadius: 15,
                   }}
@@ -124,6 +122,7 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
                     style={{
                       flexDirection: "row",
                       borderBottomWidth: 1,
+                      borderBottomColor: "white",
                       paddingVertical: 3,
                     }}
                   >
@@ -144,6 +143,7 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
                   <View
                     style={{
                       flexDirection: "row",
+                      borderBottomColor: "white",
                       borderBottomWidth: 1,
                       paddingVertical: 3,
                     }}
@@ -167,6 +167,7 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
                   <View
                     style={{
                       flexDirection: "row",
+                      borderBottomColor: "white",
                       borderBottomWidth: 1,
                       paddingVertical: 3,
                     }}
@@ -191,7 +192,7 @@ const FullStandings = ({ route, navigation }: StandingsProps) => {
                     style={{
                       paddingVertical: 3,
                       flexDirection: "row",
-                      borderColor: "#1C374A",
+                      borderColor: "white",
                       borderBottomWidth: 1,
                     }}
                   >

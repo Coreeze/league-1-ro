@@ -62,26 +62,21 @@ const PlayersListComponent = ({ route }: any) => {
     );
   }
   return (
-    <ScrollView>
+    <LinearGradient
+      colors={["#113b59", "#CEFF00"]}
+      start={{ x: 0.3, y: 0.3 }}
+      end={{ x: 0.5, y: 0.7 }}
+      locations={[0, 1]}
+    >
       <LinearGradient
-        colors={["#0E1C26", "#CEFF00"]}
-        start={{ x: 0.5, y: 0 }}
-        end={{ x: 0.4, y: 1 }}
-        locations={[0, 1]}
-        style={{
-          flex: 1,
-        }}
-      >
+        colors={["#ff4778", "#CEFF00"]}
+        start={{ x: 0.3, y: 0.9 }}
+        end={{ x: 0.8, y: 1.0 }}
+        locations={[0.6, 1]}
+        style={{ width: "100%", height: 4, alignSelf: "center" }}
+      ></LinearGradient>
+      <ScrollView>
         <View style={styles.container}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              paddingTop: 9,
-            }}
-          >
-            <Text style={styles.gamesText}>Jucători</Text>
-          </View>
           {squad.map((player: any, i) => (
             <View key={player.name} style={styles.playerCard}>
               <Image
@@ -109,8 +104,8 @@ const PlayersListComponent = ({ route }: any) => {
             </View>
           ))}
         </View>
-      </LinearGradient>
-    </ScrollView>
+      </ScrollView>
+    </LinearGradient>
   );
 };
 

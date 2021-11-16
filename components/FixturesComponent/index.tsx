@@ -168,7 +168,7 @@ const FixturesComponent = () => {
       )}
       <TouchableOpacity style={styles.button} onPress={showMoreFixtures}>
         <Text style={styles.details}>Mai mult</Text>
-        <FontAwesome5 name="arrow-right" size={12} color="grey" />
+        <FontAwesome5 name="arrow-right" size={12} color="#1C374A" />
       </TouchableOpacity>
     </View>
   );

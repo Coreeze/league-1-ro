@@ -39,9 +39,9 @@ const MoreNewsComponent = ({ route }: any) => {
   }
   return (
     <LinearGradient
-      colors={["#CEFF00", "#0E1C26"]}
-      start={{ x: 0.5, y: 0 }}
-      end={{ x: 0.4, y: 1 }}
+      colors={["#113b59", "#CEFF00"]}
+      start={{ x: 0.3, y: 0.3 }}
+      end={{ x: 0.5, y: 0.7 }}
       locations={[0, 1]}
       style={styles.container}
     >
@@ -51,7 +51,12 @@ const MoreNewsComponent = ({ route }: any) => {
           start={{ x: 0.3, y: 0.9 }}
           end={{ x: 0.8, y: 1.0 }}
           locations={[0.6, 1]}
-          style={{ width: "90%", height: 4, alignSelf: "center" }}
+          style={{
+            width: "90%",
+            height: 4,
+            alignSelf: "center",
+            marginBottom: 20,
+          }}
         ></LinearGradient>
         {/* <Text style={styles.title}>{props.title}</Text> */}
         {

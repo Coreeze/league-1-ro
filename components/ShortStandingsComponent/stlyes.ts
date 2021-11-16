@@ -4,10 +4,9 @@ const styles = StyleSheet.create({
   container: {
     marginTop: "9%",
     flex: 1,
-    // flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "rgba(255,255,255,1)",
+    backgroundColor: "rgba(255,255,255,0.8)",
     borderRadius: 15,
     marginHorizontal: 9,
     paddingHorizontal: 10,
@@ -20,7 +19,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   header: {
-    backgroundColor: "lightgrey",
+    backgroundColor: "white",
+    borderBottomWidth: 0,
     height: 33,
     alignItems: "center",
     borderRadius: 9,
@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
     color: "#1C374A",
   },
   row: {
-    borderColor: "grey",
-    borderBottomWidth: 1,
+    borderColor: "white",
+    borderBottomWidth: 0,
     borderRadius: 15,
   },
   club: {
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     paddingRight: 6,
     paddingVertical: 9,
     fontSize: 12,
-    color: "grey",
+    color: "#1C374A",
   },
 
   itemDescription: {
@@ -73,8 +73,9 @@ const styles = StyleSheet.create({
     padding: 6,
   },
   tableHeader: {
-    backgroundColor: "lightgrey",
+    backgroundColor: "white",
     borderRadius: 9,
+    borderBottomWidth: 0,
   },
   tableTitle: {
     fontFamily: "MontserratSemiBold",

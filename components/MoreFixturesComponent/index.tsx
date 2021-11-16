@@ -76,9 +76,9 @@ const MoreFixturesComponent = () => {
 
   return (
     <LinearGradient
-      colors={["#0E1C26", "#CEFF00"]}
+      colors={["#113b59", "#CEFF00"]}
       start={{ x: 0.3, y: 0.3 }}
-      end={{ x: 0.5, y: 0.5 }}
+      end={{ x: 0.5, y: 0.7 }}
       locations={[0, 1]}
       style={styles.container}
     >
@@ -107,8 +107,8 @@ const MoreFixturesComponent = () => {
                   style={styles.logoHome}
                 />
                 <Text style={styles.teamText}>
-                  {fixture.teams.home.name.length > 9
-                    ? fixture.teams.home.name.substring(0, 10) + "."
+                  {fixture.teams.home.name.length > 7
+                    ? fixture.teams.home.name.substring(0, 8) + "."
                     : fixture.teams.home.name}
                 </Text>
               </View>
@@ -128,8 +128,8 @@ const MoreFixturesComponent = () => {
                   style={styles.logoAway}
                 />
                 <Text style={styles.teamText}>
-                  {fixture.teams.away.name.length > 9
-                    ? fixture.teams.away.name.substring(0, 10) + "."
+                  {fixture.teams.away.name.length > 7
+                    ? fixture.teams.away.name.substring(0, 8) + "."
                     : fixture.teams.away.name}
                 </Text>
               </View>

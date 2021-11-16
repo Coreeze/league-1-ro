@@ -21,8 +21,6 @@ import { useNavigation } from "@react-navigation/native";
 export default function TeamsListButton() {
   const navigation = useNavigation();
 
-  const [shouldFetch, setShouldFetch] = useState(true);
-
   const dimensions = Dimensions.get("window");
   const imageWidth = dimensions.width;
 
@@ -42,30 +40,6 @@ export default function TeamsListButton() {
 
   function showAllTeams() {
     navigation.navigate("TeamsList");
-  }
-
-  // if (shouldFetch) {
-  //   fetchTest();
-  //   setShouldFetch(false);
-  // }
-
-  function fetchTest() {
-    fetch("https://v3.football.api-sports.io/teams?league=283&season=2021", {
-      method: "GET",
-      headers: {
-        "x-rapidapi-host": "v3.football.api-sports.io",
-        "x-rapidapi-key": "ed6904705c97fe6a528acacb4a32511b",
-      },
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        console.log("fetchTest");
-        console.log(json);
-        // let fetchLeague = json.response[0].league;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }
 
   return (
@@ -94,10 +68,9 @@ const styles = StyleSheet.create({
   container: {
     marginTop: "9%",
     flex: 1,
-    // flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "rgba(255,255,255,1)",
+    backgroundColor: "rgba(255,255,255,0.8)",
     borderRadius: 15,
     marginHorizontal: 9,
     paddingHorizontal: 10,

@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import constants from "../../constants/Colors";
 
 const styles = StyleSheet.create({
   container: {
@@ -7,7 +8,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   table: {
-    backgroundColor: "white",
+    backgroundColor: constants.cardBlurBackground,
     marginTop: 9,
     borderRadius: 15,
   },
@@ -20,8 +21,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   header: {
-    backgroundColor: "lightgrey",
+    backgroundColor: "white",
     borderRadius: 9,
+    borderBottomWidth: 0,
   },
   titleText: {
     fontFamily: "MontserratSemiBold",
@@ -33,9 +35,8 @@ const styles = StyleSheet.create({
     color: "#1C374A",
   },
   row: {
-    borderColor: "grey",
-    borderBottomWidth: 1,
     borderRadius: 25,
+    borderBottomWidth: 0,
   },
   club: {
     flex: 4,

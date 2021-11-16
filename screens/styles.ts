@@ -1,5 +1,6 @@
 import { Dimensions, StyleSheet } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
+import constants from "../constants/Colors";
 
 const dimensions = Dimensions.get("window");
 const imageWidth = dimensions.width;
@@ -38,7 +39,7 @@ export const historyScreenSytle = StyleSheet.create({
     color: "#fff",
   },
   descriptionContainer: {
-    backgroundColor: "white",
+    backgroundColor: constants.cardBlurBackground,
     paddingHorizontal: 10,
     borderRadius: 15,
     marginBottom: 20,
@@ -52,8 +53,8 @@ export const historyScreenSytle = StyleSheet.create({
     alignItems: "center",
     flexGrow: 1,
     borderRadius: 15,
-    marginVertical: 4,
-    backgroundColor: "white",
+    marginVertical: 3,
+    backgroundColor: constants.cardBlurBackground,
   },
   menuText: {
     marginVertical: 10,
@@ -97,8 +98,7 @@ export const teamDetailsScreen = StyleSheet.create({
     paddingBottom: 18,
     marginHorizontal: 9,
     borderRadius: 15,
-    paddingVertical: 6,
-    backgroundColor: "white",
+    backgroundColor: constants.cardBlurBackground,
   },
   title: {
     fontFamily: "MontserratBold",
@@ -126,7 +126,7 @@ export const teamDetailsScreen = StyleSheet.create({
     marginHorizontal: 9,
     borderRadius: 15,
     paddingVertical: 6,
-    backgroundColor: "white",
+    backgroundColor: constants.cardBlurBackground,
     flexDirection: "row",
     alignItems: "center",
   },
@@ -143,7 +143,7 @@ export const teamDetailsScreen = StyleSheet.create({
     marginHorizontal: 9,
     borderRadius: 15,
     paddingVertical: 6,
-    backgroundColor: "white",
+    backgroundColor: constants.cardBlurBackground,
   },
   teamForm: {
     fontFamily: "MontserratBold",
@@ -158,7 +158,7 @@ export const teamDetailsScreen = StyleSheet.create({
     marginHorizontal: 9,
     borderRadius: 15,
     paddingVertical: 6,
-    backgroundColor: "white",
+    backgroundColor: constants.cardBlurBackground,
   },
   gamesText: {
     fontFamily: "MontserratBold",
@@ -176,7 +176,7 @@ export const teamDetailsScreen = StyleSheet.create({
     marginHorizontal: 9,
     borderRadius: 15,
     paddingVertical: 6,
-    backgroundColor: "white",
+    backgroundColor: constants.cardBlurBackground,
   },
   playersContainer: {
     // paddingLeft: 18,

@@ -39,6 +39,7 @@ import MoreNewsComponent from "../components/MoreNewsComponent";
 import PlayersListComponent from "../components/PlayersListComponent";
 import TeamsList from "../components/TeamsListComponent";
 import TeamsListComponent from "../components/TeamsListComponent/TheActualList";
+import constants from "../constants/Colors";
 export default function Navigation({
   colorScheme,
 }: {
@@ -96,7 +97,7 @@ function RootNavigator() {
             </View>
           ),
           headerStyle: {
-            backgroundColor: "#0E1C26",
+            backgroundColor: constants.headerColor,
           },
           headerTintColor: "#fff",
         }}
@@ -129,7 +130,7 @@ function RootNavigator() {
             </View>
           ),
           headerStyle: {
-            backgroundColor: "#0E1C26",
+            backgroundColor: constants.headerColor,
           },
           headerTintColor: "#fff",
         }}
@@ -162,7 +163,7 @@ function RootNavigator() {
             </View>
           ),
           headerStyle: {
-            backgroundColor: "#0E1C26",
+            backgroundColor: constants.headerColor,
           },
           headerTintColor: "#fff",
         }}
@@ -195,7 +196,7 @@ function RootNavigator() {
             </View>
           ),
           headerStyle: {
-            backgroundColor: "#0E1C26",
+            backgroundColor: constants.headerColor,
           },
           headerTintColor: "#fff",
         }}
@@ -228,7 +229,7 @@ function RootNavigator() {
             </View>
           ),
           headerStyle: {
-            backgroundColor: "#0E1C26",
+            backgroundColor: constants.headerColor,
           },
           headerTintColor: "#fff",
         }}
@@ -252,7 +253,7 @@ function RootNavigator() {
             </View>
           ),
           headerStyle: {
-            backgroundColor: "#0E1C26",
+            backgroundColor: constants.headerColor,
           },
           headerTintColor: "#fff",
         }}
