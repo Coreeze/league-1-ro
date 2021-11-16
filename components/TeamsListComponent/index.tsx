@@ -14,10 +14,13 @@ import { LinearGradient } from "expo-linear-gradient";
 import { FontAwesome5 } from "@expo/vector-icons";
 import useFonts from "../../useFonts";
 import AppLoading from "expo-app-loading";
+import { useNavigation } from "@react-navigation/native";
 
 // import styles from "../components/StandingsComponent/stlyes";
 
-export default function TeamsList() {
+export default function TeamsListButton() {
+  const navigation = useNavigation();
+
   const [shouldFetch, setShouldFetch] = useState(true);
 
   const dimensions = Dimensions.get("window");
@@ -37,8 +40,17 @@ export default function TeamsList() {
     );
   }
 
+  function showAllTeams() {
+    navigation.navigate("TeamsList");
+  }
+
+  // if (shouldFetch) {
+  //   fetchTest();
+  //   setShouldFetch(false);
+  // }
+
   function fetchTest() {
-    fetch("https://v3.football.api-sports.io/teams?id=2603", {
+    fetch("https://v3.football.api-sports.io/teams?league=283&season=2021", {
       method: "GET",
       headers: {
         "x-rapidapi-host": "v3.football.api-sports.io",
@@ -58,7 +70,11 @@ export default function TeamsList() {
 
   return (
     // TODO: add loading spinner for EVERYTHING
-    <TouchableOpacity style={styles.container} activeOpacity={0.8}>
+    <TouchableOpacity
+      style={styles.container}
+      activeOpacity={0.8}
+      onPress={showAllTeams}
+    >
       <LinearGradient
         colors={["#ff4778", "#CEFF00"]}
         start={{ x: 0.3, y: 0.9 }}

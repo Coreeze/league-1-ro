@@ -82,7 +82,7 @@ const PlayersListComponent = ({ route }: any) => {
           >
             <Text style={styles.gamesText}>Jucători</Text>
           </View>
-          {squad.map((player, i) => (
+          {squad.map((player: any, i) => (
             <View key={player.name} style={styles.playerCard}>
               <Image
                 source={{

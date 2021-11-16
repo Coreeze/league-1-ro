@@ -2,15 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    // marginTop: "9%",
-    // flex: 1,
-    // width: "100%",
-    // flexDirection: "row",
-    // alignItems: "center",
-    // justifyContent: "center",
     backgroundColor: "rgba(255,255,255,1)",
-    // borderRadius: 15,
-    // marginHorizontal: 6,
     paddingHorizontal: 10,
   },
   scrollContainer: {

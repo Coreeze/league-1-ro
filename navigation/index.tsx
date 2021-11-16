@@ -37,6 +37,8 @@ import ChatScreen from "../screens/ChatScreen";
 import TeamDetails from "../screens/TeamDetailsScreen";
 import MoreNewsComponent from "../components/MoreNewsComponent";
 import PlayersListComponent from "../components/PlayersListComponent";
+import TeamsList from "../components/TeamsListComponent";
+import TeamsListComponent from "../components/TeamsListComponent/TheActualList";
 export default function Navigation({
   colorScheme,
 }: {
@@ -189,6 +191,39 @@ function RootNavigator() {
                 }}
               >
                 Listă jucători
+              </Text>
+            </View>
+          ),
+          headerStyle: {
+            backgroundColor: "#0E1C26",
+          },
+          headerTintColor: "#fff",
+        }}
+      />
+      <Stack.Screen
+        name="TeamsList"
+        component={TeamsListComponent}
+        options={{
+          headerShown: true,
+          headerTitle: (props) => (
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                style={{
+                  position: "absolute",
+                  width: 330,
+                  height: 60,
+                }}
+                source={require("../assets/images/header13.png")}
+                resizeMode="contain"
+              />
+              <Text
+                style={{
+                  fontFamily: "MontserratBold",
+                  color: "white",
+                  fontSize: 18,
+                }}
+              >
+                Listă echipe
               </Text>
             </View>
           ),

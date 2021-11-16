@@ -24,6 +24,7 @@ export type RootStackParamList = {
   History: undefined;
   MoreFixtures: undefined;
   PlayersList: undefined;
+  TeamsList: undefined;
   TeamDetails: undefined;
   MoreNews: undefined;
   Chat: undefined;

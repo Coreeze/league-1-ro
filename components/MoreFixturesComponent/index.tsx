@@ -97,7 +97,7 @@ const MoreFixturesComponent = () => {
           Vizualizare placuta!
         </Text>
         {fixtures.length != 0 ? (
-          fixtures.map((fixture, i: number) => (
+          fixtures.map((fixture: any, i: number) => (
             <View style={styles.fixture} key={i}>
               <View style={styles.teamHome}>
                 <Image
