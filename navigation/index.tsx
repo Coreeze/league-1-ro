@@ -3,7 +3,7 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { Entypo, FontAwesome, Fontisto } from "@expo/vector-icons";
+import { Entypo, FontAwesome, Fontisto, Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   NavigationContainer,
@@ -40,6 +40,7 @@ import PlayersListComponent from "../components/PlayersListComponent";
 import TeamsList from "../components/TeamsListComponent";
 import TeamsListComponent from "../components/TeamsListComponent/TheActualList";
 import constants from "../constants/Colors";
+import CommunitiesScreen from "../screens/DiscussionsScreen";
 export default function Navigation({
   colorScheme,
 }: {
@@ -258,6 +259,30 @@ function RootNavigator() {
           headerTintColor: "#fff",
         }}
       />
+      <Stack.Screen
+        name="History"
+        component={HistoryScreen}
+        options={{
+          headerShown: true,
+          headerTitle: (props) => (
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                style={{
+                  position: "absolute",
+                  width: 330,
+                  height: 60,
+                }}
+                source={require("../assets/images/header13.png")}
+                resizeMode="contain"
+              />
+            </View>
+          ),
+          headerStyle: {
+            backgroundColor: constants.headerColor,
+          },
+          headerTintColor: "#fff",
+        }}
+      />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen
           name="Modal"
@@ -307,10 +332,10 @@ function BottomTabNavigator() {
         name="Chat"
         component={ChatScreen}
         options={{
-          title: "Discutii",
+          title: "Discutii live",
           tabBarIcon: ({ color, focused }) => (
-            <Entypo
-              name="chat"
+            <Ionicons
+              name="chatbubble-ellipses-outline"
               size={24}
               color={focused ? "#ff4778" : "grey"}
             />
@@ -321,13 +346,13 @@ function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="History"
-        component={HistoryScreen}
+        name="Communities"
+        component={CommunitiesScreen}
         options={{
-          title: "Istorie",
+          title: "Comunitati",
           tabBarIcon: ({ color, focused }) => (
-            <FontAwesome
-              name="folder-open-o"
+            <Ionicons
+              name="people-outline"
               size={24}
               color={focused ? "#ff4778" : "grey"}
             />

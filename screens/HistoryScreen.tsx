@@ -19,7 +19,7 @@ const transition = (
   </Transition.Together>
 );
 
-export default function HistoryScreen() {
+export default function HistoryComponent() {
   const [dataIndex, setDataIndex] = useState(null);
   const [teamIndex, setTeamIndex] = useState(null);
   const ref = React.useRef();
