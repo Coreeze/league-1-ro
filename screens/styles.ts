@@ -118,6 +118,24 @@ export const teamDetailsScreen = StyleSheet.create({
     fontSize: 24,
     paddingLeft: 18,
   },
+  playersListContainer: {
+    paddingLeft: 18,
+    // marginTop: "9%",
+    paddingTop: 9,
+    paddingBottom: 18,
+    marginHorizontal: 9,
+    borderRadius: 15,
+    paddingVertical: 6,
+    backgroundColor: "white",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  playersListText: {
+    fontFamily: "MontserratBold",
+    paddingRight: 9,
+    fontSize: 20,
+    color: "#1C374A",
+  },
   formContainer: {
     paddingLeft: 18,
     marginTop: "9%",
@@ -131,7 +149,7 @@ export const teamDetailsScreen = StyleSheet.create({
     fontFamily: "MontserratBold",
     fontSize: 20,
     color: "#1C374A",
-    paddingVertical: 9,
+    paddingBottom: 9,
   },
   gamesContainer: {
     // paddingLeft: 18,
@@ -149,6 +167,7 @@ export const teamDetailsScreen = StyleSheet.create({
     // paddingTop: 9,
     paddingLeft: 18,
     paddingRight: 12,
+    paddingBottom: 9,
   },
   formationContainer: {
     // paddingLeft: 18,

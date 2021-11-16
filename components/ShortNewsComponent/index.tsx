@@ -32,9 +32,9 @@ const ShortNewsComponent = ({ ...props }) => {
   }
 
   function showMoreNews() {
-    // @ts-ignore: Unreachable code error
     rssFeed
-      ? navigation.navigate("MoreNews", {
+      ? // @ts-ignore: Unreachable code error
+        navigation.navigate("MoreNews", {
           feed: rssFeed,
         })
       : null;

@@ -1,4 +1,9 @@
-import { Feather } from "@expo/vector-icons";
+import {
+  Feather,
+  FontAwesome5,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import * as React from "react";
 import { useState } from "react";
@@ -19,9 +24,11 @@ import { teamDetailsScreen } from "./styles";
 export default function TeamDetails({ route }: any) {
   const id = route?.params?.team?.id;
 
+  const navigation = useNavigation();
+
   const [team, setTeam] = useState([]);
   const [teamStats, setTeamStats] = useState([]);
-  const [squad, setSquad] = useState([]);
+
   const [shouldFetch, setShouldFetch] = useState(true);
 
   const [showPlayers, setShowPlayers] = useState(false);
@@ -30,7 +37,6 @@ export default function TeamDetails({ route }: any) {
     setShouldFetch(false);
     getTeamDetails();
     getTeamStatistics();
-    getPlayers();
   }
 
   function getTeamDetails() {
@@ -73,26 +79,13 @@ export default function TeamDetails({ route }: any) {
         console.log(err);
       });
   }
-  function getPlayers() {
-    fetch("https://v3.football.api-sports.io/players/squads?team=" + id, {
-      method: "GET",
-      headers: {
-        "x-rapidapi-host": "v3.football.api-sports.io",
-        "x-rapidapi-key": "ed6904705c97fe6a528acacb4a32511b",
-      },
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        console.log("Fetch team players");
-        setSquad(json.response[0].players);
-        // console.log(json);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+  function showPlayersList() {
+    // @ts-ignore: Unreachable code error
+    navigation.navigate("PlayersList", { teamId: id });
   }
 
-  console.log(squad[0]);
+  // console.log(squad[0]);
 
   return (
     <LinearGradient
@@ -148,56 +141,12 @@ export default function TeamDetails({ route }: any) {
           Statistici - Sezon {teamStats.parameters?.season}
         </Text>
         <TouchableOpacity
+          style={teamDetailsScreen.playersListContainer}
+          onPress={showPlayersList}
           activeOpacity={0.8}
-          onPress={() => {
-            showPlayers == true ? setShowPlayers(false) : setShowPlayers(true);
-          }}
-          style={teamDetailsScreen.playersContainer}
         >
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              paddingTop: 9,
-            }}
-          >
-            <Text style={teamDetailsScreen.gamesText}>Jucători</Text>
-            <Feather name="arrow-down" size={24} color="#1C374A" />
-          </View>
-          {showPlayers
-            ? squad.map((player, i) => (
-                <View key={player.name} style={teamDetailsScreen.playerCard}>
-                  <Image
-                    source={{
-                      uri: player.photo,
-                    }}
-                    style={teamDetailsScreen.playerPhoto}
-                  />
-                  <View style={teamDetailsScreen.playerDescription}>
-                    <Text
-                      style={{
-                        fontSize: 15,
-                        fontFamily: "MontserratBold",
-                        color: "#1C374A",
-                      }}
-                    >
-                      {player.name}
-                    </Text>
-                    <View style={{ flexDirection: "row" }}>
-                      <Text style={teamDetailsScreen.playerText}>
-                        Nr. {player.number}
-                      </Text>
-                      <Text style={teamDetailsScreen.playerText}>
-                        {player.position}
-                      </Text>
-                      <Text style={teamDetailsScreen.playerText}>
-                        {player.age} ani
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-              ))
-            : null}
+          <Text style={teamDetailsScreen.playersListText}>Jucatori</Text>
+          <FontAwesome5 name="arrow-right" size={18} color="#1C374A" />
         </TouchableOpacity>
         <View style={teamDetailsScreen.formContainer}>
           <Text style={teamDetailsScreen.teamForm}>Formă</Text>
@@ -345,7 +294,7 @@ export default function TeamDetails({ route }: any) {
                 </DataTable.Title>
               </DataTable.Header>
               {teamStats.response?.lineups.map((lineup: any, i: number) => (
-                <View>
+                <View key={lineup.formation}>
                   <DataTable.Row>
                     <DataTable.Cell style={{ flex: 2, paddingLeft: 40 }}>
                       <Text style={styles.tableText}>{lineup.formation}</Text>

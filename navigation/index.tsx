@@ -36,6 +36,7 @@ import DiscussionsScreen from "../screens/ChatScreen";
 import ChatScreen from "../screens/ChatScreen";
 import TeamDetails from "../screens/TeamDetailsScreen";
 import MoreNewsComponent from "../components/MoreNewsComponent";
+import PlayersListComponent from "../components/PlayersListComponent";
 export default function Navigation({
   colorScheme,
 }: {
@@ -155,6 +156,39 @@ function RootNavigator() {
                 }}
               >
                 Știri
+              </Text>
+            </View>
+          ),
+          headerStyle: {
+            backgroundColor: "#0E1C26",
+          },
+          headerTintColor: "#fff",
+        }}
+      />
+      <Stack.Screen
+        name="PlayersList"
+        component={PlayersListComponent}
+        options={{
+          headerShown: true,
+          headerTitle: (props) => (
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                style={{
+                  position: "absolute",
+                  width: 330,
+                  height: 60,
+                }}
+                source={require("../assets/images/header13.png")}
+                resizeMode="contain"
+              />
+              <Text
+                style={{
+                  fontFamily: "MontserratBold",
+                  color: "white",
+                  fontSize: 18,
+                }}
+              >
+                Listă jucători
               </Text>
             </View>
           ),
