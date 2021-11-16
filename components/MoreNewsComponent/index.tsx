@@ -15,15 +15,10 @@ import * as rssParser from "react-native-rss-parser";
 import useFonts from "../../useFonts";
 import styles from "./styles";
 
-const MoreNewsComponent = ({ route }) => {
-  //   const [rssFeed, setRssFeed] = useState([]);
-  //   setRssFeed(route?.params?.rssFeed);
-  //   const rssFeed = [];
-  console.log(route.params.feed);
-
+const MoreNewsComponent = ({ route }: any) => {
   if (route.params.feed != []) {
     var randomArr = [];
-    while (randomArr.length < 12) {
+    while (randomArr.length < 20) {
       var r = Math.floor(Math.random() * 100);
       if (randomArr.indexOf(r) === -1) randomArr.push(r);
     }

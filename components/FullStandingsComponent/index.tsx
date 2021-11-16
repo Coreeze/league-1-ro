@@ -13,7 +13,6 @@ export type StandingsProps = {
 
 const FullStandings = ({ route, navigation }: StandingsProps) => {
   const { standings } = route.params;
-  console.log(standings);
 
   const [showLatestForm, setShowLatestForm] = useState(null);
 

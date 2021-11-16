@@ -4,9 +4,6 @@ const styles = StyleSheet.create({
   container: {
     marginTop: "9%",
     flex: 1,
-    // flexDirection: "row",
-    // alignItems: "center",
-    // justifyContent: "center",
     backgroundColor: "rgba(255,255,255,1)",
     borderRadius: 15,
     marginHorizontal: 9,
@@ -17,7 +14,6 @@ const styles = StyleSheet.create({
     fontFamily: "MontserratBold",
     fontSize: 20,
     color: "#1C374A",
-    // paddingTop: 9,
     paddingLeft: 18,
     paddingRight: 12,
   },
