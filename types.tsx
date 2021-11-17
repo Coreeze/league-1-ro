@@ -23,7 +23,6 @@ export type RootStackParamList = {
   FullStandings: undefined;
   History: undefined;
   MoreFixtures: undefined;
-  Communities: undefined;
   PlayersList: undefined;
   TeamsList: undefined;
   TeamDetails: undefined;
@@ -39,6 +38,8 @@ export type RootTabParamList = {
   Chat: undefined;
   History: undefined;
   More: undefined;
+  NewPost: undefined;
+  Communities: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
@@ -46,3 +47,21 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
     BottomTabScreenProps<RootTabParamList, Screen>,
     NativeStackScreenProps<RootStackParamList>
   >;
+
+export type UserType = {
+  id: string;
+  name: string;
+  username: string;
+  description: string;
+  image: string;
+};
+
+export type ShortPostType = {
+  id: String;
+  user: UserType;
+  createdAt: string;
+  content: string;
+  image?: string;
+  numberOfShares: number;
+  numberOfLikes: number;
+};

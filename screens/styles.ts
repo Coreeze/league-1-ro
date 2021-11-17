@@ -1,6 +1,6 @@
 import { Dimensions, StyleSheet } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
-import constants from "../constants/Colors";
+import constants from "../constants/colors";
 
 const dimensions = Dimensions.get("window");
 const imageWidth = dimensions.width;

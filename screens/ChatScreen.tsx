@@ -11,9 +11,8 @@ import {
   NativeModules,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import Dialog from "react-native-dialog";
-import emojiUtils from "emoji-utils";
 
+import EmojiSelector, { Categories } from "react-native-emoji-selector";
 import { GiftedChat } from "react-native-gifted-chat";
 import "firebase/compat/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -153,25 +152,6 @@ const ChatScreen = () => {
       : setState({ ...state, visible: true });
   };
 
-  const renderMessage = (props) => {
-    const {
-      currentMessage: { text: currText },
-    } = props;
-
-    let messageTextStyle;
-
-    // Make "pure emoji" messages much bigger than plain text.
-    if (currText && emojiUtils.isPureEmojiString(currText)) {
-      messageTextStyle = {
-        fontSize: 28,
-        // Emoji get clipped if lineHeight isn't increased; make it consistent across platforms.
-        lineHeight: Platform.OS === "android" ? 34 : 30,
-      };
-    }
-
-    return <SlackMessage {...props} messageTextStyle={messageTextStyle} />;
-  };
-
   return (
     <LinearGradient
       colors={["#CEFF00", "#113b59"]}
@@ -185,7 +165,9 @@ const ChatScreen = () => {
         renderUsernameOnMessage={true}
         user={user}
         onSend={handleSend}
-        // renderMessage={renderMessage}
+        isTyping={true}
+        showUserAvatar={true}
+        showAvatarForEveryMessage={true}
       />
     </LinearGradient>
   );

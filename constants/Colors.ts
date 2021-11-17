@@ -1,7 +1,7 @@
 const tintColorLight = "#2f95dc";
 const tintColorDark = "#fff";
 
-const constants = {
+const colors = {
   light: {
     text: "#000",
     background: "#fff",
@@ -18,6 +18,7 @@ const constants = {
   },
   headerColor: "#113b59",
   cardBlurBackground: "rgba(255,255,255,0.8)",
+  appDarkBlue: "#1C374A",
 };
 
-export default constants;
+export default colors;

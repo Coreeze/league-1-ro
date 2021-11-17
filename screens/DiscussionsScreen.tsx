@@ -8,11 +8,16 @@ import {
   Image,
   NativeModules,
   TouchableOpacity,
+  ScrollView,
+  FlatList,
 } from "react-native";
+import CommunitiesFeed from "../components/CommunitiesComponents/CommunitiesFeed";
+import ShortPost from "../components/CommunitiesComponents/PostComponent";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
-import constants from "../constants/Colors";
+import constants from "../constants/colors";
+import shortPosts from "../data/shortPosts";
 const { StatusBarManager } = NativeModules;
 
 export default function CommunitiesScreen() {
@@ -32,7 +37,7 @@ export default function CommunitiesScreen() {
       locations={[0, 1]}
       style={styles.container}
     >
-      <Image
+      {/* <Image
         style={{
           position: "relative",
           top: Platform.OS === "ios" ? 20 : StatusBarManager.HEIGHT,
@@ -41,8 +46,9 @@ export default function CommunitiesScreen() {
         }}
         source={require("../assets/images/header14.png")}
         resizeMode="cover"
-      />
-      {communities.map((community, i) => (
+      /> */}
+      <CommunitiesFeed />
+      {/* {communities.map((community, i) => (
         <TouchableOpacity
           style={styles.communityContainer}
           key={community}
@@ -51,7 +57,7 @@ export default function CommunitiesScreen() {
           <Text style={styles.communityText}>{community}</Text>
           <FontAwesome5 name="arrow-right" size={15} color="#1C374A" />
         </TouchableOpacity>
-      ))}
+      ))} */}
 
       {/* Use a light status bar on iOS to account for the black space above the modal */}
       <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
@@ -70,7 +76,6 @@ const styles = StyleSheet.create({
   communityContainer: {
     flexDirection: "row",
     alignItems: "center",
-    // justifyContent: "flex-end",
     backgroundColor: constants.cardBlurBackground,
     top: "9%",
     marginHorizontal: 20,
@@ -81,7 +86,7 @@ const styles = StyleSheet.create({
     fontFamily: "MontserratBold",
     paddingLeft: 18,
     paddingRight: 18,
-    paddingVertical: 15,
+    paddingVertical: 25,
     fontSize: 18,
     color: "#1C374A",
   },
