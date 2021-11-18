@@ -58,37 +58,40 @@ export default function NewPostScreen({ navigation }: any) {
   //   promptVisible: false,
   //   visible: true,
   // });
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("Username");
   const [name, setName] = useState("");
-  const [postText, setPostText] = useState(String);
+  const [content, setContent] = useState(String);
   const [post, setPost] = useState({
-    user: "qdw",
+    user: "",
+    id: "",
     content: "",
+    createdAt: Date,
+    image: null,
   });
 
-  useEffect(() => {
-    readUser();
+  // useEffect(() => {
+  //   readUser();
 
-    const unsubscribe = onSnapshot(chatsRef, (querySnapshot) => {
-      const messagesFirestore = querySnapshot
-        .docChanges()
-        .filter(({ type }) => type === "added")
-        .map(({ doc }) => {
-          const message = doc.data();
-          const _id = Math.random().toString(36).substring(7);
-          // console.log(message);
-          return {
-            text: message.m.text,
-            createdAt: message.m.createdAt.toDate(),
-            _id,
-            user: message.m.user,
-          };
-        })
-        .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
-      // appendMessages(messagesFirestore);
-    });
-    return () => unsubscribe();
-  }, []);
+  //   const unsubscribe = onSnapshot(chatsRef, (querySnapshot) => {
+  //     const messagesFirestore = querySnapshot
+  //       .docChanges()
+  //       .filter(({ type }) => type === "added")
+  //       .map(({ doc }) => {
+  //         const message = doc.data();
+  //         const _id = Math.random().toString(36).substring(7);
+  //         // console.log(message);
+  //         return {
+  //           text: message.m.text,
+  //           createdAt: message.m.createdAt.toDate(),
+  //           _id,
+  //           user: message.m.user,
+  //         };
+  //       })
+  //       .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+  //     // appendMessages(messagesFirestore);
+  //   });
+  //   return () => unsubscribe();
+  // }, []);
 
   // const appendMessages = useCallback(
   //   (messages) => {
@@ -99,23 +102,23 @@ export default function NewPostScreen({ navigation }: any) {
   //   [messages]
   // );
 
-  async function readUser() {
-    const user = await AsyncStorage.getItem("user");
-    // console.log(user);
-    if (user) {
-      setUser(JSON.parse(user));
-    }
-  }
+  // async function readUser() {
+  //   const user = await AsyncStorage.getItem("user");
+  //   // console.log(user);
+  //   if (user) {
+  //     setUser(JSON.parse(user));
+  //   }
+  // }
 
-  async function handlePress() {
-    const _id = Math.random().toString(36).substring(7);
-    const user = { _id, name };
-    await AsyncStorage.setItem("user", JSON.stringify(user));
-    setUser(user);
-  }
+  // async function handlePress() {
+  //   const _id = Math.random().toString(36).substring(7);
+  //   const user = { _id, name };
+  //   await AsyncStorage.setItem("user", JSON.stringify(user));
+  //   setUser(user);
+  // }
 
   async function handleSend(post: any) {
-    console.log("postText: " + post);
+    // console.log("postText: " + post);
     await addDoc(collection(db, "community"), { post });
     // const writes = messages.map(
     //   async (m: any) => await addDoc(collection(db, "community"), { m })
@@ -167,11 +170,16 @@ export default function NewPostScreen({ navigation }: any) {
     return unsubscribe;
   }, [navigation]);
 
-  console.log(postText);
-
   function sendToDb() {
     console.log("post");
     handleSend(post);
+    setPost({
+      user: "",
+      id: "",
+      content: "",
+      createdAt: Date,
+      image: null,
+    });
   }
 
   return (
@@ -189,7 +197,25 @@ export default function NewPostScreen({ navigation }: any) {
             ref={refInput}
             placeholder={"Ce mai e nou?"}
             style={styles.newPostInput}
-            onChangeText={(text) => setPost({ ...post, content: text })}
+            value={post.content}
+            onChangeText={
+              (text) => {
+                function epoch(date: any) {
+                  return Date.parse(date);
+                }
+                const createdAt = epoch(new Date());
+                const id = createdAt + Math.random();
+
+                setPost({
+                  user: user,
+                  id: id,
+                  createdAt: createdAt,
+                  image: null,
+                  content: text,
+                });
+              }
+              // setContent(text)
+            }
             maxLength={150}
             multiline={true}
           />

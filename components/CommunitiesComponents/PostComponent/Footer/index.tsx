@@ -7,10 +7,9 @@ import colors from "../../../../constants/colors";
 
 export type FooterProps = {
   numberOfLikes: number;
-  numberOfShares: number;
 };
 
-const Footer = ({ numberOfLikes, numberOfShares }: FooterProps) => {
+const Footer = ({ numberOfLikes }: FooterProps) => {
   return (
     // <View style={styles.sunIcon}>
     <TouchableOpacity

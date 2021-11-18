@@ -62,6 +62,5 @@ export type ShortPostType = {
   createdAt: string;
   content: string;
   image?: string;
-  numberOfShares: number;
   numberOfLikes: number;
 };

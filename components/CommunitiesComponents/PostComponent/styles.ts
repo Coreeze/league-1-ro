@@ -3,6 +3,7 @@ import constants from "../../../constants/colors";
 
 const styles = StyleSheet.create({
   container: {
+    // width: "100%",
     paddingHorizontal: 20,
     paddingVertical: 10,
     marginVertical: 6,

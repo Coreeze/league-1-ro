@@ -10,12 +10,85 @@ import {
   TouchableOpacity,
   ScrollView,
   FlatList,
+  RefreshControl,
 } from "react-native";
 import shortPosts from "../../../data/shortPosts";
 import ShortPost from "../PostComponent";
+import * as firebase from "firebase/compat";
+import "firebase/firestore";
+import { initializeApp } from "@firebase/app";
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs,
+  onSnapshot,
+  addDoc,
+} from "firebase/firestore";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useCallback, useEffect, useState } from "react";
+
 const { StatusBarManager } = NativeModules;
 
+const db = getFirestore();
+const chatsRef = query(collection(db, "community"));
+
 export default function CommunitiesFeed() {
+  var postsTest: any = [];
+  const [posts, setPosts] = useState([]);
+
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      getPosts();
+      setRefreshing(false);
+    }, 2000);
+    // wait(2000).then(() => {setRefreshing(false)});
+  }, []);
+
+  function getPosts() {
+    const unsubscribe = onSnapshot(chatsRef, (querySnapshot) => {
+      console.log("feed refresh");
+      const messagesFirestore = querySnapshot
+        .docChanges()
+        .filter(({ type }) => type === "added")
+        .map(({ doc }) => {
+          const message = doc.data();
+          const _id = Math.random().toString(36).substring(7);
+          // console.log(message.post);
+          return {
+            content: message.post.content,
+            createdAt: message.post.createdAt.nanoseconds,
+            _id: message.post.id,
+            user: message.post.user,
+          };
+        });
+      // .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+      // appendPosts(messagesFirestore);
+      setPosts(messagesFirestore);
+      // console.log(messagesFirestore);
+    });
+    return () => unsubscribe();
+  }
+
+  useEffect(() => {
+    // readUser();
+    getPosts();
+  }, []);
+
+  const appendPosts = useCallback(
+    (posts) => {
+      // console.log("posts: " + posts);
+      // console.log(previousPosts)
+      setPosts((previousPosts) => postsTest.append(previousPosts, posts));
+    },
+    [posts]
+  );
+
+  // console.log(posts);
+
   return (
     <LinearGradient
       colors={["#CEFF00", "#113b59"]}
@@ -35,9 +108,13 @@ export default function CommunitiesFeed() {
         resizeMode="cover"
       />
       <FlatList
-        data={shortPosts}
+        style={{ width: "100%" }}
+        data={posts}
         renderItem={({ item }) => <ShortPost shortPost={item} />}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item._id}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
         // refreshing={loading}
         // onRefresh={fetchShortPosts}
       />
