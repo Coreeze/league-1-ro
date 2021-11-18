@@ -1,7 +1,7 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import * as React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import {
   NativeModules,
   Platform,
@@ -9,30 +9,145 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  LogBox,
+  Button,
 } from "react-native";
-import useFonts from "../useFonts";
 
-import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import colors from "../constants/colors";
-import AppLoading from "expo-app-loading";
+import * as firebase from "firebase/compat";
+import "firebase/firestore";
+import { initializeApp } from "@firebase/app";
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs,
+  onSnapshot,
+  addDoc,
+} from "firebase/firestore";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+LogBox.ignoreLogs(["Setting a timer"]);
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDDQKoZYTxpvE3aHPhop6buG0aYZXYv0IU",
+  authDomain: "football-app-32bb9.firebaseapp.com",
+  projectId: "football-app-32bb9",
+  storageBucket: "football-app-32bb9.appspot.com",
+  messagingSenderId: "632067557113",
+  appId: "1:632067557113:web:dfabd8d2f45072ff8d0428",
+  measurementId: "G-07RETPKL8Y",
+};
+
+if (firebase.apps.length == 0) {
+  const app = initializeApp(firebaseConfig);
+}
+
+const db = getFirestore();
+const chatsRef = query(collection(db, "chats"));
 
 const { StatusBarManager } = NativeModules;
 
 export default function NewPostScreen({ navigation }: any) {
   const refInput = useRef(null);
 
-  // const [IsReady, SetIsReady] = useState(false);
-  // const LoadFonts = async () => {
-  //   await useFonts();
-  // };
-  // if (!IsReady) {
+  // const [state, setState] = useState({
+  //   name: "",
+  //   promptVisible: false,
+  //   visible: true,
+  // });
+  const [user, setUser] = useState(null);
+  const [name, setName] = useState("");
+  const [postText, setPostText] = useState(String);
+  const [post, setPost] = useState({
+    user: "qdw",
+    content: "",
+  });
+
+  useEffect(() => {
+    readUser();
+
+    const unsubscribe = onSnapshot(chatsRef, (querySnapshot) => {
+      const messagesFirestore = querySnapshot
+        .docChanges()
+        .filter(({ type }) => type === "added")
+        .map(({ doc }) => {
+          const message = doc.data();
+          const _id = Math.random().toString(36).substring(7);
+          // console.log(message);
+          return {
+            text: message.m.text,
+            createdAt: message.m.createdAt.toDate(),
+            _id,
+            user: message.m.user,
+          };
+        })
+        .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+      // appendMessages(messagesFirestore);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  // const appendMessages = useCallback(
+  //   (messages) => {
+  //     setPostText((previousMessages) =>
+  //       GiftedChat.append(previousMessages, messages)
+  //     );
+  //   },
+  //   [messages]
+  // );
+
+  async function readUser() {
+    const user = await AsyncStorage.getItem("user");
+    // console.log(user);
+    if (user) {
+      setUser(JSON.parse(user));
+    }
+  }
+
+  async function handlePress() {
+    const _id = Math.random().toString(36).substring(7);
+    const user = { _id, name };
+    await AsyncStorage.setItem("user", JSON.stringify(user));
+    setUser(user);
+  }
+
+  async function handleSend(post: any) {
+    console.log("postText: " + post);
+    await addDoc(collection(db, "community"), { post });
+    // const writes = messages.map(
+    //   async (m: any) => await addDoc(collection(db, "community"), { m })
+    // );
+    // await Promise.all(writes);
+  }
+
+  // if (!user) {
   //   return (
-  //     <AppLoading
-  //       startAsync={LoadFonts}
-  //       onFinish={() => SetIsReady(true)}
-  //       onError={() => {}}
-  //     />
+  //     <View
+  //       style={{
+  //         flex: 1,
+  //         backgroundColor: "#fff",
+  //         alignItems: "center",
+  //         justifyContent: "center",
+  //         padding: 30,
+  //       }}
+  //     >
+  //       <TextInput
+  //         style={{
+  //           height: 50,
+  //           width: "100%",
+  //           borderWidth: 1,
+  //           padding: 15,
+  //           borderColor: "gray",
+  //         }}
+  //         placeholder="Enter your name"
+  //         value={name}
+  //         onChangeText={setName}
+  //       />
+  //       <Button onPress={handlePress} title="Enter the chat" />
+  //     </View>
   //   );
   // }
 
@@ -52,6 +167,13 @@ export default function NewPostScreen({ navigation }: any) {
     return unsubscribe;
   }, [navigation]);
 
+  console.log(postText);
+
+  function sendToDb() {
+    console.log("post");
+    handleSend(post);
+  }
+
   return (
     <LinearGradient
       colors={["#CEFF00", "#113b59"]}
@@ -67,13 +189,20 @@ export default function NewPostScreen({ navigation }: any) {
             ref={refInput}
             placeholder={"Ce mai e nou?"}
             style={styles.newPostInput}
+            onChangeText={(text) => setPost({ ...post, content: text })}
+            maxLength={150}
+            multiline={true}
           />
         </View>
 
         {/* Use a light status bar on iOS to account for the black space above the modal */}
         <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
       </View>
-      <TouchableOpacity style={styles.sendButton} activeOpacity={0.7}>
+      <TouchableOpacity
+        style={styles.sendButton}
+        activeOpacity={0.7}
+        onPress={sendToDb}
+      >
         <Text
           style={{
             fontFamily: "MontserratSemiBold",
@@ -111,10 +240,17 @@ const styles = StyleSheet.create({
   inputContainer: {
     marginTop: 30,
     borderRadius: 15,
-    height: 60,
-    justifyContent: "center",
-    // width: "100%",
-    // paddingHorizontal: 10,
+    height: 200,
+    backgroundColor: colors.cardBlurBackground,
+  },
+  newPostInput: {
+    color: colors.appDarkBlue,
+    marginLeft: 21,
+    marginRight: 21,
+    paddingTop: 10,
+    fontFamily: "MontserratSemiBold",
+    fontSize: 21,
+    height: "100%",
   },
   sendButton: {
     alignItems: "center",
@@ -124,11 +260,5 @@ const styles = StyleSheet.create({
     right: 30,
     backgroundColor: colors.appNeonGreen,
     borderRadius: 20,
-  },
-  newPostInput: {
-    marginLeft: 21,
-    fontFamily: "MontserratSemiBold",
-    width: "100%",
-    fontSize: 21,
   },
 });
