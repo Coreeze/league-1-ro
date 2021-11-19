@@ -2,10 +2,6 @@ import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { LogBox, View, Text, TouchableOpacity } from "react-native";
-
-import useCachedResources from "./hooks/useCachedResources";
-import useColorScheme from "./hooks/useColorScheme";
-import Navigation from "./navigation";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -29,6 +25,7 @@ import auth from "@react-native-firebase/auth";
 import { initializeApp } from "firebase/app";
 import { TextInput } from "react-native-paper";
 import firebase from "firebase/compat";
+import useCachedResources from "../../hooks/useCachedResources";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDDQKoZYTxpvE3aHPhop6buG0aYZXYv0IU",
@@ -44,9 +41,8 @@ const app = initializeApp(firebaseConfig);
 
 LogBox.ignoreLogs(["Setting a timer for a long period of time"]);
 
-export default function App() {
+export default function AuthenticationComponent() {
   const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
 
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
@@ -113,16 +109,11 @@ export default function App() {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        alert("Autentificare de succes!");
         // ...
       })
       .catch((error) => {
-        console.log(error);
         const errorCode = error.code;
         const errorMessage = error.message;
-        if (errorCode.includes("wrong-password")) {
-          alert(`Parola gresita`);
-        }
       });
   }
 
@@ -155,17 +146,11 @@ export default function App() {
       });
   }
 
-  if (auth.currentUser) {
-    console.log("here");
-  }
-
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
       <SafeAreaProvider>
-        {/* <Navigation colorScheme={colorScheme} />
-        <StatusBar /> */}
         <TextInput
           value={email}
           placeholder={"Email here"}
@@ -185,10 +170,7 @@ export default function App() {
           Welcome {email} and {password}
         </Text>
         <TouchableOpacity onPress={signUp}>
-          <Text>Sign up</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={signIn}>
-          <Text>Sign IN</Text>
+          <Text>Sign in</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={getCurrentUser}>
           <Text>Get current user data</Text>

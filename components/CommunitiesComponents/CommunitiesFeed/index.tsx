@@ -50,7 +50,6 @@ export default function CommunitiesFeed() {
 
   function getPosts() {
     const unsubscribe = onSnapshot(chatsRef, (querySnapshot) => {
-      console.log("feed refresh");
       const messagesFirestore = querySnapshot
         .docChanges()
         .filter(({ type }) => type === "added")
@@ -75,6 +74,7 @@ export default function CommunitiesFeed() {
 
   useEffect(() => {
     // readUser();
+    console.log("useEffect");
     getPosts();
   }, []);
 

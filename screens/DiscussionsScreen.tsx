@@ -37,27 +37,7 @@ export default function CommunitiesScreen() {
       locations={[0, 1]}
       style={styles.container}
     >
-      {/* <Image
-        style={{
-          position: "relative",
-          top: Platform.OS === "ios" ? 20 : StatusBarManager.HEIGHT,
-          width: "100%",
-          height: 100,
-        }}
-        source={require("../assets/images/header14.png")}
-        resizeMode="cover"
-      /> */}
       <CommunitiesFeed />
-      {/* {communities.map((community, i) => (
-        <TouchableOpacity
-          style={styles.communityContainer}
-          key={community}
-          activeOpacity={0.8}
-        >
-          <Text style={styles.communityText}>{community}</Text>
-          <FontAwesome5 name="arrow-right" size={15} color="#1C374A" />
-        </TouchableOpacity>
-      ))} */}
 
       {/* Use a light status bar on iOS to account for the black space above the modal */}
       <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />

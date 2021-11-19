@@ -49,6 +49,7 @@ import constants from "../constants/colors";
 import CommunitiesScreen from "../screens/DiscussionsScreen";
 import NewPostScreen from "../screens/NewPostScreen";
 import { MenuProvider } from "react-native-popup-menu";
+
 export default function Navigation({
   colorScheme,
 }: {
@@ -362,7 +363,7 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color, focused }) => (
             <AntDesign
               name="pluscircleo"
-              size={33}
+              size={39}
               color={focused ? "#ff4778" : "grey"}
             />
           ),

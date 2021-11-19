@@ -18,16 +18,7 @@ import colors from "../constants/colors";
 import * as firebase from "firebase/compat";
 import "firebase/firestore";
 import { initializeApp } from "@firebase/app";
-import {
-  getFirestore,
-  collection,
-  query,
-  where,
-  getDocs,
-  onSnapshot,
-  addDoc,
-} from "firebase/firestore";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getFirestore, collection, query, addDoc } from "firebase/firestore";
 
 LogBox.ignoreLogs(["Setting a timer"]);
 
@@ -46,7 +37,6 @@ if (firebase.apps.length == 0) {
 }
 
 const db = getFirestore();
-const chatsRef = query(collection(db, "chats"));
 
 const { StatusBarManager } = NativeModules;
 
