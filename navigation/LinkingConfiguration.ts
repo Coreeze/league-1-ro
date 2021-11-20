@@ -20,9 +20,9 @@ const linking: LinkingOptions<RootStackParamList> = {
               MainFeedScreen: "one",
             },
           },
-          Stats: {
+          Chat: {
             screens: {
-              MoreOptionsScreen: "two",
+              ChatScreen: "two",
             },
           },
         },

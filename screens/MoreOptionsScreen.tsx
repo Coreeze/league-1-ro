@@ -1,6 +1,8 @@
 import { LinearGradient } from "expo-linear-gradient";
 import * as React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import LogOutComponent from "../components/Authetication/LogOutComponent";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
@@ -14,7 +16,10 @@ export default function MoreOptionsScreen() {
       locations={[0, 1]}
       style={styles.container}
     >
-      <Text>Setari</Text>
+      <SafeAreaView>
+        <Text>Setari</Text>
+        <LogOutComponent />
+      </SafeAreaView>
     </LinearGradient>
   );
 }

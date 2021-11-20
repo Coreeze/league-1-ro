@@ -49,15 +49,25 @@ import constants from "../constants/colors";
 import CommunitiesScreen from "../screens/DiscussionsScreen";
 import NewPostScreen from "../screens/NewPostScreen";
 import { MenuProvider } from "react-native-popup-menu";
+import SignUpComponent from "../components/Authetication/SignUpComponent";
+import { getAuth } from "firebase/auth";
+import SignInComponent from "../components/Authetication/SignInComponent";
+import { createContext } from "react";
+
+const auth: any = getAuth();
+// const AuthContext = createContext();
 
 export default function Navigation({
   colorScheme,
 }: {
   colorScheme: ColorSchemeName;
 }) {
+  React.useEffect(() => {
+    console.log("use effect navigation: " + auth.currentUser);
+  });
   return (
     <NavigationContainer
-      linking={LinkingConfiguration}
+      // linking={LinkingConfiguration}
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
     >
       <RootNavigator />
@@ -71,237 +81,256 @@ export default function Navigation({
  */
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
+let isSignedIn = auth.currentUser;
+
 function RootNavigator() {
   return (
+    // <AuthContext.Provider value={authContext}>
     <MenuProvider>
       <Stack.Navigator>
-        <Stack.Screen
-          name="Root"
-          component={BottomTabNavigator}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="FullStandings"
-          component={FullStandings}
-          options={{
-            headerShown: true,
-            headerTitle: (props) => (
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Image
-                  style={{
-                    position: "absolute",
-                    width: 330,
-                    height: 60,
-                  }}
-                  source={require("../assets/images/header13.png")}
-                  resizeMode="contain"
-                />
-                <Text
-                  style={{
-                    fontFamily: "MontserratBold",
-                    color: "white",
-                    fontSize: 18,
-                  }}
-                >
-                  Tabel complet
-                </Text>
-              </View>
-            ),
-            headerStyle: {
-              backgroundColor: constants.headerColor,
-            },
-            headerTintColor: "#fff",
-          }}
-        />
-        <Stack.Screen
-          name="MoreFixtures"
-          component={MoreFixturesComponent}
-          options={{
-            headerShown: true,
-            headerTitle: (props) => (
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Image
-                  style={{
-                    position: "absolute",
-                    width: 330,
-                    height: 60,
-                  }}
-                  source={require("../assets/images/header13.png")}
-                  resizeMode="contain"
-                />
-                <Text
-                  style={{
-                    fontFamily: "MontserratBold",
-                    color: "white",
-                    fontSize: 18,
-                  }}
-                >
-                  Meciuri
-                </Text>
-              </View>
-            ),
-            headerStyle: {
-              backgroundColor: constants.headerColor,
-            },
-            headerTintColor: "#fff",
-          }}
-        />
-        <Stack.Screen
-          name="MoreNews"
-          component={MoreNewsComponent}
-          options={{
-            headerShown: true,
-            headerTitle: (props) => (
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Image
-                  style={{
-                    position: "absolute",
-                    width: 330,
-                    height: 60,
-                  }}
-                  source={require("../assets/images/header13.png")}
-                  resizeMode="contain"
-                />
-                <Text
-                  style={{
-                    fontFamily: "MontserratBold",
-                    color: "white",
-                    fontSize: 18,
-                  }}
-                >
-                  Știri
-                </Text>
-              </View>
-            ),
-            headerStyle: {
-              backgroundColor: constants.headerColor,
-            },
-            headerTintColor: "#fff",
-          }}
-        />
-        <Stack.Screen
-          name="PlayersList"
-          component={PlayersListComponent}
-          options={{
-            headerShown: true,
-            headerTitle: (props) => (
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Image
-                  style={{
-                    position: "absolute",
-                    width: 330,
-                    height: 60,
-                  }}
-                  source={require("../assets/images/header13.png")}
-                  resizeMode="contain"
-                />
-                <Text
-                  style={{
-                    fontFamily: "MontserratBold",
-                    color: "white",
-                    fontSize: 18,
-                  }}
-                >
-                  Listă jucători
-                </Text>
-              </View>
-            ),
-            headerStyle: {
-              backgroundColor: constants.headerColor,
-            },
-            headerTintColor: "#fff",
-          }}
-        />
-        <Stack.Screen
-          name="TeamsList"
-          component={TeamsListComponent}
-          options={{
-            headerShown: true,
-            headerTitle: (props) => (
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Image
-                  style={{
-                    position: "absolute",
-                    width: 330,
-                    height: 60,
-                  }}
-                  source={require("../assets/images/header13.png")}
-                  resizeMode="contain"
-                />
-                <Text
-                  style={{
-                    fontFamily: "MontserratBold",
-                    color: "white",
-                    fontSize: 18,
-                  }}
-                >
-                  Listă echipe
-                </Text>
-              </View>
-            ),
-            headerStyle: {
-              backgroundColor: constants.headerColor,
-            },
-            headerTintColor: "#fff",
-          }}
-        />
-        <Stack.Screen
-          name="TeamDetails"
-          component={TeamDetails}
-          options={{
-            headerShown: true,
-            headerTitle: (props) => (
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Image
-                  style={{
-                    position: "absolute",
-                    width: 330,
-                    height: 60,
-                  }}
-                  source={require("../assets/images/header13.png")}
-                  resizeMode="contain"
-                />
-              </View>
-            ),
-            headerStyle: {
-              backgroundColor: constants.headerColor,
-            },
-            headerTintColor: "#fff",
-          }}
-        />
-        <Stack.Screen
-          name="History"
-          component={HistoryScreen}
-          options={{
-            headerShown: true,
-            headerTitle: (props) => (
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Image
-                  style={{
-                    position: "absolute",
-                    width: 330,
-                    height: 60,
-                  }}
-                  source={require("../assets/images/header13.png")}
-                  resizeMode="contain"
-                />
-              </View>
-            ),
-            headerStyle: {
-              backgroundColor: constants.headerColor,
-            },
-            headerTintColor: "#fff",
-          }}
-        />
-        <Stack.Group screenOptions={{ presentation: "modal" }}>
+        {isSignedIn ? (
+          <>
+            <Stack.Screen
+              name="Root"
+              component={BottomTabNavigator}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="FullStandings"
+              component={FullStandings}
+              options={{
+                headerShown: true,
+                headerTitle: (props) => (
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Image
+                      style={{
+                        position: "absolute",
+                        width: 330,
+                        height: 60,
+                      }}
+                      source={require("../assets/images/header13.png")}
+                      resizeMode="contain"
+                    />
+                    <Text
+                      style={{
+                        fontFamily: "MontserratBold",
+                        color: "white",
+                        fontSize: 18,
+                      }}
+                    >
+                      Tabel complet
+                    </Text>
+                  </View>
+                ),
+                headerStyle: {
+                  backgroundColor: constants.headerColor,
+                },
+                headerTintColor: "#fff",
+              }}
+            />
+            <Stack.Screen
+              name="MoreFixtures"
+              component={MoreFixturesComponent}
+              options={{
+                headerShown: true,
+                headerTitle: (props) => (
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Image
+                      style={{
+                        position: "absolute",
+                        width: 330,
+                        height: 60,
+                      }}
+                      source={require("../assets/images/header13.png")}
+                      resizeMode="contain"
+                    />
+                    <Text
+                      style={{
+                        fontFamily: "MontserratBold",
+                        color: "white",
+                        fontSize: 18,
+                      }}
+                    >
+                      Meciuri
+                    </Text>
+                  </View>
+                ),
+                headerStyle: {
+                  backgroundColor: constants.headerColor,
+                },
+                headerTintColor: "#fff",
+              }}
+            />
+            <Stack.Screen
+              name="MoreNews"
+              component={MoreNewsComponent}
+              options={{
+                headerShown: true,
+                headerTitle: (props) => (
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Image
+                      style={{
+                        position: "absolute",
+                        width: 330,
+                        height: 60,
+                      }}
+                      source={require("../assets/images/header13.png")}
+                      resizeMode="contain"
+                    />
+                    <Text
+                      style={{
+                        fontFamily: "MontserratBold",
+                        color: "white",
+                        fontSize: 18,
+                      }}
+                    >
+                      Știri
+                    </Text>
+                  </View>
+                ),
+                headerStyle: {
+                  backgroundColor: constants.headerColor,
+                },
+                headerTintColor: "#fff",
+              }}
+            />
+            <Stack.Screen
+              name="PlayersList"
+              component={PlayersListComponent}
+              options={{
+                headerShown: true,
+                headerTitle: (props) => (
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Image
+                      style={{
+                        position: "absolute",
+                        width: 330,
+                        height: 60,
+                      }}
+                      source={require("../assets/images/header13.png")}
+                      resizeMode="contain"
+                    />
+                    <Text
+                      style={{
+                        fontFamily: "MontserratBold",
+                        color: "white",
+                        fontSize: 18,
+                      }}
+                    >
+                      Listă jucători
+                    </Text>
+                  </View>
+                ),
+                headerStyle: {
+                  backgroundColor: constants.headerColor,
+                },
+                headerTintColor: "#fff",
+              }}
+            />
+            <Stack.Screen
+              name="TeamsList"
+              component={TeamsListComponent}
+              options={{
+                headerShown: true,
+                headerTitle: (props) => (
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Image
+                      style={{
+                        position: "absolute",
+                        width: 330,
+                        height: 60,
+                      }}
+                      source={require("../assets/images/header13.png")}
+                      resizeMode="contain"
+                    />
+                    <Text
+                      style={{
+                        fontFamily: "MontserratBold",
+                        color: "white",
+                        fontSize: 18,
+                      }}
+                    >
+                      Listă echipe
+                    </Text>
+                  </View>
+                ),
+                headerStyle: {
+                  backgroundColor: constants.headerColor,
+                },
+                headerTintColor: "#fff",
+              }}
+            />
+            <Stack.Screen
+              name="TeamDetails"
+              component={TeamDetails}
+              options={{
+                headerShown: true,
+                headerTitle: (props) => (
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Image
+                      style={{
+                        position: "absolute",
+                        width: 330,
+                        height: 60,
+                      }}
+                      source={require("../assets/images/header13.png")}
+                      resizeMode="contain"
+                    />
+                  </View>
+                ),
+                headerStyle: {
+                  backgroundColor: constants.headerColor,
+                },
+                headerTintColor: "#fff",
+              }}
+            />
+            <Stack.Screen
+              name="History"
+              component={HistoryScreen}
+              options={{
+                headerShown: true,
+                headerTitle: (props) => (
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Image
+                      style={{
+                        position: "absolute",
+                        width: 330,
+                        height: 60,
+                      }}
+                      source={require("../assets/images/header13.png")}
+                      resizeMode="contain"
+                    />
+                  </View>
+                ),
+                headerStyle: {
+                  backgroundColor: constants.headerColor,
+                },
+                headerTintColor: "#fff",
+              }}
+            />
+            <Stack.Group screenOptions={{ presentation: "modal" }}>
+              <Stack.Screen
+                name="Modal"
+                options={{ headerShown: false }}
+                component={ModalScreen}
+              />
+            </Stack.Group>
+          </>
+        ) : (
           <Stack.Screen
-            name="Modal"
-            options={{ headerShown: false }}
-            component={ModalScreen}
+            name="SignIn"
+            component={SignInComponent}
+            options={{
+              title: "Sign in",
+              // When logging out, a pop animation feels intuitive
+              // You can remove this if you want the default 'push' animation
+              // animationTypeForReplace: state.isSignout ? 'pop' : 'push',
+            }}
           />
-        </Stack.Group>
+        )}
       </Stack.Navigator>
     </MenuProvider>
+    // </AuthContext.Provider>
   );
 }
 
@@ -421,4 +450,7 @@ function TabBarIcon(props: {
   color: string;
 }) {
   return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
+}
+function useNavigation() {
+  throw new Error("Function not implemented.");
 }

@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { LogBox, View, Text, TouchableOpacity } from "react-native";
 
-import useCachedResources from "./hooks/useCachedResources";
-import useColorScheme from "./hooks/useColorScheme";
-import Navigation from "./navigation";
+import useCachedResources from "../../../hooks/useCachedResources";
+import useColorScheme from "../../../hooks/useColorScheme";
+import Navigation from "../../../navigation";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -25,11 +25,10 @@ import {
   onSnapshot,
   addDoc,
 } from "firebase/firestore";
+import auth from "@react-native-firebase/auth";
 import { initializeApp } from "firebase/app";
 import { TextInput } from "react-native-paper";
 import firebase from "firebase/compat";
-import SignUpComponent from "./components/Authetication/SignUpComponent";
-import { createStackNavigator } from "@react-navigation/stack";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDDQKoZYTxpvE3aHPhop6buG0aYZXYv0IU",
@@ -45,7 +44,7 @@ const app = initializeApp(firebaseConfig);
 
 LogBox.ignoreLogs(["Setting a timer for a long period of time"]);
 
-export default function App() {
+export default function SignUpComponent() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
 
@@ -63,7 +62,7 @@ export default function App() {
   const auth: any = getAuth();
 
   useEffect(() => {
-    console.log("USE EFFECT APP");
+    console.log("USE EFFECT");
   });
 
   function signUp() {
@@ -83,7 +82,17 @@ export default function App() {
             console.log(error);
           });
 
-        console.log(user);
+        console.log("go to navi");
+        if (!isLoadingComplete) {
+          return null;
+        } else {
+          return (
+            <SafeAreaProvider>
+              <Navigation colorScheme={colorScheme} />
+              <StatusBar />
+            </SafeAreaProvider>
+          );
+        }
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -98,6 +107,7 @@ export default function App() {
         }
         // ..
       });
+    writeUserToDb;
   }
 
   async function writeUserToDb() {
@@ -109,70 +119,34 @@ export default function App() {
     // }
   }
 
-  function signIn() {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        alert("Autentificare de succes!");
-        setEmail("");
-        setPassword("");
-        setUsername("");
-        // ...
-      })
-      .catch((error) => {
-        console.log(error);
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        if (errorCode.includes("wrong-password")) {
-          alert(`Parola gresita`);
-        }
-      });
+  if (auth.currentUser) {
+    console.log("here");
   }
 
-  function getCurrentUser() {
-    const user = auth.currentUser;
-    if (user !== null) {
-      console.log(user);
-      // The user object has basic properties such as display name, email, etc.
-      const displayName = user.displayName;
-      const email = user.email;
-      const photoURL = user.photoURL;
-      const emailVerified = user.emailVerified;
-
-      // The user's ID, unique to the Firebase project. Do NOT use
-      // this value to authenticate with your backend server, if
-      // you have one. Use User.getToken() instead.
-      const uid = user.uid;
-    }
-  }
-
-  function getOut() {
-    signOut(auth)
-      .then(() => {
-        console.log("singed out");
-        console.log(auth.currentUser);
-      })
-      .catch((error) => {
-        console.log("Error by Signing out: " + error);
-        // An error happened.
-      });
-  }
-
-  // if (!auth.currentUser) {
-  //   console.log("user NOT exists");
-  //   return <SignUpComponent />;
-  // } else {
-  // console.log("user exists");
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
       <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
+        <TextInput
+          value={email}
+          placeholder={"Email here"}
+          onChangeText={(text) => setEmail(text)}
+        />
+        <TextInput
+          value={username}
+          placeholder={"username here"}
+          onChangeText={(text) => setUsername(text)}
+        />
+        <TextInput
+          value={password}
+          placeholder={"Password here"}
+          onChangeText={(text) => setPassword(text)}
+        />
+        <TouchableOpacity onPress={signUp}>
+          <Text>Sign up</Text>
+        </TouchableOpacity>
       </SafeAreaProvider>
     );
-    // }
   }
 }
