@@ -50,7 +50,7 @@ import CommunitiesScreen from "../screens/DiscussionsScreen";
 import NewPostScreen from "../screens/NewPostScreen";
 import { MenuProvider } from "react-native-popup-menu";
 import SignUpComponent from "../components/Authetication/SignUpComponent";
-import { getAuth } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import SignInComponent from "../components/Authetication/SignInComponent";
 import { createContext, useContext, useEffect, useState } from "react";
 import LogOutComponent from "../components/Authetication/LogOutComponent";
@@ -63,6 +63,7 @@ export default function Navigation({
 }: {
   colorScheme: ColorSchemeName;
 }) {
+  const auth: any = getAuth();
   const [state, dispatch] = React.useReducer(
     (prevState: any, action: any) => {
       switch (action.type) {
@@ -116,7 +117,7 @@ export default function Navigation({
 
   const authContext = React.useMemo(
     () => ({
-      signIn: async (data) => {
+      signIn: async (data: any) => {
         // In a production app, we need to send some data (usually username, password) to server and get a token
         // We will also need to handle errors if sign in failed
         // After getting token, we need to persist the token using `SecureStore`
@@ -124,8 +125,20 @@ export default function Navigation({
 
         dispatch({ type: "SIGN_IN", token: "dummy-auth-token" });
       },
-      signOut: () => dispatch({ type: "SIGN_OUT" }),
-      signUp: async (data) => {
+      signOut: () => {
+        signOut(auth)
+          .then(() => {
+            console.log("singed out");
+            // console.log(auth.currentUser);
+          })
+          .catch((error) => {
+            console.log("Error by Signing out: " + error);
+            // An error happened.
+          });
+
+        dispatch({ type: "SIGN_OUT" });
+      },
+      signUp: async (data: any) => {
         // In a production app, we need to send user data to server and get a token
         // We will also need to handle errors if sign up failed
         // After getting token, we need to persist the token using `SecureStore`
