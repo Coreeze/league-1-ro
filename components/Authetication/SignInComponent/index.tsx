@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { LogBox, View, Text, TouchableOpacity } from "react-native";
 
@@ -8,7 +8,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { TextInput } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
-
+import { AuthContext } from "../../../navigation";
 const firebaseConfig = {
   apiKey: "AIzaSyDDQKoZYTxpvE3aHPhop6buG0aYZXYv0IU",
   authDomain: "football-app-32bb9.firebaseapp.com",
@@ -31,19 +31,22 @@ export default function SignInComponent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { signIn } = React.useContext(AuthContext);
+
   const auth: any = getAuth();
 
   useEffect(() => {
-    console.log("USE EFFECT");
+    // console.log("USE EFFECT SignInComponent: "+authenticated);
   });
 
-  function signIn() {
+  function getIn() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         // alert("Autentificare de succes!");
         // navigation.navigate("");
+        signIn({ email, password });
         setEmail("");
         setPassword("");
         // ...
@@ -56,10 +59,6 @@ export default function SignInComponent() {
           alert(`Parola gresita`);
         }
       });
-  }
-
-  if (auth.currentUser) {
-    console.log("here");
   }
 
   if (!isLoadingComplete) {
@@ -77,7 +76,7 @@ export default function SignInComponent() {
           placeholder={"Password here"}
           onChangeText={(text) => setPassword(text)}
         />
-        <TouchableOpacity onPress={signIn}>
+        <TouchableOpacity onPress={getIn}>
           <Text>Sign IN</Text>
         </TouchableOpacity>
         <Text>No Account? Then</Text>

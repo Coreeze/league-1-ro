@@ -62,7 +62,7 @@ export default function SignUpComponent() {
   const auth: any = getAuth();
 
   useEffect(() => {
-    console.log("USE EFFECT");
+    console.log("USE EFFECT SignUpComponent");
   });
 
   function signUp() {
@@ -83,16 +83,16 @@ export default function SignUpComponent() {
           });
 
         console.log("go to navi");
-        if (!isLoadingComplete) {
-          return null;
-        } else {
-          return (
-            <SafeAreaProvider>
-              <Navigation colorScheme={colorScheme} />
-              <StatusBar />
-            </SafeAreaProvider>
-          );
-        }
+        // if (!isLoadingComplete) {
+        //   return null;
+        // } else {
+        //   return (
+        //     <SafeAreaProvider>
+        //       <Navigation colorScheme={colorScheme} />
+        //       <StatusBar />
+        //     </SafeAreaProvider>
+        //   );
+        // }
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -117,10 +117,6 @@ export default function SignUpComponent() {
     const uid = auth.currentUser.uid;
     await addDoc(collection(db, "users"), { uid });
     // }
-  }
-
-  if (auth.currentUser) {
-    console.log("here");
   }
 
   if (!isLoadingComplete) {

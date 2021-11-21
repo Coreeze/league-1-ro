@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { LogBox, View, Text, TouchableOpacity } from "react-native";
 
 import useCachedResources from "../../../hooks/useCachedResources";
 import { getAuth, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
+import { NavigationContainer } from "@react-navigation/native";
+import { AuthContext, AuthStackScreen } from "../../../navigation";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDDQKoZYTxpvE3aHPhop6buG0aYZXYv0IU",
@@ -25,24 +27,19 @@ export default function LogOutComponent() {
   const isLoadingComplete = useCachedResources();
   const auth: any = getAuth();
 
-  useEffect(() => {
-    console.log("USE EFFECT");
-  });
+  const { signOut } = React.useContext(AuthContext);
 
   function getOut() {
     signOut(auth)
       .then(() => {
+        signOut;
         console.log("singed out");
-        console.log(auth.currentUser);
+        // console.log(auth.currentUser);
       })
       .catch((error) => {
         console.log("Error by Signing out: " + error);
         // An error happened.
       });
-  }
-
-  if (auth.currentUser) {
-    console.log("here");
   }
 
   if (!isLoadingComplete) {
