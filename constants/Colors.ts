@@ -17,7 +17,7 @@ const colors = {
     tabIconSelected: tintColorDark,
   },
   headerColor: "#113b59",
-  cardBlurBackground: "rgba(255,255,255,0.8)",
+  cardBlurBackground: "rgba(230,230,230,0.8)",
   appDarkBlue: "#1C374A",
   appNeonGreen: "#CEFF00",
 };

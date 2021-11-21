@@ -97,7 +97,7 @@ const ChatScreen = () => {
 
   async function readUser() {
     const user = await AsyncStorage.getItem("user");
-    // console.log(user);
+    console.log(user);
     if (user) {
       setUser(JSON.parse(user));
     }

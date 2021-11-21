@@ -49,11 +49,6 @@ export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
 
-  // if (!auth.currentUser) {
-  //   console.log("user NOT exists");
-  //   return <SignUpComponent />;
-  // } else {
-  // console.log("user exists");
   if (!isLoadingComplete) {
     return null;
   } else {
