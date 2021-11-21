@@ -1,9 +1,4 @@
-import { useState } from "react";
 import { StyleSheet, Dimensions } from "react-native";
-import colors from "../../../constants/colors";
-import useFonts from "../../../useFonts";
-import AppLoading from "expo-app-loading";
-import React from "react";
 
 const dimensions = Dimensions.get("window");
 

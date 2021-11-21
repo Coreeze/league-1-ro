@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import React from "react";
 import { LogBox, View, Text, TouchableOpacity } from "react-native";
 
 import useCachedResources from "../../../hooks/useCachedResources";
@@ -8,7 +7,6 @@ import { initializeApp } from "firebase/app";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { AuthContext, AuthStackScreen } from "../../../navigation";
 import styles from "./styles";
-import HistoryComponent from "../../../screens/HistoryScreen";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDDQKoZYTxpvE3aHPhop6buG0aYZXYv0IU",
@@ -45,7 +43,11 @@ export default function LogOutComponent() {
           width: "100%",
         }}
       >
-        <TouchableOpacity onPress={signOut} style={styles.logoutContainer}>
+        <TouchableOpacity
+          onPress={signOut}
+          style={styles.logoutContainer}
+          activeOpacity={0.8}
+        >
           <Text style={styles.logouText}>Delogare</Text>
         </TouchableOpacity>
       </View>

@@ -57,6 +57,7 @@ export default function MoreOptionsScreen() {
           <TouchableOpacity
             onPress={goToHistory}
             style={styles.historyContainer}
+            activeOpacity={0.8}
           >
             <Text style={styles.historyText}>
               Vezi istoria fotbalului romanesc

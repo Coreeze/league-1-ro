@@ -248,10 +248,10 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   title: {
-    fontSize: 20,
+    fontSize: 33,
     fontFamily: "MontserratBold",
     color: colors.appDarkBlue,
-    alignSelf: "center",
+    // alignSelf: "center",
   },
   inputContainer: {
     marginTop: 30,
