@@ -61,6 +61,10 @@ export default function SignInComponent() {
       });
   }
 
+  function print() {
+    console.log(auth.currentUser);
+  }
+
   if (!isLoadingComplete) {
     return null;
   } else {
@@ -82,6 +86,9 @@ export default function SignInComponent() {
         <Text>No Account? Then</Text>
         <TouchableOpacity>
           <Text>Sign up</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={print}>
+          <Text>Print</Text>
         </TouchableOpacity>
       </SafeAreaProvider>
     );

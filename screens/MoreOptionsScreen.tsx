@@ -17,7 +17,6 @@ export default function MoreOptionsScreen() {
       style={styles.container}
     >
       <SafeAreaView>
-        <Text>Setari</Text>
         <LogOutComponent />
       </SafeAreaView>
     </LinearGradient>

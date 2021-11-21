@@ -26,7 +26,6 @@ LogBox.ignoreLogs(["Setting a timer for a long period of time"]);
 export default function LogOutComponent() {
   const isLoadingComplete = useCachedResources();
   const auth: any = getAuth();
-
   const { signOut } = React.useContext(AuthContext);
 
   function getOut() {
@@ -42,13 +41,20 @@ export default function LogOutComponent() {
       });
   }
 
+  function print() {
+    console.log(auth.currentUser);
+  }
+
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
       <SafeAreaProvider>
-        <TouchableOpacity onPress={getOut}>
+        <TouchableOpacity onPress={signOut}>
           <Text>Sign out</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={print}>
+          <Text>Print</Text>
         </TouchableOpacity>
       </SafeAreaProvider>
     );
