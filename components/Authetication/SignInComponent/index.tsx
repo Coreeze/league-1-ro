@@ -119,6 +119,7 @@ export default function SignInComponent() {
                 placeholder={"Codul de la dulap (parola)"}
                 onChangeText={(text) => setPassword(text)}
                 style={styles.input}
+                secureTextEntry={true}
               />
               <TouchableOpacity
                 onPress={getIn}

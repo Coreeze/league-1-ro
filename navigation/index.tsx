@@ -399,6 +399,15 @@ function RootNavigator() {
                   source={require("../assets/images/header13.png")}
                   resizeMode="contain"
                 />
+                <Text
+                  style={{
+                    fontFamily: "MontserratBold",
+                    color: "white",
+                    fontSize: 18,
+                  }}
+                >
+                  Istorie
+                </Text>
               </View>
             ),
             headerStyle: {

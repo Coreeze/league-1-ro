@@ -5,8 +5,10 @@ import { LogBox, View, Text, TouchableOpacity } from "react-native";
 import useCachedResources from "../../../hooks/useCachedResources";
 import { getAuth, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { AuthContext, AuthStackScreen } from "../../../navigation";
+import styles from "./styles";
+import HistoryComponent from "../../../screens/HistoryScreen";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDDQKoZYTxpvE3aHPhop6buG0aYZXYv0IU",
@@ -24,27 +26,29 @@ const app = initializeApp(firebaseConfig);
 LogBox.ignoreLogs(["Setting a timer for a long period of time"]);
 
 export default function LogOutComponent() {
+  const navigation = useNavigation();
   const isLoadingComplete = useCachedResources();
   const auth: any = getAuth();
   // @ts-ignore
   const { signOut } = React.useContext(AuthContext);
 
-  function print() {
-    console.log(auth.currentUser);
+  function goToHistory() {
+    navigation.navigate("History");
   }
 
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
-        <TouchableOpacity onPress={signOut}>
-          <Text>Sign out</Text>
+      <View
+        style={{
+          width: "100%",
+        }}
+      >
+        <TouchableOpacity onPress={signOut} style={styles.logoutContainer}>
+          <Text style={styles.logouText}>Delogare</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={print}>
-          <Text>Print</Text>
-        </TouchableOpacity>
-      </SafeAreaProvider>
+      </View>
     );
   }
 }

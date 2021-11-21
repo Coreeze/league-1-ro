@@ -157,6 +157,7 @@ export default function SignUpComponent() {
                 placeholder={"Codul de la dulap"}
                 onChangeText={(text) => setPassword(text)}
                 style={styles.input}
+                secureTextEntry={true}
               />
               <TouchableOpacity
                 onPress={signUp}

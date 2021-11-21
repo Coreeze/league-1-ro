@@ -31,7 +31,7 @@ export default function HistoryComponent() {
 
   return (
     <LinearGradient
-      colors={["#CEFF00", "#113b59"]}
+      colors={["#113b59", "#CEFF00"]}
       start={{ x: 0.3, y: 0.3 }}
       end={{ x: 0.5, y: 0.7 }}
       locations={[0, 1]}
@@ -40,15 +40,6 @@ export default function HistoryComponent() {
       <Transitioning.View ref={ref} style={{ backgroundColor: "transparent" }}>
         {/* TODO: animated transitions */}
         <ScrollView style={historyScreenSytle.scrollview}>
-          <Image
-            style={{
-              position: "relative",
-              width: imageWidth,
-              height: 100,
-            }}
-            source={require("../assets/images/header12.png")}
-            resizeMode="cover"
-          />
           <View style={historyScreenSytle.writingContainer}>
             <Image
               style={{
