@@ -5,7 +5,7 @@ import { LogBox, View, Text, TouchableOpacity } from "react-native";
 
 import useCachedResources from "../../../hooks/useCachedResources";
 import useColorScheme from "../../../hooks/useColorScheme";
-import Navigation from "../../../navigation";
+import Navigation, { AuthContext } from "../../../navigation";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -47,6 +47,7 @@ LogBox.ignoreLogs(["Setting a timer for a long period of time"]);
 export default function SignUpComponent() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
+  const { signIn } = React.useContext(AuthContext);
 
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
@@ -69,10 +70,9 @@ export default function SignUpComponent() {
     console.log("createUser");
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        alert("Succes!");
-
+        signIn({ email, password });
         updateProfile(auth.currentUser, {
-          displayName: "Jane Q. User",
+          displayName: username,
           photoURL: "https://example.com/jane-q-user/profile.jpg",
         })
           .then(() => {

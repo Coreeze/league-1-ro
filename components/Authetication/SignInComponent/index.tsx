@@ -30,7 +30,7 @@ export default function SignInComponent() {
   // Set an initializing state whilst Firebase connects
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  // @ts-ignore
   const { signIn } = React.useContext(AuthContext);
 
   const auth: any = getAuth();
@@ -61,6 +61,10 @@ export default function SignInComponent() {
       });
   }
 
+  function goToSignUp() {
+    navigation.navigate("SignUp");
+  }
+
   function print() {
     console.log(auth.currentUser);
   }
@@ -84,7 +88,7 @@ export default function SignInComponent() {
           <Text>Sign IN</Text>
         </TouchableOpacity>
         <Text>No Account? Then</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={goToSignUp}>
           <Text>Sign up</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={print}>

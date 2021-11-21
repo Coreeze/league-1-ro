@@ -26,20 +26,8 @@ LogBox.ignoreLogs(["Setting a timer for a long period of time"]);
 export default function LogOutComponent() {
   const isLoadingComplete = useCachedResources();
   const auth: any = getAuth();
+  // @ts-ignore
   const { signOut } = React.useContext(AuthContext);
-
-  function getOut() {
-    signOut(auth)
-      .then(() => {
-        signOut;
-        console.log("singed out");
-        // console.log(auth.currentUser);
-      })
-      .catch((error) => {
-        console.log("Error by Signing out: " + error);
-        // An error happened.
-      });
-  }
 
   function print() {
     console.log(auth.currentUser);
