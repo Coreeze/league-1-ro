@@ -38,7 +38,7 @@ const PictureContainer = ({ image, user }: PictureContainerProps) => {
                 fontSize: sizes.textSize,
               }}
             >
-              {user.name}
+              {user}
             </Text>
 
             <Text

@@ -56,12 +56,13 @@ export default function CommunitiesFeed() {
         .map(({ doc }) => {
           const message = doc.data();
           const _id = Math.random().toString(36).substring(7);
-          // console.log(message.post);
+          console.log(message.post.createdAt.nanoseconds);
+          // console.log(message.post.user);
           return {
             content: message.post.content,
             createdAt: message.post.createdAt.nanoseconds,
             _id: message.post.id,
-            user: message.post.user,
+            user: message.post.user.username,
           };
         });
       // .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
@@ -74,7 +75,6 @@ export default function CommunitiesFeed() {
 
   useEffect(() => {
     // readUser();
-    console.log("useEffect");
     getPosts();
   }, []);
 

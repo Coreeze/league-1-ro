@@ -28,6 +28,7 @@ import {
   onSnapshot,
   addDoc,
 } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDDQKoZYTxpvE3aHPhop6buG0aYZXYv0IU",
@@ -58,9 +59,13 @@ const ChatScreen = () => {
     visible: true,
   });
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({
+    username: "",
+    uid: "",
+  });
   const [name, setName] = useState("");
   const [messages, setMessages] = useState([]);
+  const auth: any = getAuth();
 
   useEffect(() => {
     readUser();
@@ -72,7 +77,7 @@ const ChatScreen = () => {
         .map(({ doc }) => {
           const message = doc.data();
           const _id = Math.random().toString(36).substring(7);
-          // console.log(message);
+          console.log(message);
           return {
             text: message.m.text,
             createdAt: message.m.createdAt.toDate(),
@@ -96,11 +101,15 @@ const ChatScreen = () => {
   );
 
   async function readUser() {
-    const user = await AsyncStorage.getItem("user");
-    console.log(user);
-    if (user) {
-      setUser(JSON.parse(user));
-    }
+    // const user = await AsyncStorage.getItem("user");
+    const user = auth.currentUser;
+    setUser({
+      username: auth.currentUser.displayName,
+      uid: auth.currentUser.uid,
+    });
+    // console.log(user);
+    // if (user) {
+    // }
   }
 
   async function handlePress() {
@@ -132,19 +141,19 @@ const ChatScreen = () => {
     [messages]
   );
 
-  if (!user) {
-    return (
-      <View style={styles.container}>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your name"
-          value={name}
-          onChangeText={setName}
-        />
-        <Button onPress={handlePress} title="Enter the chat" />
-      </View>
-    );
-  }
+  // if (!user) {
+  //   return (
+  //     <View style={styles.container}>
+  //       <TextInput
+  //         style={styles.input}
+  //         placeholder="Enter your name"
+  //         value={name}
+  //         onChangeText={setName}
+  //       />
+  //       <Button onPress={handlePress} title="Enter the chat" />
+  //     </View>
+  //   );
+  // }
 
   const handleSubmit = () => {
     state.name.length > 3

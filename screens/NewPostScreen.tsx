@@ -19,6 +19,7 @@ import * as firebase from "firebase/compat";
 import "firebase/firestore";
 import { initializeApp } from "@firebase/app";
 import { getFirestore, collection, query, addDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 LogBox.ignoreLogs(["Setting a timer"]);
 
@@ -49,10 +50,12 @@ export default function NewPostScreen({ navigation }: any) {
   //   visible: true,
   // });
   const [user, setUser] = useState("Username");
+  const auth: any = getAuth();
+  // setUser(auth.currentUser);
   const [name, setName] = useState("");
   const [content, setContent] = useState(String);
   const [post, setPost] = useState({
-    user: "",
+    user: {},
     id: "",
     content: "",
     createdAt: Date,
@@ -164,7 +167,7 @@ export default function NewPostScreen({ navigation }: any) {
     console.log("post");
     handleSend(post);
     setPost({
-      user: "",
+      user: {},
       id: "",
       content: "",
       createdAt: Date,
@@ -197,7 +200,10 @@ export default function NewPostScreen({ navigation }: any) {
                 const id = createdAt + Math.random();
 
                 setPost({
-                  user: user,
+                  user: {
+                    username: auth.currentUser.displayName,
+                    uid: auth.currentUser.uid,
+                  },
                   id: id,
                   createdAt: createdAt,
                   image: null,
