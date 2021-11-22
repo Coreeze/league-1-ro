@@ -1,21 +1,8 @@
-import {
-  AntDesign,
-  Entypo,
-  EvilIcons,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
 import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
-import {
-  Menu,
-  MenuOption,
-  MenuOptions,
-  MenuTrigger,
-  renderers,
-} from "react-native-popup-menu";
-import { sizes } from "../../../../constants/sizes";
+import { Text, View } from "react-native";
+import TimeAgo from "react-native-timeago";
 
-import { UserType } from "../../../../types";
+import { sizes } from "../../../../constants/sizes";
 import ProfilePicture from "../../ProfilePicture";
 import styles from "./styles";
 
@@ -23,9 +10,15 @@ export type PictureContainerProps = {
   image: string;
   user: any;
   fan: string;
+  date: any;
 };
 
-const PictureContainer = ({ image, user, fan }: PictureContainerProps) => {
+const PictureContainer = ({
+  image,
+  user,
+  fan,
+  date,
+}: PictureContainerProps) => {
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -55,7 +48,7 @@ const PictureContainer = ({ image, user, fan }: PictureContainerProps) => {
           <Text
             style={{ color: "grey", marginRight: 10, fontSize: sizes.textSize }}
           >
-            acum 15s
+            <TimeAgo time={date} />
           </Text>
         </View>
       </View>

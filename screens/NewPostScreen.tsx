@@ -195,8 +195,8 @@ export default function NewPostScreen({ navigation }: any) {
                 function epoch(date: any) {
                   return Date.parse(date);
                 }
-                const createdAt = epoch(new Date());
-                const id = createdAt + Math.random();
+                const createdAt = new Date();
+                const id = epoch(createdAt) + Math.random();
 
                 setPost({
                   user: {

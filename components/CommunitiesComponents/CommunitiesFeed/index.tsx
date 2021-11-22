@@ -58,12 +58,13 @@ export default function CommunitiesFeed() {
           // console.log(message.post.user);
           return {
             content: message.post.content,
-            createdAt: message.post.createdAt.nanoseconds,
+            createdAt: message.post.createdAt.toDate(),
             _id: message.post.id,
             user: message.post.user.username.split("|")[0],
             fan: message.post.user.username.split("|")[1],
           };
-        });
+        })
+        .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
       // .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
       // appendPosts(messagesFirestore);
       setPosts(messagesFirestore);
