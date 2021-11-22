@@ -27,7 +27,7 @@ export default function HistoryComponent() {
   const dimensions = Dimensions.get("window");
   const imageWidth = dimensions.width;
 
-  console.log(dimensions);
+  // console.log(dimensions);
 
   return (
     <LinearGradient

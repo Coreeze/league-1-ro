@@ -22,7 +22,7 @@ const PlayersListComponent = ({ route }: any) => {
   const [squad, setSquad] = useState([]);
 
   const teamId = route.params.teamId;
-  console.log(teamId);
+  // console.log(teamId);
 
   if (shouldFetch) {
     setShouldFetch(false);

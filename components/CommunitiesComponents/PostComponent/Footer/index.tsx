@@ -11,7 +11,6 @@ export type FooterProps = {
 
 const Footer = ({ numberOfLikes }: FooterProps) => {
   return (
-    // <View style={styles.sunIcon}>
     <TouchableOpacity
       activeOpacity={0.7}
       style={{
@@ -23,7 +22,6 @@ const Footer = ({ numberOfLikes }: FooterProps) => {
     >
       <FontAwesome name="soccer-ball-o" size={24} color={colors.appDarkBlue} />
       <Text style={{ marginLeft: 5 }}>{numberOfLikes}</Text>
-      {/* </View */}
     </TouchableOpacity>
   );
 };

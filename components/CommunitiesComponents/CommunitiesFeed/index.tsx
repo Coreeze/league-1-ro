@@ -54,8 +54,6 @@ export default function CommunitiesFeed() {
         .map(({ doc }) => {
           const message = doc.data();
           const _id = Math.random().toString(36).substring(7);
-          console.log(message.post.createdAt.nanoseconds);
-          // console.log(message.post.user);
           return {
             content: message.post.content,
             createdAt: message.post.createdAt.toDate(),
@@ -65,29 +63,33 @@ export default function CommunitiesFeed() {
           };
         })
         .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
-      // .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
-      // appendPosts(messagesFirestore);
       setPosts(messagesFirestore);
-      // console.log(messagesFirestore);
     });
     return () => unsubscribe();
   }
 
+  // useEffect(() => {
+  //   onRefresh;
+  //   const willFocusSubscription = navigation.addListener("focus", () => {
+  //     onRefresh;
+  //   });
+
+  //   return willFocusSubscription;
+  // }, []);
+
   useEffect(() => {
     // readUser();
+    console.log("here");
+    onRefresh;
     getPosts();
   }, []);
 
   const appendPosts = useCallback(
     (posts) => {
-      // console.log("posts: " + posts);
-      // console.log(previousPosts)
       setPosts((previousPosts) => postsTest.append(previousPosts, posts));
     },
     [posts]
   );
-
-  // console.log(posts);
 
   return (
     <LinearGradient
@@ -115,19 +117,9 @@ export default function CommunitiesFeed() {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
-        refreshing={true}
+        // refreshing={true}
         // onRefresh={fetchShortPosts}
       />
-      {/* {communities.map((community, i) => (
-            <TouchableOpacity
-              style={styles.communityContainer}
-              key={community}
-              activeOpacity={0.8}
-            >
-              <Text style={styles.communityText}>{community}</Text>
-              <FontAwesome5 name="arrow-right" size={15} color="#1C374A" />
-            </TouchableOpacity>
-          ))} */}
 
       {/* Use a light status bar on iOS to account for the black space above the modal */}
       <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />

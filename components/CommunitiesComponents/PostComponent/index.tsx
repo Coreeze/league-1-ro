@@ -21,7 +21,6 @@ const ShortPost = ({ shortPost }: ShortPostProps) => {
         fan={shortPost.fan}
         date={shortPost.createdAt}
       />
-      {/* <UpContainer user={shortPost.user} createdAt={shortPost.createdAt} /> */}
       <DownContainer content={shortPost.content} image={shortPost.image} />
       <Footer numberOfLikes={shortPost.numberOfLikes} />
     </View>

@@ -34,9 +34,7 @@ const firebaseConfig = {
   measurementId: "G-07RETPKL8Y",
 };
 
-if (firebase.apps.length == 0) {
-  const app = initializeApp(firebaseConfig);
-}
+const app = initializeApp(firebaseConfig);
 
 const db = getFirestore();
 
@@ -45,11 +43,6 @@ const { StatusBarManager } = NativeModules;
 export default function NewPostScreen({ navigation }: any) {
   const refInput = useRef(null);
 
-  // const [state, setState] = useState({
-  //   name: "",
-  //   promptVisible: false,
-  //   visible: true,
-  // });
   const [user, setUser] = useState("Username");
   const auth: any = getAuth();
   // setUser(auth.currentUser);
@@ -63,54 +56,6 @@ export default function NewPostScreen({ navigation }: any) {
     image: null,
   });
 
-  // useEffect(() => {
-  //   readUser();
-
-  //   const unsubscribe = onSnapshot(chatsRef, (querySnapshot) => {
-  //     const messagesFirestore = querySnapshot
-  //       .docChanges()
-  //       .filter(({ type }) => type === "added")
-  //       .map(({ doc }) => {
-  //         const message = doc.data();
-  //         const _id = Math.random().toString(36).substring(7);
-  //         // console.log(message);
-  //         return {
-  //           text: message.m.text,
-  //           createdAt: message.m.createdAt.toDate(),
-  //           _id,
-  //           user: message.m.user,
-  //         };
-  //       })
-  //       .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
-  //     // appendMessages(messagesFirestore);
-  //   });
-  //   return () => unsubscribe();
-  // }, []);
-
-  // const appendMessages = useCallback(
-  //   (messages) => {
-  //     setPostText((previousMessages) =>
-  //       GiftedChat.append(previousMessages, messages)
-  //     );
-  //   },
-  //   [messages]
-  // );
-
-  // async function readUser() {
-  //   const user = await AsyncStorage.getItem("user");
-  //   // console.log(user);
-  //   if (user) {
-  //     setUser(JSON.parse(user));
-  //   }
-  // }
-
-  // async function handlePress() {
-  //   const _id = Math.random().toString(36).substring(7);
-  //   const user = { _id, name };
-  //   await AsyncStorage.setItem("user", JSON.stringify(user));
-  //   setUser(user);
-  // }
-
   async function handleSend(post: any) {
     // console.log("postText: " + post);
     await addDoc(collection(db, "community"), { post });
@@ -120,39 +65,10 @@ export default function NewPostScreen({ navigation }: any) {
     // await Promise.all(writes);
   }
 
-  // if (!user) {
-  //   return (
-  //     <View
-  //       style={{
-  //         flex: 1,
-  //         backgroundColor: "#fff",
-  //         alignItems: "center",
-  //         justifyContent: "center",
-  //         padding: 30,
-  //       }}
-  //     >
-  //       <TextInput
-  //         style={{
-  //           height: 50,
-  //           width: "100%",
-  //           borderWidth: 1,
-  //           padding: 15,
-  //           borderColor: "gray",
-  //         }}
-  //         placeholder="Enter your name"
-  //         value={name}
-  //         onChangeText={setName}
-  //       />
-  //       <Button onPress={handlePress} title="Enter the chat" />
-  //     </View>
-  //   );
-  // }
-
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
       // The screen is focused
       // Call any action
-      console.log("focus");
       Platform.OS === "ios"
         ? // @ts-ignore:
           refInput.current.focus()
@@ -165,15 +81,34 @@ export default function NewPostScreen({ navigation }: any) {
   }, [navigation]);
 
   function sendToDb() {
-    console.log("post");
-    handleSend(post);
-    setPost({
-      user: {},
-      id: "",
-      content: "",
-      createdAt: Date,
-      image: null,
-    });
+    if (
+      post.content.length > 1 &&
+      !post.content.toLowerCase().includes("pula") &&
+      !post.content.toLowerCase().includes("pulă") &&
+      !post.content.toLowerCase().includes("pulâ") &&
+      !post.content.toLowerCase().includes("cacat") &&
+      !post.content.toLowerCase().includes("câcat") &&
+      !post.content.toLowerCase().includes("câcăt") &&
+      !post.content.toLowerCase().includes("rahat") &&
+      !post.content.toLowerCase().includes("rehat") &&
+      !post.content.toLowerCase().includes("rehet")
+    ) {
+      console.log("post");
+      const refresh = true;
+      navigation.navigate("Communities", { refresh });
+      handleSend(post);
+      setPost({
+        user: {},
+        id: "",
+        content: "",
+        createdAt: Date,
+        image: null,
+      });
+    } else {
+      alert(
+        "Postare invalida! \nPoate fi prea scurta sau contine cuvinte invalide"
+      );
+    }
   }
 
   return (

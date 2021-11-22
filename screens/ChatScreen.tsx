@@ -77,7 +77,7 @@ const ChatScreen = () => {
         .map(({ doc }) => {
           const message = doc.data();
           const _id = Math.random().toString(36).substring(7);
-          console.log(message);
+          // console.log(message);
           return {
             text: message.m.text,
             createdAt: message.m.createdAt.toDate(),
@@ -133,7 +133,7 @@ const ChatScreen = () => {
       );
 
       messages.map(async (m: any) => {
-        console.log(m);
+        // console.log(m);
         await addDoc(collection(db, "chats"), { m });
       });
       // await Promise.all(writes);

@@ -126,9 +126,9 @@ export default function Navigation({
         // After getting token, we need to persist the token using `SecureStore`
         // In the example, we'll use a dummy token
 
-        console.log(
-          "save token " + auth.currentUser.stsTokenManager.refreshToken
-        );
+        // console.log(
+        //   "save token " + auth.currentUser.stsTokenManager.refreshToken
+        // );
         SecureStore.setItemAsync("userToken", "logedIn");
         dispatch({
           type: "SIGN_IN",

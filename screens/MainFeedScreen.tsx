@@ -37,7 +37,7 @@ export default function MainFeedScreen({
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
       setUser(auth.currentUser);
-      console.log(user);
+      // console.log(user);
       const uid = user.uid;
     }
   });

@@ -1,34 +1,13 @@
-import { FontAwesome5 } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import * as React from "react";
-import {
-  Platform,
-  StyleSheet,
-  Image,
-  NativeModules,
-  TouchableOpacity,
-  ScrollView,
-  FlatList,
-} from "react-native";
+import { Platform, StyleSheet, NativeModules } from "react-native";
 import CommunitiesFeed from "../components/CommunitiesComponents/CommunitiesFeed";
-import ShortPost from "../components/CommunitiesComponents/PostComponent";
 
-import EditScreenInfo from "../components/EditScreenInfo";
-import { Text, View } from "../components/Themed";
 import constants from "../constants/colors";
-import shortPosts from "../data/shortPosts";
 const { StatusBarManager } = NativeModules;
 
 export default function CommunitiesScreen() {
-  const communities = [
-    "fotbal international",
-    "fotbal romanesc",
-    "liga 1",
-    "random",
-    "discutii libere",
-  ];
-
   return (
     <LinearGradient
       colors={["#CEFF00", "#113b59"]}

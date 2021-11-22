@@ -58,27 +58,20 @@ const PictureContainer = ({
 
 const optionsStyles = {
   optionsContainer: {
-    // backgroundColor: "green",
     width: "100%",
     paddingTop: 5,
   },
-  optionsWrapper: {
-    // backgroundColor: "purple",
-  },
+  optionsWrapper: {},
   optionWrapper: {
     paddingVertical: 10,
-    // backgroundColor: "yellow",
     borderBottomWidth: 1,
     borderColor: "lightgrey",
     padding: 5,
   },
   optionTouchable: {
-    // underlayColor: "gold",
     activeOpacity: 70,
   },
-  optionText: {
-    // color: "brown",
-  },
+  optionText: {},
 };
 
 export default PictureContainer;
