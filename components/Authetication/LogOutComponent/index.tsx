@@ -2,10 +2,8 @@ import React from "react";
 import { LogBox, View, Text, TouchableOpacity } from "react-native";
 
 import useCachedResources from "../../../hooks/useCachedResources";
-import { getAuth, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import { AuthContext, AuthStackScreen } from "../../../navigation";
+import { AuthContext } from "../../../navigation";
 import styles from "./styles";
 
 const firebaseConfig = {
@@ -19,13 +17,11 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-// const { signOut } = React.useContext(AuthContext);
 
 LogBox.ignoreLogs(["Setting a timer for a long period of time"]);
 
 export default function LogOutComponent() {
   const isLoadingComplete = useCachedResources();
-  const auth: any = getAuth();
   // @ts-ignore
   const { signOut } = React.useContext(AuthContext);
 

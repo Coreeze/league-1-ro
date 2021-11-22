@@ -11,6 +11,7 @@ import {
   Image,
   LogBox,
   Button,
+  ImageBackground,
 } from "react-native";
 
 import { Text, View } from "../components/Themed";
@@ -176,12 +177,10 @@ export default function NewPostScreen({ navigation }: any) {
   }
 
   return (
-    <LinearGradient
-      colors={["#CEFF00", "#113b59"]}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 0.5, y: 0.7 }}
-      locations={[0, 1]}
-      style={styles.gradient}
+    <ImageBackground
+      source={require("../assets/images/new-post.jpg")}
+      style={{ flex: 1 }}
+      resizeMode="cover"
     >
       <View style={styles.mainContainer}>
         <Text style={styles.title}>Postare noua</Text>
@@ -239,7 +238,7 @@ export default function NewPostScreen({ navigation }: any) {
           source={require("../assets/images/send_icon.png")}
         />
       </TouchableOpacity>
-    </LinearGradient>
+    </ImageBackground>
   );
 }
 

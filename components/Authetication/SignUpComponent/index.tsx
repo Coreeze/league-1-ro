@@ -63,7 +63,6 @@ export default function SignUpComponent() {
   const navigation = useNavigation();
 
   // Set an initializing state whilst Firebase connects
-  const [initializing, setInitializing] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -126,7 +125,7 @@ export default function SignUpComponent() {
     return (
       <SafeAreaProvider>
         <ImageBackground
-          source={require("../../../assets/images/login.jpg")}
+          source={require("../../../assets/images/login4.jpg")}
           style={styles.background}
           resizeMode="cover"
         >
@@ -139,7 +138,7 @@ export default function SignUpComponent() {
                   color={colors.appDarkBlue}
                 />
               </TouchableOpacity>
-              <Text style={styles.title}>Hai sa ne cunoastem!</Text>
+              <Text style={styles.title}>Mai avem un loc!</Text>
               <TextInput
                 value={email}
                 placeholder={"E-mail"}
@@ -167,7 +166,7 @@ export default function SignUpComponent() {
                 <Text style={styles.loginText}>Creeaza cont</Text>
               </TouchableOpacity>
 
-              <Text style={{ fontSize: 10 }}>
+              <Text style={{ fontSize: 10, color: "grey" }}>
                 Folosirea aplicatiei Fotbalul Romanesc inseamna ca esti de acord
                 cu Politica de Confidentialitate si cea de Folosire a
                 Cookie-urilor.

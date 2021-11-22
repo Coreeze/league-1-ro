@@ -12,13 +12,14 @@ const imageHeight = dimensions.height;
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-end",
   },
   container: {
     backgroundColor: colors.cardBlurBackground,
     marginHorizontal: 20,
     paddingVertical: 18,
     borderRadius: 15,
+    marginBottom: "20%",
   },
   container2: {
     paddingHorizontal: 24,

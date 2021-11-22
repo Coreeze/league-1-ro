@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import {
   ScrollView,
   StyleSheet,
@@ -20,20 +20,40 @@ import ShortNewsComponent from "../components/ShortNewsComponent";
 import NewsOfTheDayComponent from "../components/NewsOfTheDayComponent";
 import FixturesComponent from "../components/FixturesComponent";
 import TeamsList from "../components/TeamsListComponent";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import colors from "../constants/colors";
+import useFonts from "../useFonts";
+import AppLoading from "expo-app-loading";
 // import styles from "../components/StandingsComponent/stlyes";
 
 export default function MainFeedScreen({
   navigation,
 }: RootTabScreenProps<"MainFeed">) {
-  const [shouldFetch, setShouldFetch] = useState(true);
-
-  const dimensions = Dimensions.get("window");
-  const imageWidth = dimensions.width;
+  const [user, setUser] = useState(null);
 
   const auth: any = getAuth();
-  const user = auth.currentUser;
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      setUser(auth.currentUser);
+      const uid = user.uid;
+    }
+  });
+
+  const [IsReady, SetIsReady] = useState(false);
+  const LoadFonts = async () => {
+    await useFonts();
+  };
+  if (!IsReady) {
+    return (
+      <AppLoading
+        startAsync={LoadFonts}
+        onFinish={() => SetIsReady(true)}
+        onError={() => {}}
+      />
+    );
+  }
 
   function fetchTest() {
     fetch("https://v3.football.api-sports.io/teams?id=2603", {
@@ -86,7 +106,11 @@ export default function MainFeedScreen({
           }}
         >
           Salutare, {"\n"}
-          {user.displayName}!
+          {console.log("Salutarre: " + auth.currentUser)}
+          {
+            // @ts-ignore
+            user?.displayName
+          }
         </Text>
         {/* <TouchableOpacity onPress={fetchTest}>
           <Text>BUTTON</Text>

@@ -26,7 +26,6 @@ import {
   onSnapshot,
   addDoc,
 } from "firebase/firestore";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useState } from "react";
 
 const { StatusBarManager } = NativeModules;
@@ -45,7 +44,6 @@ export default function CommunitiesFeed() {
       getPosts();
       setRefreshing(false);
     }, 2000);
-    // wait(2000).then(() => {setRefreshing(false)});
   }, []);
 
   function getPosts() {

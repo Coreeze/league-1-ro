@@ -1,7 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import * as React from "react";
+import { useState } from "react";
 import {
   NativeModules,
   Platform,
@@ -21,9 +22,18 @@ export default function MoreOptionsScreen() {
     navigation.navigate("History");
   }
 
+  const [user, setUser] = useState(null);
+
   const auth: any = getAuth();
-  const user = auth.currentUser;
-  console.log(user.displayName);
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      setUser(auth.currentUser);
+      const uid = user.uid;
+    }
+  });
+
   return (
     <LinearGradient
       colors={["#CEFF00", "#113b59"]}
@@ -42,7 +52,11 @@ export default function MoreOptionsScreen() {
         <View style={styles.titleContainer}>
           <Text style={styles.title}>
             Salutare, {"\n"}
-            {user.displayName}!
+            {
+              // @ts-ignore
+              user?.displayName
+            }
+            !
           </Text>
         </View>
         <View

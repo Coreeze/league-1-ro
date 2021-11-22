@@ -43,11 +43,6 @@ export default function SignInComponent() {
   // @ts-ignore
   const { signIn } = React.useContext(AuthContext);
 
-  const [inputStyle, setInputStyle] = useState({
-    focusBackgroundColor: "",
-    blurBackgroundColor: "",
-  });
-
   const auth: any = getAuth();
 
   const [IsReady, SetIsReady] = useState(false);
@@ -68,9 +63,7 @@ export default function SignInComponent() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
-        const user = userCredential.user;
-        // alert("Autentificare de succes!");
-        // navigation.navigate("");
+        console.log("signedIn: " + auth.currentUser);
         signIn({ email, password });
         setEmail("");
         setPassword("");
@@ -99,7 +92,7 @@ export default function SignInComponent() {
     return (
       <SafeAreaProvider>
         <ImageBackground
-          source={require("../../../assets/images/login.jpg")}
+          source={require("../../../assets/images/login3.jpg")}
           style={styles.background}
           resizeMode="cover"
         >
@@ -146,7 +139,7 @@ export default function SignInComponent() {
               >
                 <Text style={styles.signUpText}>Creeaza cont</Text>
               </TouchableOpacity>
-              <Text style={{ fontSize: 10 }}>
+              <Text style={{ fontSize: 10, color: "grey" }}>
                 Folosirea aplicatiei Fotbalul Romanesc inseamna ca esti de acord
                 cu Politica de Confidentialitate si cea de Folosire a
                 Cookie-urilor.

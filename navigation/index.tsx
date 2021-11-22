@@ -55,6 +55,7 @@ import SignInComponent from "../components/Authetication/SignInComponent";
 import { createContext, useContext, useEffect, useState } from "react";
 import LogOutComponent from "../components/Authetication/LogOutComponent";
 import * as SecureStore from "expo-secure-store";
+import { enableIndexedDbPersistence } from "firebase/firestore";
 
 export const AuthContext = React.createContext({});
 
@@ -101,7 +102,9 @@ export default function Navigation({
 
       try {
         userToken = await SecureStore.getItemAsync("userToken");
+        console.log("userToken: " + userToken);
       } catch (e) {
+        console.log(e);
         // Restoring token failed
       }
 
@@ -123,12 +126,20 @@ export default function Navigation({
         // After getting token, we need to persist the token using `SecureStore`
         // In the example, we'll use a dummy token
 
-        dispatch({ type: "SIGN_IN", token: "dummy-auth-token" });
+        console.log(
+          "save token " + auth.currentUser.stsTokenManager.refreshToken
+        );
+        SecureStore.setItemAsync("userToken", "logedIn");
+        dispatch({
+          type: "SIGN_IN",
+          token: auth.currentUser.stsTokenManager.refreshToken,
+        });
       },
       signOut: () => {
         signOut(auth)
           .then(() => {
             console.log("singed out");
+            SecureStore.deleteItemAsync("userToken");
             // console.log(auth.currentUser);
           })
           .catch((error) => {
@@ -170,18 +181,20 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export function AuthStackScreen() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="SignIn"
-        component={SignInComponent}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="SignUp"
-        component={SignUpComponent}
-        options={{ headerShown: false }}
-      />
-    </Stack.Navigator>
+    <MenuProvider>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="SignIn"
+          component={SignInComponent}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SignUp"
+          component={SignUpComponent}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </MenuProvider>
   );
 }
 
