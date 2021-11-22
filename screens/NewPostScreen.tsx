@@ -19,7 +19,14 @@ import colors from "../constants/colors";
 import * as firebase from "firebase/compat";
 import "firebase/firestore";
 import { initializeApp } from "@firebase/app";
-import { getFirestore, collection, query, addDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  query,
+  addDoc,
+  setDoc,
+  doc,
+} from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 LogBox.ignoreLogs(["Setting a timer"]);
@@ -56,13 +63,24 @@ export default function NewPostScreen({ navigation }: any) {
     image: null,
   });
 
+  const communityRef = collection(db, "community");
   async function handleSend(post: any) {
     // console.log("postText: " + post);
-    await addDoc(collection(db, "community"), { post });
-    // const writes = messages.map(
-    //   async (m: any) => await addDoc(collection(db, "community"), { m })
-    // );
-    // await Promise.all(writes);
+
+    // await addDoc(collection(db, "community"), { post });
+    const id = JSON.stringify(post.id);
+    await setDoc(doc(communityRef, id), { post });
+
+    const citiesRef = collection(db, "cities");
+
+    await setDoc(doc(citiesRef, "SF"), {
+      name: "San Francisco",
+      state: "CA",
+      country: "USA",
+      capital: false,
+      population: 860000,
+      regions: ["west_coast", "norcal"],
+    });
   }
 
   useEffect(() => {
@@ -131,7 +149,8 @@ export default function NewPostScreen({ navigation }: any) {
                   return Date.parse(date);
                 }
                 const createdAt = new Date();
-                const id = epoch(createdAt) + Math.random();
+                const id =
+                  epoch(createdAt) + Math.floor(Math.random() * 10000000001);
 
                 setPost({
                   user: {
@@ -142,6 +161,7 @@ export default function NewPostScreen({ navigation }: any) {
                   createdAt: createdAt,
                   image: null,
                   content: text,
+                  noOfLikes: 0,
                 });
               }
               // setContent(text)

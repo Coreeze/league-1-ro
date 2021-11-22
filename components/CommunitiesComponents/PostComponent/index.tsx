@@ -22,7 +22,7 @@ const ShortPost = ({ shortPost }: ShortPostProps) => {
         date={shortPost.createdAt}
       />
       <DownContainer content={shortPost.content} image={shortPost.image} />
-      <Footer numberOfLikes={shortPost.numberOfLikes} />
+      <Footer numberOfLikes={shortPost.noOfLikes} id={shortPost._id} />
     </View>
   );
 };

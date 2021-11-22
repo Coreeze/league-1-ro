@@ -27,7 +27,11 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { useCallback, useEffect, useState } from "react";
-import { useIsFocused, useNavigation } from "@react-navigation/native";
+import {
+  useFocusEffect,
+  useIsFocused,
+  useNavigation,
+} from "@react-navigation/native";
 
 const { StatusBarManager } = NativeModules;
 
@@ -50,9 +54,13 @@ export default function CommunitiesFeed() {
   }, []);
 
   if (isFocused) {
-    getPosts();
+    // getPosts();
   }
-
+  useFocusEffect(
+    React.useCallback(() => {
+      getPosts();
+    }, [])
+  );
   function getPosts() {
     const unsubscribe = onSnapshot(chatsRef, (querySnapshot) => {
       const messagesFirestore = querySnapshot
@@ -61,12 +69,14 @@ export default function CommunitiesFeed() {
         .map(({ doc }) => {
           const message = doc.data();
           const _id = Math.random().toString(36).substring(7);
+          // console.log(message);
           return {
             content: message.post.content,
             createdAt: message.post.createdAt.toDate(),
             _id: message.post.id,
             user: message.post.user.username.split("|")[0],
             fan: message.post.user.username.split("|")[1],
+            noOfLikes: message.post.noOfLikes,
           };
         })
         .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());

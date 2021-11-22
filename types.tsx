@@ -59,11 +59,11 @@ export type UserType = {
 };
 
 export type ShortPostType = {
-  id: String;
+  _id: String;
   user: UserType;
   createdAt: string;
   content: string;
   image?: string;
-  numberOfLikes: number;
+  noOfLikes: number;
   fan: string;
 };
