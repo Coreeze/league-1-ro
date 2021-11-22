@@ -60,7 +60,7 @@ const ChatScreen = () => {
   });
 
   const [user, setUser] = useState({
-    username: "",
+    name: "",
     uid: "",
   });
   const [name, setName] = useState("");
@@ -104,7 +104,7 @@ const ChatScreen = () => {
     // const user = await AsyncStorage.getItem("user");
     const user = auth.currentUser;
     setUser({
-      username: auth.currentUser.displayName,
+      name: auth.currentUser.displayName.split("|")[0],
       uid: auth.currentUser.uid,
     });
     // console.log(user);
