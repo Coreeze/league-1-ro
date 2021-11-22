@@ -10,6 +10,7 @@ import useFonts from "../../useFonts";
 // import styles from "./styles";
 import { FontAwesome5 } from "@expo/vector-icons";
 import styles from "./styles";
+import colors from "../../constants/colors";
 
 const NewsOfTheDayComponent = () => {
   const [rssFeed, setRssFeed] = useState([]);
@@ -62,11 +63,17 @@ const NewsOfTheDayComponent = () => {
               fontFamily: "MontserratBold",
               color: "#fff",
               fontSize: 18,
+              textShadowColor: "black",
+              textShadowOffset: { width: 0, height: 0 },
+              textShadowRadius: 5,
             }}
             descriptionStyle={{
               fontFamily: "MontserratSemiBold",
               fontSize: 15,
-              color: "#e6e6e6",
+              color: "#fff",
+              textShadowColor: "black",
+              textShadowOffset: { width: 0, height: 0 },
+              textShadowRadius: 5,
             }}
             descriptionNumberOfLines={1}
             containerStyle={{

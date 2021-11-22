@@ -20,6 +20,8 @@ import ShortNewsComponent from "../components/ShortNewsComponent";
 import NewsOfTheDayComponent from "../components/NewsOfTheDayComponent";
 import FixturesComponent from "../components/FixturesComponent";
 import TeamsList from "../components/TeamsListComponent";
+import { getAuth } from "firebase/auth";
+import colors from "../constants/colors";
 // import styles from "../components/StandingsComponent/stlyes";
 
 export default function MainFeedScreen({
@@ -29,6 +31,9 @@ export default function MainFeedScreen({
 
   const dimensions = Dimensions.get("window");
   const imageWidth = dimensions.width;
+
+  const auth: any = getAuth();
+  const user = auth.currentUser;
 
   function fetchTest() {
     fetch("https://v3.football.api-sports.io/teams?id=2603", {
@@ -52,7 +57,7 @@ export default function MainFeedScreen({
   return (
     // TODO: add loading spinner for EVERYTHING
     <LinearGradient
-      colors={["#CEFF00", "#113b59"]}
+      colors={["#113b59", "#CEFF00"]}
       start={{ x: 0.3, y: 0.3 }}
       end={{ x: 0.5, y: 0.7 }}
       locations={[0, 1]}
@@ -61,13 +66,28 @@ export default function MainFeedScreen({
       <ScrollView style={styles.scrollview}>
         <Image
           style={{
-            position: "relative",
+            position: "absolute",
             width: "100%",
-            height: 100,
+            height: 160,
           }}
-          source={require("../assets/images/header11.png")}
+          source={require("../assets/images/header18.png")}
           resizeMode="cover"
         />
+        <Text
+          style={{
+            fontSize: 42,
+            fontFamily: "MontserratBold",
+            color: colors.appNeonGreen,
+            paddingVertical: 15,
+            paddingLeft: 20,
+            textShadowColor: colors.appDarkBlue,
+            textShadowOffset: { width: -1, height: 1 },
+            textShadowRadius: 33,
+          }}
+        >
+          Salutare, {"\n"}
+          {user.displayName}!
+        </Text>
         {/* <TouchableOpacity onPress={fetchTest}>
           <Text>BUTTON</Text>
         </TouchableOpacity> */}

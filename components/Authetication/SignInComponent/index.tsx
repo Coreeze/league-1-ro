@@ -133,6 +133,7 @@ export default function SignInComponent() {
                   textAlign: "center",
                   fontFamily: "MontserratSemiBold",
                   color: "#1C374A",
+                  paddingTop: 33,
                 }}
               >
                 Nu ai cont inca? Devin-o acum parte din comunitatea fotbalului

@@ -19,6 +19,7 @@ const colors = {
   headerColor: "#113b59",
   cardBlurBackground: "rgba(230,230,230,0.8)",
   appDarkBlue: "#1C374A",
+  appNormalBlue: "#113b59",
   appNeonGreen: "#CEFF00",
 };
 

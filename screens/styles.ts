@@ -1,5 +1,6 @@
 import { Dimensions, StyleSheet } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
+import colors from "../constants/colors";
 import constants from "../constants/colors";
 
 const dimensions = Dimensions.get("window");
@@ -32,11 +33,17 @@ export const historyScreenSytle = StyleSheet.create({
     fontSize: 23,
     fontFamily: "MontserratBold",
     color: "#fff",
+    textShadowColor: colors.appDarkBlue,
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
   },
   subTitleText: {
     fontSize: 17,
     fontFamily: "MontserratSemiBold",
     color: "#fff",
+    textShadowColor: colors.appDarkBlue,
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
   },
   descriptionContainer: {
     backgroundColor: constants.cardBlurBackground,
@@ -74,6 +81,9 @@ export const historyScreenSytle = StyleSheet.create({
     paddingBottom: 10,
     paddingTop: 20,
     alignSelf: "center",
+    textShadowColor: colors.appDarkBlue,
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
   },
 });
 
