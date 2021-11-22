@@ -27,6 +27,7 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { useCallback, useEffect, useState } from "react";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 
 const { StatusBarManager } = NativeModules;
 
@@ -37,6 +38,8 @@ export default function CommunitiesFeed() {
   var postsTest: any = [];
   const [posts, setPosts] = useState([]);
 
+  const isFocused = useIsFocused();
+
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -45,6 +48,10 @@ export default function CommunitiesFeed() {
       setRefreshing(false);
     }, 2000);
   }, []);
+
+  if (isFocused) {
+    getPosts();
+  }
 
   function getPosts() {
     const unsubscribe = onSnapshot(chatsRef, (querySnapshot) => {
@@ -67,15 +74,6 @@ export default function CommunitiesFeed() {
     });
     return () => unsubscribe();
   }
-
-  // useEffect(() => {
-  //   onRefresh;
-  //   const willFocusSubscription = navigation.addListener("focus", () => {
-  //     onRefresh;
-  //   });
-
-  //   return willFocusSubscription;
-  // }, []);
 
   useEffect(() => {
     // readUser();
