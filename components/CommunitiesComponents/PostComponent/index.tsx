@@ -12,10 +12,14 @@ export type ShortPostProps = {
 };
 
 const ShortPost = ({ shortPost }: ShortPostProps) => {
-  // console.log(shortPost);
+  console.log(shortPost);
   return (
     <View style={styles.container}>
-      <PictureContainer image={shortPost.user.image} user={shortPost.user} />
+      <PictureContainer
+        image={shortPost.user.image}
+        user={shortPost.user}
+        fan={shortPost.fan}
+      />
       {/* <UpContainer user={shortPost.user} createdAt={shortPost.createdAt} /> */}
       <DownContainer content={shortPost.content} image={shortPost.image} />
       <Footer numberOfLikes={shortPost.numberOfLikes} />

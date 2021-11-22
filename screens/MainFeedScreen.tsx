@@ -37,6 +37,7 @@ export default function MainFeedScreen({
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
       setUser(auth.currentUser);
+      console.log(user);
       const uid = user.uid;
     }
   });
@@ -53,25 +54,6 @@ export default function MainFeedScreen({
         onError={() => {}}
       />
     );
-  }
-
-  function fetchTest() {
-    fetch("https://v3.football.api-sports.io/teams?id=2603", {
-      method: "GET",
-      headers: {
-        "x-rapidapi-host": "v3.football.api-sports.io",
-        "x-rapidapi-key": "ed6904705c97fe6a528acacb4a32511b",
-      },
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        console.log("fetchTest");
-        console.log(json);
-        // let fetchLeague = json.response[0].league;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }
 
   return (
@@ -105,12 +87,11 @@ export default function MainFeedScreen({
             textShadowRadius: 33,
           }}
         >
-          Salutare, {"\n"}
-          {console.log("Salutarre: " + auth.currentUser)}
-          {
+          Salutare
+          {/* {
             // @ts-ignore
-            user?.displayName
-          }
+            user?.displayName?.split("|")[0]
+          } */}
         </Text>
         {/* <TouchableOpacity onPress={fetchTest}>
           <Text>BUTTON</Text>

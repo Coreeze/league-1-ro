@@ -22,9 +22,10 @@ import styles from "./styles";
 export type PictureContainerProps = {
   image: string;
   user: any;
+  fan: string;
 };
 
-const PictureContainer = ({ image, user }: PictureContainerProps) => {
+const PictureContainer = ({ image, user, fan }: PictureContainerProps) => {
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -48,7 +49,7 @@ const PictureContainer = ({ image, user }: PictureContainerProps) => {
                 fontSize: sizes.textSize,
               }}
             >
-              {user.description}
+              Fan {fan}
             </Text>
           </View>
           <Text
@@ -57,76 +58,6 @@ const PictureContainer = ({ image, user }: PictureContainerProps) => {
             acum 15s
           </Text>
         </View>
-      </View>
-      <View style={{ position: "absolute", right: 0 }}>
-        <TouchableOpacity activeOpacity={0.8}>
-          <Menu renderer={renderers.SlideInMenu}>
-            <MenuTrigger
-              children={
-                <Entypo name="dots-three-vertical" size={20} color="grey" />
-              }
-            />
-            <MenuOptions customStyles={optionsStyles}>
-              <MenuOption
-                onSelect={() => alert(`Editeaza postarea`)}
-                children={
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "flex-start",
-                    }}
-                  >
-                    <EvilIcons name="pencil" size={28} color="black" />
-                    <Text style={{ paddingLeft: 10, fontSize: 20 }}>
-                      Editeaza postarea
-                    </Text>
-                  </View>
-                }
-              />
-              <MenuOption
-                onSelect={() => alert(`Urmareste`)}
-                children={
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "flex-start",
-                    }}
-                  >
-                    <AntDesign name="deleteuser" size={24} color="black" />
-                    <Text style={{ paddingLeft: 14, fontSize: 20 }}>
-                      Urmareste utiliatorul
-                    </Text>
-                  </View>
-                }
-              />
-              <MenuOption
-                onSelect={() => alert(`Sterge postarea`)}
-                children={
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "flex-start",
-                    }}
-                  >
-                    <MaterialCommunityIcons
-                      name="logout"
-                      size={20}
-                      color="red"
-                    />
-                    <Text
-                      style={{ color: "red", paddingLeft: 19, fontSize: 20 }}
-                    >
-                      Sterge postarea
-                    </Text>
-                  </View>
-                }
-              />
-            </MenuOptions>
-          </Menu>
-        </TouchableOpacity>
       </View>
     </View>
   );

@@ -39,6 +39,7 @@ import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import colors from "../../../constants/colors";
+import DropDownPicker from "react-native-dropdown-picker";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDDQKoZYTxpvE3aHPhop6buG0aYZXYv0IU",
@@ -66,17 +67,28 @@ export default function SignUpComponent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const [user, setUser] = useState({
-    uid: "",
-    username: "",
-    avatar: "",
-  });
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    { label: "CFR Cluj", value: "CFR Cluj" },
+    { label: "FCSB", value: "FCSB" },
+    { label: "Univ. Craiova", value: "Univ. Craiova" },
+    { label: "FC Rapid 1923", value: "FC Rapid 1923" },
+    { label: "FC Botosani", value: "FC Botosani" },
+    { label: "Farul Constanta", value: "Farul Constanta" },
+    { label: "UTA Arad", value: "UTA Arad" },
+    { label: "FC Voluntari", value: "FC Voluntari" },
+    { label: "FC Arges", value: "FC Arges" },
+    { label: "AFC Chindia Targoviste", value: "AFC Chindia Targoviste" },
+    { label: "Sepsi OSK", value: "Sepsi OSK" },
+    { label: "Gaz Metan", value: "Gaz Metan" },
+    { label: "U Craiova 1948", value: "U Craiova 1948" },
+    { label: "CS Mioveni", value: "CS Mioveni" },
+    { label: "FC Dinamo 1948", value: "FC Dinamo 1948" },
+    { label: "Academia Clinceni", value: "Academia Clinceni" },
+  ]);
 
   const auth: any = getAuth();
-
-  useEffect(() => {
-    console.log("USE EFFECT SignUpComponent");
-  });
 
   function signUp() {
     console.log("createUser");
@@ -84,7 +96,7 @@ export default function SignUpComponent() {
       .then((userCredential) => {
         signIn({ email, password });
         updateProfile(auth.currentUser, {
-          displayName: username,
+          displayName: username + "|" + value,
           photoURL: "https://example.com/jane-q-user/profile.jpg",
         })
           .then(() => {
@@ -138,7 +150,7 @@ export default function SignUpComponent() {
                   color={colors.appDarkBlue}
                 />
               </TouchableOpacity>
-              <Text style={styles.title}>Mai avem un loc!</Text>
+              <Text style={styles.title}>Hai in echipa, mai avem un loc!</Text>
               <TextInput
                 value={email}
                 placeholder={"E-mail"}
@@ -150,6 +162,21 @@ export default function SignUpComponent() {
                 placeholder={"Numele de pe tricou"}
                 onChangeText={(text) => setUsername(text)}
                 style={styles.input}
+              />
+              <DropDownPicker
+                open={open}
+                value={value}
+                items={items}
+                setOpen={setOpen}
+                setValue={setValue}
+                setItems={setItems}
+                placeholder="Ce echipa sustii?"
+                style={{ borderWidth: 1, borderColor: "#e8e8e8" }}
+                dropDownContainerStyle={{
+                  borderWidth: 1,
+                  borderColor: "#e8e8e8",
+                }}
+                labelStyle={{}}
               />
               <TextInput
                 value={password}

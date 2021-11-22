@@ -54,7 +54,7 @@ export default function MoreOptionsScreen() {
             Salutare, {"\n"}
             {
               // @ts-ignore
-              user?.displayName
+              user?.displayName.split("|")[0]
             }
             !
           </Text>

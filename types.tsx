@@ -65,4 +65,5 @@ export type ShortPostType = {
   content: string;
   image?: string;
   numberOfLikes: number;
+  fan: string;
 };

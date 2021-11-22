@@ -155,7 +155,11 @@ export default function Navigation({
         // After getting token, we need to persist the token using `SecureStore`
         // In the example, we'll use a dummy token
 
-        dispatch({ type: "SIGN_IN", token: "dummy-auth-token" });
+        SecureStore.setItemAsync("userToken", "logedIn");
+        dispatch({
+          type: "SIGN_IN",
+          token: auth.currentUser.stsTokenManager.refreshToken,
+        });
       },
     }),
     []

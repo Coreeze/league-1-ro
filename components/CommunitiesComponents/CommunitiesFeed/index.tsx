@@ -60,7 +60,8 @@ export default function CommunitiesFeed() {
             content: message.post.content,
             createdAt: message.post.createdAt.nanoseconds,
             _id: message.post.id,
-            user: message.post.user.username,
+            user: message.post.user.username.split("|")[0],
+            fan: message.post.user.username.split("|")[1],
           };
         });
       // .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
@@ -113,7 +114,7 @@ export default function CommunitiesFeed() {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
-        // refreshing={loading}
+        refreshing={true}
         // onRefresh={fetchShortPosts}
       />
       {/* {communities.map((community, i) => (
