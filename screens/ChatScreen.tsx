@@ -60,8 +60,8 @@ const ChatScreen = () => {
   });
 
   const [user, setUser] = useState({
+    _id: "",
     name: "",
-    uid: "",
   });
   const [name, setName] = useState("");
   const [messages, setMessages] = useState([]);
@@ -102,10 +102,10 @@ const ChatScreen = () => {
 
   async function readUser() {
     // const user = await AsyncStorage.getItem("user");
-    const user = auth.currentUser;
+    const currentUser = auth.currentUser;
     setUser({
-      name: auth.currentUser.displayName.split("|")[0],
-      uid: auth.currentUser.uid,
+      name: currentUser.displayName.split("|")[0],
+      _id: currentUser.uid,
     });
     // console.log(user);
     // if (user) {
@@ -165,7 +165,7 @@ const ChatScreen = () => {
     <LinearGradient
       colors={["#CEFF00", "#113b59"]}
       start={{ x: 0.3, y: 0.3 }}
-      end={{ x: 0.5, y: 0.7 }}
+      end={{ x: 0.5, y: 0.9 }}
       locations={[0, 1]}
       style={styles.gradientContainer}
     >
