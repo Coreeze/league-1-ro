@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Image,
   Dimensions,
+  ActivityIndicator,
 } from "react-native";
 
 // import LinearGradient from "react-native-linear-gradient";
@@ -34,6 +35,8 @@ export default function MainFeedScreen({
   navigation,
 }: RootTabScreenProps<"MainFeed">) {
   const [user, setUser] = useState(null);
+
+  const [loadingUser, setLoadingUser] = useState(false);
 
   const auth: any = getAuth();
   onAuthStateChanged(auth, (user) => {
@@ -92,10 +95,12 @@ export default function MainFeedScreen({
           }}
         >
           Salutare
-          {/* {
+          {!user ? (
+            <ActivityIndicator size="large" color={colors.appDarkBlue} />
+          ) : (
             // @ts-ignore
-            user?.displayName?.split("|")[0]
-          } */}
+            "\n" + user?.displayName?.split("|")[0]
+          )}
         </Text>
         {/* <TouchableOpacity onPress={fetchTest}>
           <Text>BUTTON</Text>
