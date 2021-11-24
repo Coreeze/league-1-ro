@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 33,
-    paddingBottom: 12,
+    paddingBottom: 27,
     fontFamily: "MontserratBold",
     color: "#1C374A",
   },

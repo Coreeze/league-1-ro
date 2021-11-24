@@ -63,6 +63,11 @@ export default function SignUpComponent() {
 
   const navigation = useNavigation();
 
+  const [color, setColor] = useState("grey");
+  function changeColor() {
+    setColor("black");
+  }
+
   // Set an initializing state whilst Firebase connects
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -210,12 +215,14 @@ export default function SignUpComponent() {
                 placeholder={"E-mail"}
                 onChangeText={(text) => setEmail(text)}
                 style={styles.input}
+                selectionColor={colors.appDarkBlue}
               />
               <TextInput
                 value={username}
                 placeholder={"Numele de pe tricou"}
                 onChangeText={(text) => setUsername(text)}
                 style={styles.input}
+                selectionColor={colors.appDarkBlue}
               />
               <DropDownPicker
                 open={open}
@@ -231,6 +238,8 @@ export default function SignUpComponent() {
                   borderColor: "#e8e8e8",
                 }}
                 labelStyle={{}}
+                textStyle={{ color: color, fontSize: 15 }}
+                onChangeValue={changeColor}
               />
               <TextInput
                 value={password}
@@ -238,6 +247,7 @@ export default function SignUpComponent() {
                 onChangeText={(text) => setPassword(text)}
                 style={styles.input}
                 secureTextEntry={true}
+                selectionColor={colors.appDarkBlue}
               />
               <TouchableOpacity
                 onPress={signUp}
@@ -247,7 +257,7 @@ export default function SignUpComponent() {
                 <Text style={styles.loginText}>Creeaza cont</Text>
               </TouchableOpacity>
 
-              <Text style={{ fontSize: 10, color: "grey" }}>
+              <Text style={{ fontSize: 10, color: "grey", paddingTop: 9 }}>
                 Folosirea aplicatiei Fotbalul Romanesc inseamna ca esti de acord
                 cu Politica de Confidentialitate si cea de Folosire a
                 Cookie-urilor.

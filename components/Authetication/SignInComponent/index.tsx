@@ -9,6 +9,7 @@ import {
   Image,
   ImageBackground,
 } from "react-native";
+import { Divider } from "react-native-elements";
 
 import useCachedResources from "../../../hooks/useCachedResources";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -19,6 +20,7 @@ import { AuthContext } from "../../../navigation";
 import styles from "./styles";
 import useFonts from "../../../useFonts";
 import AppLoading from "expo-app-loading";
+import colors from "../../../constants/colors";
 const firebaseConfig = {
   apiKey: "AIzaSyDDQKoZYTxpvE3aHPhop6buG0aYZXYv0IU",
   authDomain: "football-app-32bb9.firebaseapp.com",
