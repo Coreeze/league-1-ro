@@ -1,6 +1,12 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React, { Component, useState } from "react";
-import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Text,
+  ActivityIndicator,
+} from "react-native";
 import AppLoading from "expo-app-loading";
 
 // @ts-ignore
@@ -17,6 +23,8 @@ const NewsOfTheDayComponent = () => {
   const [shouldFetch, setShouldFetch] = useState(true);
   var feed = [];
 
+  const [loading, setLoading] = useState(false);
+
   if (shouldFetch) {
     console.log("shouldFetch");
     getFeed();
@@ -24,6 +32,7 @@ const NewsOfTheDayComponent = () => {
   }
 
   function getFeed() {
+    setLoading(true);
     console.log("getFeed: " + shouldFetch);
     fetch(
       "https://news.google.com/rss/search?q=fotbal&hl=ro&gl=RO&ceid=RO%3Aro"
@@ -35,6 +44,10 @@ const NewsOfTheDayComponent = () => {
         feed = feedItems;
         // @ts-ignore
         setRssFeed(rss?.items);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
 
@@ -53,67 +66,67 @@ const NewsOfTheDayComponent = () => {
   }
   return (
     <View style={styles.container}>
-      {
-        // @ts-ignore
-        rssFeed[0]?.links[0]?.url ? (
-          <RNUrlPreview
-            // @ts-ignore
-            text={rssFeed[0]?.links[0].url}
-            titleStyle={{
-              fontFamily: "MontserratBold",
-              color: "#fff",
-              fontSize: 18,
-              textShadowColor: "black",
-              textShadowOffset: { width: 0, height: 0 },
-              textShadowRadius: 5,
-            }}
-            descriptionStyle={{
-              fontFamily: "MontserratSemiBold",
-              fontSize: 15,
-              color: "#fff",
-              textShadowColor: "black",
-              textShadowOffset: { width: 0, height: 0 },
-              textShadowRadius: 5,
-            }}
-            descriptionNumberOfLines={1}
-            containerStyle={{
-              backgroundColor: "rgba(52, 52, 52, 0)",
-              flexDirection: "column",
-            }}
-            imageStyle={{
-              width: "100%",
-              height: 260,
-              paddingHorizontal: 10,
-              borderRadius: 15,
-              //   marginRight: 10,
-            }}
-          />
-        ) : (
-          <RNUrlPreview
-            // @ts-ignore
-            text={
-              "https://www.digisport.ro/fotbal/premier-league/ronaldo-a-decis-de-unde-se-va-retrage-din-fotbal-anuntul-jurnalistilor-din-anglia-1355391"
-            }
-            titleStyle={{ fontFamily: "MontserratBold", color: "#fff" }}
-            descriptionStyle={{
-              fontFamily: "MontserratSemiBold",
-              fontSize: 12,
-              color: "#fff",
-            }}
-            descriptionNumberOfLines={1}
-            containerStyle={{
-              backgroundColor: "rgba(52, 52, 52, 0)",
-              flexDirection: "column",
-            }}
-            imageStyle={{
-              width: "100%",
-              height: 230,
-              paddingHorizontal: 10,
-              //   marginRight: 10,
-            }}
-          />
-        )
-      }
+      {loading ? (
+        <ActivityIndicator size="large" color={colors.appNeonGreen} />
+      ) : // @ts-ignore
+      rssFeed[0]?.links[0]?.url ? (
+        <RNUrlPreview
+          // @ts-ignore
+          text={rssFeed[0]?.links[0].url}
+          titleStyle={{
+            fontFamily: "MontserratBold",
+            color: "#fff",
+            fontSize: 18,
+            textShadowColor: "black",
+            textShadowOffset: { width: 0, height: 0 },
+            textShadowRadius: 5,
+          }}
+          descriptionStyle={{
+            fontFamily: "MontserratSemiBold",
+            fontSize: 15,
+            color: "#fff",
+            textShadowColor: "black",
+            textShadowOffset: { width: 0, height: 0 },
+            textShadowRadius: 5,
+          }}
+          descriptionNumberOfLines={1}
+          containerStyle={{
+            backgroundColor: "rgba(52, 52, 52, 0)",
+            flexDirection: "column",
+          }}
+          imageStyle={{
+            width: "100%",
+            height: 260,
+            paddingHorizontal: 10,
+            borderRadius: 15,
+            //   marginRight: 10,
+          }}
+        />
+      ) : (
+        <RNUrlPreview
+          // @ts-ignore
+          text={
+            "https://www.digisport.ro/fotbal/premier-league/ronaldo-a-decis-de-unde-se-va-retrage-din-fotbal-anuntul-jurnalistilor-din-anglia-1355391"
+          }
+          titleStyle={{ fontFamily: "MontserratBold", color: "#fff" }}
+          descriptionStyle={{
+            fontFamily: "MontserratSemiBold",
+            fontSize: 12,
+            color: "#fff",
+          }}
+          descriptionNumberOfLines={1}
+          containerStyle={{
+            backgroundColor: "rgba(52, 52, 52, 0)",
+            flexDirection: "column",
+          }}
+          imageStyle={{
+            width: "100%",
+            height: 230,
+            paddingHorizontal: 10,
+            //   marginRight: 10,
+          }}
+        />
+      )}
       {/* <LinearGradient
         colors={["#ff4778", "#CEFF00"]}
         start={{ x: 0.3, y: 0.3 }}

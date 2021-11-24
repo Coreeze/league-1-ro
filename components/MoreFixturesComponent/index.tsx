@@ -4,14 +4,24 @@ import AppLoading from "expo-app-loading";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { useState } from "react";
-import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 import { configureFonts } from "react-native-paper";
+import colors from "../../constants/colors";
 import useFonts from "../../useFonts";
 import styles from "./styles";
 
 const MoreFixturesComponent = () => {
   const [fixtures, setFixtures] = useState(Array);
   const [shouldGetFixtures, setShouldGetFixtures] = useState(true);
+
+  const [loading, setLoading] = useState(false);
 
   const [IsReady, SetIsReady] = useState(false);
   const LoadFonts = async () => {
@@ -30,6 +40,7 @@ const MoreFixturesComponent = () => {
   getEndOfWeek();
 
   function getFixtures() {
+    setLoading(true);
     fetch(
       "https://v3.football.api-sports.io/fixtures?league=283&season=2021&from=" +
         getToday() +
@@ -60,7 +71,7 @@ const MoreFixturesComponent = () => {
           return x.timestamp - y.timestamp;
         });
         setFixtures(sortedFix);
-
+        setLoading(false);
         // TODO: add check for what happens when api requests are full
       })
       .catch((err) => {
@@ -96,7 +107,9 @@ const MoreFixturesComponent = () => {
           noastra de data. Le vom aduce la curent pe masura ce se apropie.
           Vizualizare placuta!
         </Text>
-        {fixtures.length != 0 ? (
+        {loading ? (
+          <ActivityIndicator size="large" color={colors.appDarkBlue} />
+        ) : fixtures.length != 0 ? (
           fixtures.map((fixture: any, i: number) => (
             <View style={styles.fixture} key={i}>
               <View style={styles.teamHome}>

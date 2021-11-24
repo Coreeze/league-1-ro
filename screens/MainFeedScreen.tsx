@@ -26,6 +26,8 @@ import useFonts from "../useFonts";
 import AppLoading from "expo-app-loading";
 import CompletedFixturesComponent from "../components/CompletedFixturesComponent";
 import NavigateToFixtures from "../components/CompletedFixturesComponent/navigateToFixtures";
+import LoadingScreen from "./LoadingScreen";
+import NavigateToCompletedFixtures from "../components/CompletedFixturesComponent/navigateToFixtures";
 // import styles from "../components/StandingsComponent/stlyes";
 
 export default function MainFeedScreen({
@@ -98,10 +100,11 @@ export default function MainFeedScreen({
         {/* <TouchableOpacity onPress={fetchTest}>
           <Text>BUTTON</Text>
         </TouchableOpacity> */}
+
         <NewsOfTheDayComponent />
         <TeamsList />
         <FixturesComponent />
-        <NavigateToFixtures />
+        <NavigateToCompletedFixtures />
         <ShortStandingsComponent />
         <ShortNewsComponent keyWords={["fotbal"]} title={"Știri recente"} />
 

@@ -4,7 +4,14 @@ import AppLoading from "expo-app-loading";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { useState } from "react";
-import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 import { configureFonts } from "react-native-paper";
 import colors from "../../constants/colors";
 import useFonts from "../../useFonts";
@@ -17,6 +24,8 @@ const CompletedFixturesComponent = () => {
   const [shouldGetFixtures, setShouldGetFixtures] = useState(true);
 
   const [showDetailsMenu, setShowDetailsMenu] = useState(null);
+
+  const [loading, setLoading] = useState(false);
 
   const [IsReady, SetIsReady] = useState(false);
   const LoadFonts = async () => {
@@ -35,6 +44,7 @@ const CompletedFixturesComponent = () => {
   //   getPastDate();
 
   function getFixtures() {
+    setLoading(true);
     fetch(
       "https://v3.football.api-sports.io/fixtures?league=283&season=2021&from=" +
         getPastDate(90) +
@@ -68,6 +78,7 @@ const CompletedFixturesComponent = () => {
         // console.log(sortedFix);
 
         // TODO: add check for what happens when api requests are full
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -115,7 +126,9 @@ const CompletedFixturesComponent = () => {
         <Text style={styles.title}>
           Meciuri încheiate în ultimele 90 de zile
         </Text>
-        {fixtures.length != 0 ? (
+        {loading ? (
+          <ActivityIndicator size="large" color={colors.appDarkBlue} />
+        ) : fixtures.length != 0 ? (
           fixtures.map((fixture: any, i: number) => (
             <View
               key={i}

@@ -1,6 +1,12 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React, { Component, useState } from "react";
-import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Text,
+  ActivityIndicator,
+} from "react-native";
 import AppLoading from "expo-app-loading";
 
 // @ts-ignore
@@ -10,9 +16,12 @@ import useFonts from "../../useFonts";
 import styles from "./styles";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import colors from "../../constants/colors";
 
 const ShortNewsComponent = ({ ...props }) => {
   const navigation = useNavigation();
+
+  const [loading, setLoading] = useState(false);
 
   const [rssFeed, setRssFeed] = useState([]);
   const [shouldFetch, setShouldFetch] = useState(true);
@@ -42,6 +51,7 @@ const ShortNewsComponent = ({ ...props }) => {
 
   function getFeed() {
     console.log("get news feed");
+    setLoading(true);
     fetch(
       "https://news.google.com/rss/search?q=" +
         searchQuery +
@@ -54,6 +64,10 @@ const ShortNewsComponent = ({ ...props }) => {
         feed = feedItems;
         // @ts-ignore
         setRssFeed(rss?.items);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
 
@@ -89,44 +103,44 @@ const ShortNewsComponent = ({ ...props }) => {
       ></LinearGradient>
       <View style={styles.container2}>
         <Text style={styles.title}>{props.title}</Text>
-        {
+        {loading ? (
+          <ActivityIndicator size="large" color={colors.appDarkBlue} />
+        ) : // @ts-ignore
+        rssFeed[0]?.links[0]?.url ? (
           // @ts-ignore
-          rssFeed[0]?.links[0]?.url ? (
-            // @ts-ignore
-            randomArr.map((randomNo: number, i: number) => (
-              <RNUrlPreview
-                key={i}
-                // @ts-ignore
-                text={rssFeed[randomNo]?.links[0].url}
-                titleStyle={{
-                  fontFamily: "MontserratBold",
-                  color: "#1C374A",
-                  fontSize: 16,
-                }}
-                descriptionStyle={{
-                  fontFamily: "MontserratSemiBold",
-                  fontSize: 13,
-                  color: "#42759E",
-                }}
-                descriptionNumberOfLines={2}
-                containerStyle={{ backgroundColor: "#ffffff" }}
-              />
-            ))
-          ) : (
+          randomArr.map((randomNo: number, i: number) => (
             <RNUrlPreview
-              key={1}
+              key={i}
               // @ts-ignore
-              text={rssFeed[0]?.links[0].url}
-              titleStyle={{ fontFamily: "MontserratBold", color: "#1C374A" }}
+              text={rssFeed[randomNo]?.links[0].url}
+              titleStyle={{
+                fontFamily: "MontserratBold",
+                color: "#1C374A",
+                fontSize: 16,
+              }}
               descriptionStyle={{
                 fontFamily: "MontserratSemiBold",
-                fontSize: 12,
+                fontSize: 13,
                 color: "#42759E",
               }}
               descriptionNumberOfLines={2}
+              containerStyle={{ backgroundColor: "#ffffff" }}
             />
-          )
-        }
+          ))
+        ) : (
+          <RNUrlPreview
+            key={1}
+            // @ts-ignore
+            text={rssFeed[0]?.links[0].url}
+            titleStyle={{ fontFamily: "MontserratBold", color: "#1C374A" }}
+            descriptionStyle={{
+              fontFamily: "MontserratSemiBold",
+              fontSize: 12,
+              color: "#42759E",
+            }}
+            descriptionNumberOfLines={2}
+          />
+        )}
         <View>
           <TouchableOpacity style={styles.button} onPress={showMoreNews}>
             <Text style={styles.details}>Mai multe stiri</Text>

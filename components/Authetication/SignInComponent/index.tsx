@@ -21,6 +21,7 @@ import styles from "./styles";
 import useFonts from "../../../useFonts";
 import AppLoading from "expo-app-loading";
 import colors from "../../../constants/colors";
+import LoadingScreen from "../../../screens/LoadingScreen";
 const firebaseConfig = {
   apiKey: "AIzaSyDDQKoZYTxpvE3aHPhop6buG0aYZXYv0IU",
   authDomain: "football-app-32bb9.firebaseapp.com",
@@ -45,6 +46,8 @@ export default function SignInComponent() {
   // @ts-ignore
   const { signIn } = React.useContext(AuthContext);
 
+  const [loading, setLoading] = useState(false);
+
   const auth: any = getAuth();
 
   const [IsReady, SetIsReady] = useState(false);
@@ -62,6 +65,10 @@ export default function SignInComponent() {
   }
 
   function getIn() {
+    setLoading(true);
+    if (loading) {
+      return <LoadingScreen />;
+    }
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
@@ -69,7 +76,7 @@ export default function SignInComponent() {
         signIn({ email, password });
         setEmail("");
         setPassword("");
-        // ...
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -80,6 +87,11 @@ export default function SignInComponent() {
         }
         if (errorCode.includes("invalid-email")) {
           alert(`Date invalide`);
+        }
+        if (errorCode.includes("user-not-found")) {
+          alert(
+            `Se pare ca nu esti inca in echipa noastra.\n\nNu-i nimic, fa-ti cont acum!`
+          );
         }
       });
   }

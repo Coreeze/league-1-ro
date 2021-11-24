@@ -18,7 +18,7 @@ import { useNavigation } from "@react-navigation/native";
 
 // import styles from "../components/StandingsComponent/stlyes";
 
-export default function NavigateToFixtures() {
+export default function NavigateToCompletedFixtures() {
   const navigation = useNavigation();
 
   const dimensions = Dimensions.get("window");

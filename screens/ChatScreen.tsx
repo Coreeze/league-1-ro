@@ -9,6 +9,7 @@ import {
   LogBox,
   Platform,
   NativeModules,
+  ActivityIndicator,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -31,6 +32,7 @@ import {
   limitToLast,
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import colors from "../constants/colors";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDDQKoZYTxpvE3aHPhop6buG0aYZXYv0IU",
@@ -74,7 +76,10 @@ const ChatScreen = () => {
   const [messages, setMessages] = useState([]);
   const auth: any = getAuth();
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
+    setLoading(true);
     readUser();
 
     const unsubscribe = onSnapshot(chatsRef, (querySnapshot) => {
@@ -94,6 +99,7 @@ const ChatScreen = () => {
         })
         .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
       appendMessages(messagesFirestore);
+      setLoading(false);
     });
     return () => unsubscribe();
   }, []);
@@ -176,15 +182,19 @@ const ChatScreen = () => {
       locations={[0, 1]}
       style={styles.gradientContainer}
     >
-      <GiftedChat
-        messages={messages}
-        renderUsernameOnMessage={true}
-        user={user}
-        onSend={handleSend}
-        isTyping={true}
-        showUserAvatar={true}
-        showAvatarForEveryMessage={true}
-      />
+      {loading ? (
+        <ActivityIndicator size="large" color={colors.appDarkBlue} />
+      ) : (
+        <GiftedChat
+          messages={messages}
+          renderUsernameOnMessage={true}
+          user={user}
+          onSend={handleSend}
+          isTyping={true}
+          showUserAvatar={true}
+          showAvatarForEveryMessage={true}
+        />
+      )}
     </LinearGradient>
   );
 };

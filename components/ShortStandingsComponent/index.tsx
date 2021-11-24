@@ -2,12 +2,13 @@
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import { DataTable, Avatar } from "react-native-paper";
 import AppLoading from "expo-app-loading";
 
 import styles from "./stlyes";
 import useFonts from "../../useFonts";
+import colors from "../../constants/colors";
 import { LinearGradient } from "expo-linear-gradient";
 
 export type StandingsProps = {
@@ -19,6 +20,8 @@ const ShortStandingsComponent = () => {
 
   const [standings, setStandings] = useState([]);
   const [shouldFetch, setShouldFetch] = useState(true);
+
+  const [loading, setLoading] = useState(false);
 
   const [showLatestForm, setShowLatestForm] = useState(null);
 
@@ -43,6 +46,8 @@ const ShortStandingsComponent = () => {
   }
 
   function getStandtings() {
+    setLoading(true);
+
     fetch(
       "https://v3.football.api-sports.io/standings?league=283&season=2021",
       {
@@ -60,6 +65,7 @@ const ShortStandingsComponent = () => {
         let fetchStandings = fetchLeague.standings[0];
         setStandings(fetchStandings);
         // TODO: add check for what happens when api requests are full
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -103,130 +109,134 @@ const ShortStandingsComponent = () => {
           </DataTable.Title>
         </DataTable.Header>
 
-        {topFiveStandings.map((team, i) => (
-          <View key={i}>
-            <DataTable.Row
-              style={styles.row}
-              onPress={() => {
-                setShowLatestForm(i === showLatestForm ? null : i);
-              }}
-            >
-              <DataTable.Cell>
-                <Text style={styles.tableText}>{team.rank}</Text>
-              </DataTable.Cell>
-              <DataTable.Cell>
-                <Avatar.Image
-                  size={25}
-                  source={{ uri: team.team.logo }}
-                  style={styles.avatar}
-                />
-              </DataTable.Cell>
-              <DataTable.Cell style={styles.club}>
-                <Text style={styles.tableText}>
-                  {team.team.name.length > 18
-                    ? team.team.name.substring(0, 18) + "."
-                    : team.team.name}
-                </Text>
-              </DataTable.Cell>
-              <DataTable.Cell>
-                <Text style={styles.tableText}>{team.all.played}</Text>
-              </DataTable.Cell>
-              <DataTable.Cell>
-                <Text style={styles.tableText}>
-                  {team.all.goals.for - team.all.goals.against}
-                </Text>
-              </DataTable.Cell>
-              <DataTable.Cell>
-                <Text style={styles.tableText}>{team.points}</Text>
-              </DataTable.Cell>
-            </DataTable.Row>
-            {i === showLatestForm && (
-              <View
-                key={team.team.id}
-                style={{
-                  alignItems: "center",
-                  backgroundColor: "rgba(255,255,255,0.5)",
-                  paddingVertical: 3,
-                  borderRadius: 15,
+        {loading ? (
+          <ActivityIndicator size="large" color={colors.appNeonGreen} />
+        ) : (
+          topFiveStandings.map((team, i) => (
+            <View key={i}>
+              <DataTable.Row
+                style={styles.row}
+                onPress={() => {
+                  setShowLatestForm(i === showLatestForm ? null : i);
                 }}
               >
+                <DataTable.Cell>
+                  <Text style={styles.tableText}>{team.rank}</Text>
+                </DataTable.Cell>
+                <DataTable.Cell>
+                  <Avatar.Image
+                    size={25}
+                    source={{ uri: team.team.logo }}
+                    style={styles.avatar}
+                  />
+                </DataTable.Cell>
+                <DataTable.Cell style={styles.club}>
+                  <Text style={styles.tableText}>
+                    {team.team.name.length > 18
+                      ? team.team.name.substring(0, 18) + "."
+                      : team.team.name}
+                  </Text>
+                </DataTable.Cell>
+                <DataTable.Cell>
+                  <Text style={styles.tableText}>{team.all.played}</Text>
+                </DataTable.Cell>
+                <DataTable.Cell>
+                  <Text style={styles.tableText}>
+                    {team.all.goals.for - team.all.goals.against}
+                  </Text>
+                </DataTable.Cell>
+                <DataTable.Cell>
+                  <Text style={styles.tableText}>{team.points}</Text>
+                </DataTable.Cell>
+              </DataTable.Row>
+              {i === showLatestForm && (
                 <View
-                  // key={Math.random()}
+                  key={team.team.id}
                   style={{
-                    flexDirection: "row",
+                    alignItems: "center",
+                    backgroundColor: "rgba(255,255,255,0.5)",
+                    paddingVertical: 3,
+                    borderRadius: 15,
                   }}
                 >
-                  <Text style={styles.accordionText}>
-                    Meciuri - {team.all.played}
-                  </Text>
-                  <Text style={styles.accordionText}>|</Text>
-                  <Text style={styles.accordionText}>
-                    Castigate - {team.all.win}
-                  </Text>
-                  <Text style={styles.accordionText}>|</Text>
-                  <Text style={styles.accordionText}>
-                    Pierdute - {team.all.lose}
-                  </Text>
-                </View>
-                <View
-                  // key={Math.random()}
-                  style={{
-                    flexDirection: "row",
-                    borderColor: "white",
-                    borderBottomWidth: 1,
-                    borderTopWidth: 1,
-                  }}
-                >
-                  <Text style={styles.accordionText}>
-                    Goluri marcate - {team.all.goals.for}
-                  </Text>
-                  <Text style={styles.accordionText}>|</Text>
-                  <Text style={styles.accordionText}>
-                    Goluri primite - {team.all.goals.against}
-                  </Text>
-                </View>
-
-                <View
-                  // key={Math.random()}
-                  style={{ flexDirection: "row", alignItems: "center" }}
-                >
-                  <Text
+                  <View
+                    // key={Math.random()}
                     style={{
-                      fontFamily: "MontserratSemiBold",
-                      color: "#1C374A",
-                      fontSize: 13,
-                      padding: 5,
+                      flexDirection: "row",
                     }}
                   >
-                    Formă
-                  </Text>
-                  {team.form.split("").map((result, i) => (
+                    <Text style={styles.accordionText}>
+                      Meciuri - {team.all.played}
+                    </Text>
+                    <Text style={styles.accordionText}>|</Text>
+                    <Text style={styles.accordionText}>
+                      Castigate - {team.all.win}
+                    </Text>
+                    <Text style={styles.accordionText}>|</Text>
+                    <Text style={styles.accordionText}>
+                      Pierdute - {team.all.lose}
+                    </Text>
+                  </View>
+                  <View
+                    // key={Math.random()}
+                    style={{
+                      flexDirection: "row",
+                      borderColor: "white",
+                      borderBottomWidth: 1,
+                      borderTopWidth: 1,
+                    }}
+                  >
+                    <Text style={styles.accordionText}>
+                      Goluri marcate - {team.all.goals.for}
+                    </Text>
+                    <Text style={styles.accordionText}>|</Text>
+                    <Text style={styles.accordionText}>
+                      Goluri primite - {team.all.goals.against}
+                    </Text>
+                  </View>
+
+                  <View
+                    // key={Math.random()}
+                    style={{ flexDirection: "row", alignItems: "center" }}
+                  >
                     <Text
-                      key={Math.random()}
                       style={{
-                        backgroundColor:
-                          result == "W"
-                            ? "#CEFF00"
-                            : result == "D"
-                            ? "lightgrey"
-                            : "#ff4778",
-                        borderRadius: 5,
-                        padding: 5,
-                        color: "white",
-                        margin: 5,
                         fontFamily: "MontserratSemiBold",
-                        color: "#1e4b6b",
+                        color: "#1C374A",
                         fontSize: 13,
+                        padding: 5,
                       }}
                     >
-                      {result}
+                      Formă
                     </Text>
-                  ))}
+                    {team.form.split("").map((result, i) => (
+                      <Text
+                        key={Math.random()}
+                        style={{
+                          backgroundColor:
+                            result == "W"
+                              ? "#CEFF00"
+                              : result == "D"
+                              ? "lightgrey"
+                              : "#ff4778",
+                          borderRadius: 5,
+                          padding: 5,
+                          color: "white",
+                          margin: 5,
+                          fontFamily: "MontserratSemiBold",
+                          color: "#1e4b6b",
+                          fontSize: 13,
+                        }}
+                      >
+                        {result}
+                      </Text>
+                    ))}
+                  </View>
                 </View>
-              </View>
-            )}
-          </View>
-        ))}
+              )}
+            </View>
+          ))
+        )}
         <TouchableOpacity style={styles.button} onPress={showFullStandings}>
           <Text style={styles.details}>Tabel complet</Text>
           <FontAwesome5 name="arrow-right" size={12} color="#1C374A" />

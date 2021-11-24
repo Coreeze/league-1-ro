@@ -37,6 +37,7 @@ import {
   useIsFocused,
   useNavigation,
 } from "@react-navigation/native";
+import colors from "../../../constants/colors";
 
 const { StatusBarManager } = NativeModules;
 
@@ -47,6 +48,8 @@ export default function CommunitiesFeed() {
   const [posts, setPosts] = useState([]);
 
   const isFocused = useIsFocused();
+
+  const [loading, setLoading] = useState(false);
 
   const [lazyLoading, setLazyLoading] = useState({
     shouldGetMore: false,
@@ -76,6 +79,7 @@ export default function CommunitiesFeed() {
   );
 
   async function getPosts() {
+    setLoading(true);
     try {
       setLazyLoading({ ...lazyLoading, loading: true });
 
@@ -113,6 +117,7 @@ export default function CommunitiesFeed() {
         // console.log(lazyLoading.data);
         setPosts(messagesFirestore);
       });
+      setLoading(false);
 
       const documentSnapshots = await getDocs(postsRef);
       const lastVisible =
@@ -237,24 +242,28 @@ export default function CommunitiesFeed() {
         source={require("../../../assets/images/header14.png")}
         resizeMode="cover"
       />
-      <FlatList
-        style={{ width: "100%" }}
-        data={posts}
-        renderItem={({ item }) => <ShortPost shortPost={item} />}
-        // @ts-ignore
-        keyExtractor={(item) => item._id}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-        ListFooterComponent={renderFooter()}
-        // onEndReached={() => getMorePosts()}
-        // How Close To The End Of List Until Next Data Request Is Made
-        onEndReachedThreshold={0}
-        bounces={true}
-        showsVerticalScrollIndicator={false}
-        // refreshing={true}
-        // onRefresh={fetchShortPosts}
-      />
+      {loading ? (
+        <ActivityIndicator size="large" color={"white"} />
+      ) : (
+        <FlatList
+          style={{ width: "100%" }}
+          data={posts}
+          renderItem={({ item }) => <ShortPost shortPost={item} />}
+          // @ts-ignore
+          keyExtractor={(item) => item._id}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+          ListFooterComponent={renderFooter()}
+          // onEndReached={() => getMorePosts()}
+          // How Close To The End Of List Until Next Data Request Is Made
+          onEndReachedThreshold={0}
+          bounces={true}
+          showsVerticalScrollIndicator={false}
+          // refreshing={true}
+          // onRefresh={fetchShortPosts}
+        />
+      )}
 
       {/* Use a light status bar on iOS to account for the black space above the modal */}
       <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />

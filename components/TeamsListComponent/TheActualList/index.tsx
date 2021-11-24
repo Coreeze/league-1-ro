@@ -11,8 +11,10 @@ import {
   TouchableOpacity,
   ScrollView,
   StyleSheet,
+  ActivityIndicator,
 } from "react-native";
-import { configureFonts } from "react-native-paper";
+
+import colors from "../../../constants/colors";
 import useFonts from "../../../useFonts";
 
 const TeamsListComponent = () => {
@@ -20,6 +22,8 @@ const TeamsListComponent = () => {
 
   const [teams, setTeams] = useState(Array);
   const [shouldFetch, setShouldFetch] = useState(true);
+
+  const [loading, setLoading] = useState(false);
 
   const [IsReady, SetIsReady] = useState(false);
   const LoadFonts = async () => {
@@ -41,6 +45,7 @@ const TeamsListComponent = () => {
   }
 
   function fetchTest() {
+    setLoading(true);
     fetch("https://v3.football.api-sports.io/teams?league=283&season=2021", {
       method: "GET",
       headers: {
@@ -53,6 +58,7 @@ const TeamsListComponent = () => {
         console.log("fetchTest");
         setTeams(json.response);
         // let fetchLeague = json.response[0].league;
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -82,36 +88,40 @@ const TeamsListComponent = () => {
       <ScrollView
         style={{ backgroundColor: "rgba(255,255,255,0)", marginTop: "3%" }}
       >
-        {teams.map((obj: any, i) => (
-          <TouchableOpacity
-            key={obj.team.name}
-            style={styles.teamCard}
-            activeOpacity={0.8}
-            onPress={() => {
-              showTeamDetails(obj.team);
-            }}
-          >
-            <Image
-              source={{
-                uri: obj.team.logo,
+        {loading ? (
+          <ActivityIndicator size="large" color={colors.appNeonGreen} />
+        ) : (
+          teams.map((obj: any, i) => (
+            <TouchableOpacity
+              key={obj.team.name}
+              style={styles.teamCard}
+              activeOpacity={0.8}
+              onPress={() => {
+                showTeamDetails(obj.team);
               }}
-              style={styles.playerPhoto}
-            />
-            <View style={styles.playerDescription}>
-              <Text
-                style={{
-                  fontSize: 15,
-                  fontFamily: "MontserratBold",
-                  color: "#1C374A",
+            >
+              <Image
+                source={{
+                  uri: obj.team.logo,
                 }}
-              >
-                {obj.team.name}
-              </Text>
-              <Text style={styles.teamDescription}>{obj.venue.city}</Text>
-              <Text style={styles.teamDescription}>{obj.venue.address}</Text>
-            </View>
-          </TouchableOpacity>
-        ))}
+                style={styles.playerPhoto}
+              />
+              <View style={styles.playerDescription}>
+                <Text
+                  style={{
+                    fontSize: 15,
+                    fontFamily: "MontserratBold",
+                    color: "#1C374A",
+                  }}
+                >
+                  {obj.team.name}
+                </Text>
+                <Text style={styles.teamDescription}>{obj.venue.city}</Text>
+                <Text style={styles.teamDescription}>{obj.venue.address}</Text>
+              </View>
+            </TouchableOpacity>
+          ))
+        )}
       </ScrollView>
     </LinearGradient>
   );
