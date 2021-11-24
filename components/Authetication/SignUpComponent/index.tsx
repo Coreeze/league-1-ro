@@ -90,36 +90,90 @@ export default function SignUpComponent() {
 
   const auth: any = getAuth();
 
+  function checkEmail() {
+    if (
+      !email.toLowerCase().includes("pula") &&
+      !email.toLowerCase().includes("pulă") &&
+      !email.toLowerCase().includes("pulâ") &&
+      !email.toLowerCase().includes("cacat") &&
+      !email.toLowerCase().includes("câcat") &&
+      !email.toLowerCase().includes("câcăt") &&
+      !email.toLowerCase().includes("rahat") &&
+      !email.toLowerCase().includes("rehat") &&
+      !email.toLowerCase().includes("rehet") &&
+      (email.toLowerCase().includes("yahoo") ||
+        email.toLowerCase().includes("gmail") ||
+        email.toLowerCase().includes("outlook") ||
+        email.toLowerCase().includes("icloud") ||
+        email.toLowerCase().includes("protonmail"))
+    ) {
+      return true;
+    } else return false;
+  }
+  function checkUsername() {
+    if (
+      !username.toLowerCase().includes("pula") &&
+      !username.toLowerCase().includes("pulă") &&
+      !username.toLowerCase().includes("pulâ") &&
+      !username.toLowerCase().includes("cacat") &&
+      !username.toLowerCase().includes("câcat") &&
+      !username.toLowerCase().includes("câcăt") &&
+      !username.toLowerCase().includes("rahat") &&
+      !username.toLowerCase().includes("rehat") &&
+      !username.toLowerCase().includes("rehet") &&
+      !username.toLowerCase().includes(" ")
+    ) {
+      return true;
+    } else return false;
+  }
+
   function signUp() {
-    console.log("createUser");
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        signIn({ email, password });
-        updateProfile(auth.currentUser, {
-          displayName: username + "|" + value,
-          photoURL: "https://example.com/jane-q-user/profile.jpg",
-        })
-          .then(() => {
-            console.log("Profile updated!");
+    if (
+      checkEmail() &&
+      checkUsername() &&
+      email != "" &&
+      password != "" &&
+      username.length > 4
+    ) {
+      console.log("createUser");
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          signIn({ email, password });
+          updateProfile(auth.currentUser, {
+            displayName: username + "|" + value,
+            photoURL: "https://example.com/jane-q-user/profile.jpg",
           })
-          .catch((error) => {
-            console.log(error);
-          });
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        console.log(errorCode);
-        const errorMessage = error.message;
-        console.log(errorMessage);
-        if (errorCode.includes("invalid-email")) {
-          alert(`Date invalide!`);
-        }
-        if (errorCode.includes("email-already-in-use")) {
-          alert(`Ne pare rau, adresa de e-mail este deja folosita de cineva`);
-        }
-        // ..
-      });
-    writeUserToDb;
+            .then(() => {
+              console.log("Profile updated!");
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          console.log(errorCode);
+          const errorMessage = error.message;
+          console.log(errorMessage);
+          if (errorCode.includes("invalid-email")) {
+            alert(`Date invalide!`);
+          }
+          if (errorCode.includes("email-already-in-use")) {
+            alert(`Ne pare rau, adresa de e-mail este deja folosita de cineva`);
+          }
+          if (errorCode.includes("weak-password")) {
+            alert(
+              `Ne pare rau, codul tau de la dulap (parola) e prea usor de ghicit`
+            );
+          }
+          // ..
+        });
+      writeUserToDb;
+    } else {
+      alert(
+        "Ceva nu este ok la datele introduse. \n\nTe rugam mai verifica odata si apoi incepem meciul!"
+      );
+    }
   }
 
   async function writeUserToDb() {
