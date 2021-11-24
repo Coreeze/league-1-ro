@@ -11,6 +11,7 @@ import {
   ScrollView,
   FlatList,
   RefreshControl,
+  ActivityIndicator,
 } from "react-native";
 import shortPosts from "../../../data/shortPosts";
 import ShortPost from "../PostComponent";
@@ -25,6 +26,10 @@ import {
   getDocs,
   onSnapshot,
   addDoc,
+  limit,
+  orderBy,
+  limitToLast,
+  startAfter,
 } from "firebase/firestore";
 import { useCallback, useEffect, useState } from "react";
 import {
@@ -36,13 +41,21 @@ import {
 const { StatusBarManager } = NativeModules;
 
 const db = getFirestore();
-const chatsRef = query(collection(db, "community"));
 
 export default function CommunitiesFeed() {
   var postsTest: any = [];
   const [posts, setPosts] = useState([]);
 
   const isFocused = useIsFocused();
+
+  const [lazyLoading, setLazyLoading] = useState({
+    shouldGetMore: false,
+    loading: false,
+    lastVisible: null,
+    limit: 10,
+    data: [],
+  });
+  // const [getMore, setGetMore] = useState(false);
 
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = useCallback(() => {
@@ -61,33 +74,140 @@ export default function CommunitiesFeed() {
       getPosts();
     }, [])
   );
-  function getPosts() {
-    const unsubscribe = onSnapshot(chatsRef, (querySnapshot) => {
-      const messagesFirestore = querySnapshot
-        .docChanges()
-        .filter(({ type }) => type === "added")
-        .map(({ doc }) => {
-          const message = doc.data();
-          const _id = Math.random().toString(36).substring(7);
-          // console.log(message);
-          return {
-            content: message.post.content,
-            createdAt: message.post.createdAt.toDate(),
-            _id: message.post.id,
-            user: message.post.user.username.split("|")[0],
-            fan: message.post.user.username.split("|")[1],
-            noOfLikes: message.post.noOfLikes,
-          };
-        })
-        .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
-      setPosts(messagesFirestore);
+
+  async function getPosts() {
+    try {
+      setLazyLoading({ ...lazyLoading, loading: true });
+
+      const postsRef = query(
+        collection(db, "community"),
+        orderBy("post.createdAt"),
+        // startAfter(1644262604449)
+        limitToLast(500)
+        // limit(lazyLoading.limit)
+      );
+
+      const unsubscribe = onSnapshot(postsRef, (querySnapshot) => {
+        const messagesFirestore = querySnapshot
+          .docChanges()
+          .filter(({ type }) => type === "added")
+          .map(({ doc }) => {
+            const message = doc.data();
+            const _id = Math.random().toString(36).substring(7);
+            // console.log(message);
+            return {
+              content: message.post.content,
+              createdAt: message.post.createdAt.toDate(),
+              _id: message.post.id,
+              user: message.post.user.username.split("|")[0],
+              fan: message.post.user.username.split("|")[1],
+              noOfLikes: message.post.noOfLikes,
+            };
+          })
+          .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+
+        // console.log(messagesFirestore.length);
+
+        // @ts-ignore
+        setLazyLoading({ ...posts, data: messagesFirestore });
+        // console.log(lazyLoading.data);
+        setPosts(messagesFirestore);
+      });
+
+      const documentSnapshots = await getDocs(postsRef);
+      const lastVisible =
+        documentSnapshots.docs[documentSnapshots.docs.length - 1];
+      // console.log(lastVisible.data());
+      setLazyLoading({
+        ...lazyLoading,
+        // @ts-ignore
+        lastVisible: lastVisible,
+        loading: true,
+      });
+
+      return () => unsubscribe();
+    } catch (error) {
+      alert("Ne pare rau, a aparut o eroare (cod 400).");
+      console.log(error);
+    }
+  }
+
+  async function getMorePosts() {
+    console.log("getting more posts");
+    // try {
+    setLazyLoading({ ...lazyLoading, loading: true });
+
+    const postsRef = query(
+      collection(db, "community"),
+      orderBy("post.createdAt"),
+      startAfter(lazyLoading?.lastVisible),
+      // limitToLast(lazyLoading.limit)
+      limit(lazyLoading.limit)
+    );
+
+    try {
+      const unsubscribe = onSnapshot(postsRef, (querySnapshot) => {
+        const messagesFirestore = querySnapshot
+          .docChanges()
+          .filter(({ type }) => type === "added")
+          .map(({ doc }) => {
+            const message = doc.data();
+            const _id = Math.random().toString(36).substring(7);
+            console.log("message: " + message);
+            return {
+              content: message.post.content,
+              createdAt: message.post.createdAt.toDate(),
+              _id: message.post.id,
+              user: message.post.user.username.split("|")[0],
+              fan: message.post.user.username.split("|")[1],
+              noOfLikes: message.post.noOfLikes,
+            };
+          })
+          .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+
+        // console.log(messagesFirestore);
+        setLazyLoading({ ...posts, data: messagesFirestore });
+        var oldPosts = posts;
+        console.log("oldPosts.length: " + oldPosts.length);
+        oldPosts.push(messagesFirestore[0]);
+
+        setPosts(oldPosts);
+      });
+      return () => unsubscribe();
+    } catch (error) {
+      console.log(error);
+      alert("Eroare la getMorePosts");
+    }
+
+    const documentSnapshots = await getDocs(postsRef);
+    const lastVisible =
+      documentSnapshots.docs[documentSnapshots.docs.length - 1];
+    setLazyLoading({
+      ...lazyLoading,
+      // @ts-ignore
+      lastVisible: lastVisible,
+      loading: true,
     });
-    return () => unsubscribe();
+    // } catch (error) {
+    //   alert("Ne pare rau, a aparut o eroare (cod 400).");
+    //   console.log(error);
+    // }
+  }
+
+  function renderFooter() {
+    try {
+      // Check If Loading
+      if (lazyLoading.loading) {
+        return <ActivityIndicator />;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
-    // readUser();
-    console.log("here");
     onRefresh;
     getPosts();
   }, []);
@@ -121,10 +241,17 @@ export default function CommunitiesFeed() {
         style={{ width: "100%" }}
         data={posts}
         renderItem={({ item }) => <ShortPost shortPost={item} />}
+        // @ts-ignore
         keyExtractor={(item) => item._id}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
+        ListFooterComponent={renderFooter()}
+        // onEndReached={() => getMorePosts()}
+        // How Close To The End Of List Until Next Data Request Is Made
+        onEndReachedThreshold={0}
+        bounces={true}
+        showsVerticalScrollIndicator={false}
         // refreshing={true}
         // onRefresh={fetchShortPosts}
       />

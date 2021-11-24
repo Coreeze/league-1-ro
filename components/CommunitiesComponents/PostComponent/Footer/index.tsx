@@ -28,8 +28,6 @@ const Footer = ({ numberOfLikes, id }: FooterProps) => {
   async function updateDbLikeCounter() {
     const postRef = doc(db, "community", JSON.stringify(id));
 
-    console.log(likesCounter);
-
     // await updateDoc(postRef, {
     //   "post.noOfLikes": likesCounter,
     // });

@@ -7,7 +7,10 @@ import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
 
-LogBox.ignoreLogs(["Setting a timer for a long period of time"]);
+LogBox.ignoreLogs([
+  "Setting a timer for a long period of time",
+  "Require cycle:",
+]);
 
 export default function App() {
   const isLoadingComplete = useCachedResources();

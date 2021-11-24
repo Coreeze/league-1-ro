@@ -27,6 +27,8 @@ import {
   getDocs,
   onSnapshot,
   addDoc,
+  orderBy,
+  limitToLast,
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
@@ -50,7 +52,11 @@ if (firebase.apps.length == 0) {
 }
 
 const db = getFirestore();
-const chatsRef = query(collection(db, "chats"));
+const chatsRef = query(
+  collection(db, "chats"),
+  orderBy("post.createdAt"),
+  limitToLast(500)
+);
 
 const ChatScreen = () => {
   const [state, setState] = useState({
