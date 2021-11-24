@@ -10,6 +10,7 @@ import {
   ImageBackground,
 } from "react-native";
 import { Divider } from "react-native-elements";
+import { useNetInfo } from "@react-native-community/netinfo";
 
 import useCachedResources from "../../../hooks/useCachedResources";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -46,6 +47,8 @@ export default function SignInComponent() {
   // @ts-ignore
   const { signIn } = React.useContext(AuthContext);
 
+  const netInfo = useNetInfo();
+
   const [loading, setLoading] = useState(false);
 
   const auth: any = getAuth();
@@ -66,34 +69,40 @@ export default function SignInComponent() {
 
   function getIn() {
     setLoading(true);
-    if (loading) {
-      return <LoadingScreen />;
-    }
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        console.log("signedIn: " + auth.currentUser);
-        signIn({ email, password });
-        setEmail("");
-        setPassword("");
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        if (errorCode.includes("wrong-password")) {
-          alert(`Date invalide`);
-        }
-        if (errorCode.includes("invalid-email")) {
-          alert(`Date invalide`);
-        }
-        if (errorCode.includes("user-not-found")) {
-          alert(
-            `Se pare ca nu esti inca in echipa noastra.\n\nNu-i nimic, fa-ti cont acum!`
-          );
-        }
-      });
+
+    if (netInfo.isConnected) {
+      if (loading) {
+        return <LoadingScreen />;
+      }
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in
+          console.log("signedIn: " + auth.currentUser);
+          signIn({ email, password });
+          setEmail("");
+          setPassword("");
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          if (errorCode.includes("wrong-password")) {
+            alert(`Date invalide`);
+          }
+          if (errorCode.includes("invalid-email")) {
+            alert(`Date invalide`);
+          }
+          if (errorCode.includes("user-not-found")) {
+            alert(
+              `Se pare ca nu esti inca in echipa noastra.\n\nNu-i nimic, fa-ti cont acum!`
+            );
+          }
+        });
+    } else
+      alert(
+        "Nu exista conexiune la internet. Conecteaza-te si hai in echipa! Mai avem un loc!"
+      );
   }
 
   function goToSignUp() {

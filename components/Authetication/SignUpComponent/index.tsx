@@ -40,6 +40,7 @@ import { useNavigation } from "@react-navigation/native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import colors from "../../../constants/colors";
 import DropDownPicker from "react-native-dropdown-picker";
+import { useNetInfo } from "@react-native-community/netinfo";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDDQKoZYTxpvE3aHPhop6buG0aYZXYv0IU",
@@ -62,6 +63,8 @@ export default function SignUpComponent() {
   const { signIn } = React.useContext(AuthContext);
 
   const navigation = useNavigation();
+
+  const netInfo = useNetInfo();
 
   const [color, setColor] = useState("grey");
   function changeColor() {
@@ -133,52 +136,59 @@ export default function SignUpComponent() {
   }
 
   function signUp() {
-    if (
-      checkEmail() &&
-      checkUsername() &&
-      email != "" &&
-      password != "" &&
-      username.length > 4
-    ) {
-      console.log("createUser");
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          signIn({ email, password });
-          updateProfile(auth.currentUser, {
-            displayName: username + "|" + value,
-            photoURL: "https://example.com/jane-q-user/profile.jpg",
-          })
-            .then(() => {
-              console.log("Profile updated!");
+    if (netInfo.isConnected) {
+      if (
+        checkEmail() &&
+        checkUsername() &&
+        email != "" &&
+        password != "" &&
+        username.length > 4
+      ) {
+        console.log("createUser");
+        createUserWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            signIn({ email, password });
+            updateProfile(auth.currentUser, {
+              displayName: username + "|" + value,
+              photoURL: "https://example.com/jane-q-user/profile.jpg",
             })
-            .catch((error) => {
-              console.log(error);
-            });
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          console.log(errorCode);
-          const errorMessage = error.message;
-          console.log(errorMessage);
-          if (errorCode.includes("invalid-email")) {
-            alert(`Date invalide!`);
-          }
-          if (errorCode.includes("email-already-in-use")) {
-            alert(`Ne pare rau, adresa de e-mail este deja folosita de cineva`);
-          }
-          if (errorCode.includes("weak-password")) {
-            alert(
-              `Ne pare rau, codul tau de la dulap (parola) e prea usor de ghicit`
-            );
-          }
-          // ..
-        });
-      writeUserToDb;
-    } else {
+              .then(() => {
+                console.log("Profile updated!");
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            console.log(errorCode);
+            const errorMessage = error.message;
+            console.log(errorMessage);
+            if (errorCode.includes("invalid-email")) {
+              alert(`Date invalide!`);
+            }
+            if (errorCode.includes("email-already-in-use")) {
+              alert(
+                `Ne pare rau, adresa de e-mail este deja folosita de cineva`
+              );
+            }
+            if (errorCode.includes("weak-password")) {
+              alert(
+                `Ne pare rau, codul tau de la dulap (parola) e prea usor de ghicit`
+              );
+            }
+            // ..
+          });
+        writeUserToDb;
+      } else {
+        alert(
+          "Ceva nu este ok la datele introduse. \n\nTe rugam mai verifica odata si apoi incepem meciul!"
+        );
+      }
+    } else
       alert(
-        "Ceva nu este ok la datele introduse. \n\nTe rugam mai verifica odata si apoi incepem meciul!"
+        "Nu exista conexiune la internet. Conecteaza-te si hai in echipa! Mai avem un loc!"
       );
-    }
   }
 
   async function writeUserToDb() {
