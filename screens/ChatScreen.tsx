@@ -72,7 +72,6 @@ const ChatScreen = () => {
     _id: "",
     name: "",
   });
-  const [name, setName] = useState("");
   const [messages, setMessages] = useState([]);
   const auth: any = getAuth();
 
@@ -99,8 +98,8 @@ const ChatScreen = () => {
         })
         .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
       appendMessages(messagesFirestore);
-      setLoading(false);
     });
+    setLoading(false);
     return () => unsubscribe();
   }, []);
 
