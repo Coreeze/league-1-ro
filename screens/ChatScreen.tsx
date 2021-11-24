@@ -15,7 +15,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import EmojiSelector, { Categories } from "react-native-emoji-selector";
 import { GiftedChat } from "react-native-gifted-chat";
 import "firebase/compat/firestore";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as firebase from "firebase/compat";
 import "firebase/firestore";
 import { initializeApp } from "@firebase/app";
@@ -44,7 +44,7 @@ const firebaseConfig = {
 
 const { StatusBarManager } = NativeModules;
 
-LogBox.ignoreLogs(["Setting a timer"]);
+// LogBox.ignoreLogs(["Setting a timer"]);
 
 // TODO: add adsupport, user tracking
 // @ts-ignore
@@ -119,12 +119,12 @@ const ChatScreen = () => {
     // }
   }
 
-  async function handlePress() {
-    const _id = Math.random().toString(36).substring(7);
-    const user = { _id, name };
-    await AsyncStorage.setItem("user", JSON.stringify(user));
-    setUser(user);
-  }
+  // async function handlePress() {
+  //   const _id = Math.random().toString(36).substring(7);
+  //   const user = { _id, name };
+  //   await AsyncStorage.setItem("user", JSON.stringify(user));
+  //   setUser(user);
+  // }
 
   async function handleSend(messages: any[]) {
     const writes = messages.map(

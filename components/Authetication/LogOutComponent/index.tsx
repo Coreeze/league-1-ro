@@ -18,7 +18,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-LogBox.ignoreLogs(["Setting a timer for a long period of time"]);
+// LogBox.ignoreLogs(["Setting a timer for a long period of time"]);
 
 export default function LogOutComponent() {
   const isLoadingComplete = useCachedResources();

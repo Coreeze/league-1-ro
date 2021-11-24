@@ -10,6 +10,7 @@ import Navigation from "./navigation";
 LogBox.ignoreLogs([
   "Setting a timer for a long period of time",
   "Require cycle:",
+  "AsyncStorage",
 ]);
 
 export default function App() {

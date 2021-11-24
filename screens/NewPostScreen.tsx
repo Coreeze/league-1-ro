@@ -29,7 +29,7 @@ import {
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
-LogBox.ignoreLogs(["Setting a timer"]);
+// LogBox.ignoreLogs(["Setting a timer"]);
 
 const firebaseConfig = {
   apiKey: "AIzaSyDDQKoZYTxpvE3aHPhop6buG0aYZXYv0IU",
