@@ -24,6 +24,8 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import colors from "../constants/colors";
 import useFonts from "../useFonts";
 import AppLoading from "expo-app-loading";
+import CompletedFixturesComponent from "../components/CompletedFixturesComponent";
+import NavigateToFixtures from "../components/CompletedFixturesComponent/navigateToFixtures";
 // import styles from "../components/StandingsComponent/stlyes";
 
 export default function MainFeedScreen({
@@ -99,6 +101,7 @@ export default function MainFeedScreen({
         <NewsOfTheDayComponent />
         <TeamsList />
         <FixturesComponent />
+        <NavigateToFixtures />
         <ShortStandingsComponent />
         <ShortNewsComponent keyWords={["fotbal"]} title={"Știri recente"} />
 

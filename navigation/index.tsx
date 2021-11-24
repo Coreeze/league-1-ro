@@ -56,6 +56,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import LogOutComponent from "../components/Authetication/LogOutComponent";
 import * as SecureStore from "expo-secure-store";
 import { enableIndexedDbPersistence } from "firebase/firestore";
+import CompletedFixturesComponent from "../components/CompletedFixturesComponent";
 
 export const AuthContext = React.createContext({});
 
@@ -247,6 +248,39 @@ function RootNavigator() {
         <Stack.Screen
           name="MoreFixtures"
           component={MoreFixturesComponent}
+          options={{
+            headerShown: true,
+            headerTitle: (props) => (
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Image
+                  style={{
+                    position: "absolute",
+                    width: 330,
+                    height: 60,
+                  }}
+                  source={require("../assets/images/header13.png")}
+                  resizeMode="contain"
+                />
+                <Text
+                  style={{
+                    fontFamily: "MontserratBold",
+                    color: "white",
+                    fontSize: 18,
+                  }}
+                >
+                  Meciuri
+                </Text>
+              </View>
+            ),
+            headerStyle: {
+              backgroundColor: constants.headerColor,
+            },
+            headerTintColor: "#fff",
+          }}
+        />
+        <Stack.Screen
+          name="CompletedFixtures"
+          component={CompletedFixturesComponent}
           options={{
             headerShown: true,
             headerTitle: (props) => (

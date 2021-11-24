@@ -23,6 +23,7 @@ export type RootStackParamList = {
   FullStandings: undefined;
   History: undefined;
   MoreFixtures: undefined;
+  CompletedFixtures: undefined;
   PlayersList: undefined;
   TeamsList: undefined;
   TeamDetails: undefined;
