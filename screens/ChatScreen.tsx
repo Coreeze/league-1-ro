@@ -47,6 +47,7 @@ const { StatusBarManager } = NativeModules;
 LogBox.ignoreLogs(["Setting a timer"]);
 
 // TODO: add adsupport, user tracking
+// @ts-ignore
 if (firebase.apps.length == 0) {
   const app = initializeApp(firebaseConfig);
 }
