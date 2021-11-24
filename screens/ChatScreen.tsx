@@ -53,9 +53,9 @@ if (firebase.apps.length == 0) {
 
 const db = getFirestore();
 const chatsRef = query(
-  collection(db, "chats"),
-  orderBy("post.createdAt"),
-  limitToLast(500)
+  collection(db, "chats")
+  // orderBy("post.createdAt"),
+  // limitToLast(500)
 );
 
 const ChatScreen = () => {
