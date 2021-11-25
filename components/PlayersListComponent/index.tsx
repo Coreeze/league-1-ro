@@ -7,6 +7,7 @@ import {
   Text,
   ScrollView,
   Image,
+  ActivityIndicator,
 } from "react-native";
 import AppLoading from "expo-app-loading";
 
@@ -16,10 +17,13 @@ import * as rssParser from "react-native-rss-parser";
 import useFonts from "../../useFonts";
 import styles from "./styles";
 import { Feather } from "@expo/vector-icons";
+import colors from "../../constants/colors";
 
 const PlayersListComponent = ({ route }: any) => {
   const [shouldFetch, setShouldFetch] = useState(true);
   const [squad, setSquad] = useState([]);
+
+  const [loading, setLoading] = useState(false);
 
   const teamId = route.params.teamId;
   // console.log(teamId);
@@ -30,6 +34,7 @@ const PlayersListComponent = ({ route }: any) => {
   }
 
   function getPlayers() {
+    setLoading(true);
     fetch("https://v3.football.api-sports.io/players/squads?team=" + teamId, {
       method: "GET",
       headers: {
@@ -42,6 +47,7 @@ const PlayersListComponent = ({ route }: any) => {
         console.log("Fetch team players");
         setSquad(json.response[0].players);
         // console.log(json);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -76,34 +82,38 @@ const PlayersListComponent = ({ route }: any) => {
         style={{ width: "100%", height: 4, alignSelf: "center" }}
       ></LinearGradient>
       <ScrollView>
-        <View style={styles.container}>
-          {squad.map((player: any, i) => (
-            <View key={player.name} style={styles.playerCard}>
-              <Image
-                source={{
-                  uri: player.photo,
-                }}
-                style={styles.playerPhoto}
-              />
-              <View style={styles.playerDescription}>
-                <Text
-                  style={{
-                    fontSize: 15,
-                    fontFamily: "MontserratBold",
-                    color: "#1C374A",
+        {loading ? (
+          <ActivityIndicator size="large" color={colors.appDarkBlue} />
+        ) : (
+          <View style={styles.container}>
+            {squad.map((player: any, i) => (
+              <View key={player.name} style={styles.playerCard}>
+                <Image
+                  source={{
+                    uri: player.photo,
                   }}
-                >
-                  {player.name}
-                </Text>
-                <View style={{ flexDirection: "row" }}>
-                  <Text style={styles.playerText}>Nr. {player.number}</Text>
-                  <Text style={styles.playerText}>{player.position}</Text>
-                  <Text style={styles.playerText}>{player.age} ani</Text>
+                  style={styles.playerPhoto}
+                />
+                <View style={styles.playerDescription}>
+                  <Text
+                    style={{
+                      fontSize: 15,
+                      fontFamily: "MontserratBold",
+                      color: "#1C374A",
+                    }}
+                  >
+                    {player.name}
+                  </Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text style={styles.playerText}>Nr. {player.number}</Text>
+                    <Text style={styles.playerText}>{player.position}</Text>
+                    <Text style={styles.playerText}>{player.age} ani</Text>
+                  </View>
                 </View>
               </View>
-            </View>
-          ))}
-        </View>
+            ))}
+          </View>
+        )}
       </ScrollView>
     </LinearGradient>
   );
