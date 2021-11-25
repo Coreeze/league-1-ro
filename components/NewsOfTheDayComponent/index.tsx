@@ -66,6 +66,7 @@ const NewsOfTheDayComponent = () => {
   }
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Știrea zilei</Text>
       {loading ? (
         <ActivityIndicator size="large" color={colors.appNeonGreen} />
       ) : // @ts-ignore
@@ -75,19 +76,19 @@ const NewsOfTheDayComponent = () => {
           text={rssFeed[0]?.links[0].url}
           titleStyle={{
             fontFamily: "MontserratBold",
-            color: "#fff",
+            color: colors.appDarkBlue,
             fontSize: 18,
-            textShadowColor: "black",
-            textShadowOffset: { width: 0, height: 0 },
-            textShadowRadius: 5,
+            // textShadowColor: "black",
+            // textShadowOffset: { width: 0, height: 0 },
+            // textShadowRadius: 5,
           }}
           descriptionStyle={{
             fontFamily: "MontserratSemiBold",
             fontSize: 15,
-            color: "#fff",
-            textShadowColor: "black",
-            textShadowOffset: { width: 0, height: 0 },
-            textShadowRadius: 5,
+            color: colors.appNormalBlue,
+            // textShadowColor: "black",
+            // textShadowOffset: { width: 0, height: 0 },
+            // textShadowRadius: 5,
           }}
           descriptionNumberOfLines={1}
           containerStyle={{
