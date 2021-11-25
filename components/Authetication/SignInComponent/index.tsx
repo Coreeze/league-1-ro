@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image,
   ImageBackground,
+  ActivityIndicator,
 } from "react-native";
 import { Divider } from "react-native-elements";
 import { useNetInfo } from "@react-native-community/netinfo";
@@ -71,9 +72,6 @@ export default function SignInComponent() {
     setLoading(true);
 
     if (netInfo.isConnected) {
-      if (loading) {
-        return <LoadingScreen />;
-      }
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           // Signed in
@@ -126,74 +124,78 @@ export default function SignInComponent() {
           style={styles.background}
           resizeMode="cover"
         >
-          <View style={styles.container}>
-            <View style={styles.container2}>
-              <Text style={styles.title}>Salutare!</Text>
-              <View>
+          {loading ? (
+            <ActivityIndicator size="large" color={colors.appNeonGreen} />
+          ) : (
+            <View style={styles.container}>
+              <View style={styles.container2}>
+                <Text style={styles.title}>Salutare!</Text>
+                <View>
+                  <TextInput
+                    value={email}
+                    placeholder={"E-mail"}
+                    onChangeText={(text) => setEmail(text)}
+                    style={styles.input}
+                  />
+                </View>
                 <TextInput
-                  value={email}
-                  placeholder={"E-mail"}
-                  onChangeText={(text) => setEmail(text)}
+                  value={password}
+                  placeholder={"Codul de la dulap (parola)"}
+                  onChangeText={(text) => setPassword(text)}
                   style={styles.input}
+                  secureTextEntry={true}
                 />
+                <TouchableOpacity
+                  onPress={getIn}
+                  style={styles.loginContainer}
+                  activeOpacity={0.8}
+                >
+                  <Text style={styles.loginText}>Logare</Text>
+                </TouchableOpacity>
+                <Text
+                  style={{
+                    textAlign: "center",
+                    fontFamily: "MontserratSemiBold",
+                    color: "#1C374A",
+                    paddingTop: 33,
+                  }}
+                >
+                  Nu ai cont inca? Devin-o acum parte din comunitatea fotbalului
+                  romanesc!
+                </Text>
+                <TouchableOpacity
+                  onPress={goToSignUp}
+                  style={styles.signUpContainer}
+                  activeOpacity={0.8}
+                >
+                  <Text style={styles.signUpText}>Creeaza cont</Text>
+                </TouchableOpacity>
+                <Text
+                  style={{
+                    fontSize: 10,
+                    color: "grey",
+                  }}
+                >
+                  Folosirea aplicatiei Fotbalul Romanesc inseamna ca esti de
+                  acord cu{" "}
+                  <Text
+                    style={{ fontSize: 10, color: "#5E5E5E" }}
+                    onPress={showConfidentialiy}
+                  >
+                    Politica de Confidentialitate
+                  </Text>
+                  si cu{" "}
+                  <Text
+                    onPress={showTerms}
+                    style={{ fontSize: 10, color: "#5E5E5E" }}
+                  >
+                    Termenii si Conditiile.
+                  </Text>
+                  .
+                </Text>
               </View>
-              <TextInput
-                value={password}
-                placeholder={"Codul de la dulap (parola)"}
-                onChangeText={(text) => setPassword(text)}
-                style={styles.input}
-                secureTextEntry={true}
-              />
-              <TouchableOpacity
-                onPress={getIn}
-                style={styles.loginContainer}
-                activeOpacity={0.8}
-              >
-                <Text style={styles.loginText}>Logare</Text>
-              </TouchableOpacity>
-              <Text
-                style={{
-                  textAlign: "center",
-                  fontFamily: "MontserratSemiBold",
-                  color: "#1C374A",
-                  paddingTop: 33,
-                }}
-              >
-                Nu ai cont inca? Devin-o acum parte din comunitatea fotbalului
-                romanesc!
-              </Text>
-              <TouchableOpacity
-                onPress={goToSignUp}
-                style={styles.signUpContainer}
-                activeOpacity={0.8}
-              >
-                <Text style={styles.signUpText}>Creeaza cont</Text>
-              </TouchableOpacity>
-              <Text
-                style={{
-                  fontSize: 10,
-                  color: "grey",
-                }}
-              >
-                Folosirea aplicatiei Fotbalul Romanesc inseamna ca esti de acord
-                cu{" "}
-                <Text
-                  style={{ fontSize: 10, color: "#5E5E5E" }}
-                  onPress={showConfidentialiy}
-                >
-                  Politica de Confidentialitate
-                </Text>
-                si cu{" "}
-                <Text
-                  onPress={showTerms}
-                  style={{ fontSize: 10, color: "#5E5E5E" }}
-                >
-                  Termenii si Conditiile.
-                </Text>
-                .
-              </Text>
             </View>
-          </View>
+          )}
         </ImageBackground>
       </SafeAreaProvider>
     );
