@@ -2,7 +2,7 @@
   "expo": {
     "name": "liga-1-romania",
     "slug": "liga-1-romania",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon2.png",
     "scheme": "myapp",
@@ -24,7 +24,7 @@
         "foregroundImage": "./assets/images/icon2.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.coreeze.liga1romania.preAlpha"
+      "package": "com.coreeze.liga1romania.beta"
     },
     "web": {
       "favicon": "./assets/images/icon1-transparent.png",
