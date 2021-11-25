@@ -252,7 +252,7 @@ export default function TeamDetails({ route }: any) {
           <DataTable style={{ marginTop: 25, paddingHorizontal: 15 }}>
             <DataTable.Header style={styles.tableHeader}>
               <DataTable.Title style={{ flex: 2 }}>
-                <Text style={styles.titleText}>M. jucate</Text>
+                <Text style={styles.titleText}>Meciuri</Text>
               </DataTable.Title>
               <DataTable.Title>
                 <Text style={styles.titleText}>Acasă</Text>
@@ -267,7 +267,7 @@ export default function TeamDetails({ route }: any) {
 
             <DataTable.Row style={{ borderBottomWidth: 0 }}>
               <DataTable.Cell style={{ flex: 2 }}>
-                <Text style={styles.tableText}>Acasă</Text>
+                <Text style={styles.tableText}>M. jucate</Text>
               </DataTable.Cell>
               <DataTable.Cell>
                 <Text style={styles.tableText}>

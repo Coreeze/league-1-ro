@@ -142,8 +142,14 @@ export default function SignUpComponent() {
   function signUp() {
     if (netInfo.isConnected) {
       if (checkEmail() && checkUsername()) {
-        if (email != "" && password != "" && username.length >= 3) {
+        if (
+          email != "" &&
+          password != "" &&
+          username.length >= 3 &&
+          value != null
+        ) {
           console.log("createUser");
+          console.log(value);
           setLoading(true);
           createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -183,7 +189,7 @@ export default function SignUpComponent() {
           writeUserToDb;
         } else {
           alert(
-            "Numele de pe triocu (utilizatorul) este prea scurt. \n\nTe rugam mai verifica odata si apoi incepem meciul!"
+            "Numele de pe triocu (utilizatorul) este prea scurt sau ai uitat sa alegi o echipa. \n\nTe rugam mai verifica odata si apoi incepem meciul!"
           );
         }
       } else {
