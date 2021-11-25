@@ -137,52 +137,52 @@ export default function SignUpComponent() {
 
   function signUp() {
     if (netInfo.isConnected) {
-      if (
-        checkEmail() &&
-        checkUsername() &&
-        email != "" &&
-        password != "" &&
-        username.length > 4
-      ) {
-        console.log("createUser");
-        createUserWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-            signIn({ email, password });
-            updateProfile(auth.currentUser, {
-              displayName: username + "|" + value,
-              photoURL: "https://example.com/jane-q-user/profile.jpg",
-            })
-              .then(() => {
-                console.log("Profile updated!");
+      if (checkEmail() && checkUsername()) {
+        if (email != "" && password != "" && username.length >= 3) {
+          console.log("createUser");
+          createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+              signIn({ email, password });
+              updateProfile(auth.currentUser, {
+                displayName: username + "|" + value,
+                photoURL: "",
               })
-              .catch((error) => {
-                console.log(error);
-              });
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            console.log(errorCode);
-            const errorMessage = error.message;
-            console.log(errorMessage);
-            if (errorCode.includes("invalid-email")) {
-              alert(`Date invalide!`);
-            }
-            if (errorCode.includes("email-already-in-use")) {
-              alert(
-                `Ne pare rau, adresa de e-mail este deja folosita de cineva`
-              );
-            }
-            if (errorCode.includes("weak-password")) {
-              alert(
-                `Ne pare rau, codul tau de la dulap (parola) e prea usor de ghicit`
-              );
-            }
-            // ..
-          });
-        writeUserToDb;
+                .then(() => {
+                  console.log("Profile updated!");
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              console.log(errorCode);
+              const errorMessage = error.message;
+              console.log(errorMessage);
+              if (errorCode.includes("invalid-email")) {
+                alert(`Date invalide!`);
+              }
+              if (errorCode.includes("email-already-in-use")) {
+                alert(
+                  `Ne pare rau, adresa de e-mail este deja folosita de cineva`
+                );
+              }
+              if (errorCode.includes("weak-password")) {
+                alert(
+                  `Ne pare rau, codul tau de la dulap (parola) e prea usor de ghicit`
+                );
+              }
+              // ..
+            });
+          writeUserToDb;
+        } else {
+          alert(
+            "Numele de pe triocu (utilizatorul) este prea scurt. \n\nTe rugam mai verifica odata si apoi incepem meciul!"
+          );
+        }
       } else {
         alert(
-          "Ceva nu este ok la datele introduse. \n\nTe rugam mai verifica odata si apoi incepem meciul!"
+          "E-mail sau parola invalide. \n\nTe rugam mai verifica odata si apoi incepem meciul!"
         );
       }
     } else
@@ -260,7 +260,7 @@ export default function SignUpComponent() {
               />
               <TextInput
                 value={password}
-                placeholder={"Codul de la dulap"}
+                placeholder={"Codul de la dulap (parola)"}
                 onChangeText={(text) => setPassword(text)}
                 style={styles.input}
                 secureTextEntry={true}
