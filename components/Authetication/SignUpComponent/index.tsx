@@ -129,6 +129,7 @@ export default function SignUpComponent() {
       !username.toLowerCase().includes("rahat") &&
       !username.toLowerCase().includes("rehat") &&
       !username.toLowerCase().includes("rehet") &&
+      !username.toLowerCase().includes("pizd") &&
       !username.toLowerCase().includes(" ")
     ) {
       return true;
