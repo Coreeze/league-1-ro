@@ -109,6 +109,13 @@ export default function SignInComponent() {
     navigation.navigate("SignUp");
   }
 
+  function showConfidentialiy() {
+    navigation.navigate("Confidentiality");
+  }
+  function showTerms() {
+    navigation.navigate("Terms");
+  }
+
   if (!isLoadingComplete) {
     return null;
   } else {
@@ -162,10 +169,28 @@ export default function SignInComponent() {
               >
                 <Text style={styles.signUpText}>Creeaza cont</Text>
               </TouchableOpacity>
-              <Text style={{ fontSize: 10, color: "grey" }}>
+              <Text
+                style={{
+                  fontSize: 10,
+                  color: "grey",
+                }}
+              >
                 Folosirea aplicatiei Fotbalul Romanesc inseamna ca esti de acord
-                cu Politica de Confidentialitate si cea de Folosire a
-                Cookie-urilor.
+                cu{" "}
+                <Text
+                  style={{ fontSize: 10, color: "#5E5E5E" }}
+                  onPress={showConfidentialiy}
+                >
+                  Politica de Confidentialitate
+                </Text>
+                si cu{" "}
+                <Text
+                  onPress={showTerms}
+                  style={{ fontSize: 10, color: "#5E5E5E" }}
+                >
+                  Termenii si Conditiile.
+                </Text>
+                .
               </Text>
             </View>
           </View>

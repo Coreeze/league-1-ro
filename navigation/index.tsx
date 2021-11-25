@@ -57,6 +57,8 @@ import LogOutComponent from "../components/Authetication/LogOutComponent";
 import * as SecureStore from "expo-secure-store";
 import { enableIndexedDbPersistence } from "firebase/firestore";
 import CompletedFixturesComponent from "../components/CompletedFixturesComponent";
+import CofidentialityScreen from "../components/PolicyComponents/Confidentiality";
+import TermsScreen from "../components/PolicyComponents/Terms";
 
 export const AuthContext = React.createContext({});
 
@@ -196,6 +198,16 @@ export function AuthStackScreen() {
         <Stack.Screen
           name="SignUp"
           component={SignUpComponent}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Confidentiality"
+          component={CofidentialityScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Terms"
+          component={TermsScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

@@ -31,6 +31,8 @@ export type RootStackParamList = {
   Chat: undefined;
   SignUp: undefined;
   SignIn: undefined;
+  Confidentiality: undefined;
+  Terms: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
