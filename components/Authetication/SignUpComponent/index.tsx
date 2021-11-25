@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   ImageBackground,
+  ActivityIndicator,
 } from "react-native";
 
 import useCachedResources from "../../../hooks/useCachedResources";
@@ -63,6 +64,8 @@ export default function SignUpComponent() {
   const { signIn } = React.useContext(AuthContext);
 
   const navigation = useNavigation();
+
+  const [loading, setLoading] = useState(false);
 
   const netInfo = useNetInfo();
 
@@ -141,6 +144,7 @@ export default function SignUpComponent() {
       if (checkEmail() && checkUsername()) {
         if (email != "" && password != "" && username.length >= 3) {
           console.log("createUser");
+          setLoading(true);
           createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
               signIn({ email, password });
@@ -154,6 +158,7 @@ export default function SignUpComponent() {
                 .catch((error) => {
                   console.log(error);
                 });
+              setLoading(false);
             })
             .catch((error) => {
               const errorCode = error.code;
@@ -219,86 +224,95 @@ export default function SignUpComponent() {
           resizeMode="cover"
         >
           <View style={styles.container}>
-            <View style={styles.container2}>
-              <TouchableOpacity onPress={navigation.goBack} activeOpacity={0.5}>
-                <Ionicons
-                  name="return-up-back"
-                  size={34}
-                  color={colors.appDarkBlue}
+            {loading ? (
+              <ActivityIndicator size="large" color={colors.appNeonGreen} />
+            ) : (
+              <View style={styles.container2}>
+                <TouchableOpacity
+                  onPress={navigation.goBack}
+                  activeOpacity={0.5}
+                >
+                  <Ionicons
+                    name="return-up-back"
+                    size={34}
+                    color={colors.appDarkBlue}
+                  />
+                </TouchableOpacity>
+                <Text style={styles.title}>
+                  Hai in echipa, mai avem un loc!
+                </Text>
+                <TextInput
+                  value={email}
+                  placeholder={"E-mail"}
+                  onChangeText={(text) => setEmail(text)}
+                  style={styles.input}
+                  selectionColor={colors.appDarkBlue}
                 />
-              </TouchableOpacity>
-              <Text style={styles.title}>Hai in echipa, mai avem un loc!</Text>
-              <TextInput
-                value={email}
-                placeholder={"E-mail"}
-                onChangeText={(text) => setEmail(text)}
-                style={styles.input}
-                selectionColor={colors.appDarkBlue}
-              />
-              <TextInput
-                value={username}
-                placeholder={"Numele de pe tricou"}
-                onChangeText={(text) => setUsername(text)}
-                style={styles.input}
-                selectionColor={colors.appDarkBlue}
-              />
-              <DropDownPicker
-                open={open}
-                value={value}
-                items={items}
-                setOpen={setOpen}
-                setValue={setValue}
-                setItems={setItems}
-                placeholder="Ce echipa sustii?"
-                style={{ borderWidth: 1, borderColor: "#e8e8e8" }}
-                dropDownContainerStyle={{
-                  borderWidth: 1,
-                  borderColor: "#e8e8e8",
-                }}
-                labelStyle={{}}
-                textStyle={{ color: color, fontSize: 15 }}
-                onChangeValue={changeColor}
-              />
-              <TextInput
-                value={password}
-                placeholder={"Codul de la dulap (parola)"}
-                onChangeText={(text) => setPassword(text)}
-                style={styles.input}
-                secureTextEntry={true}
-                selectionColor={colors.appDarkBlue}
-              />
-              <TouchableOpacity
-                onPress={signUp}
-                style={styles.loginContainer}
-                activeOpacity={0.8}
-              >
-                <Text style={styles.loginText}>Creeaza cont</Text>
-              </TouchableOpacity>
+                <TextInput
+                  value={username}
+                  placeholder={"Numele de pe tricou"}
+                  onChangeText={(text) => setUsername(text)}
+                  style={styles.input}
+                  selectionColor={colors.appDarkBlue}
+                />
+                <DropDownPicker
+                  open={open}
+                  value={value}
+                  items={items}
+                  setOpen={setOpen}
+                  setValue={setValue}
+                  setItems={setItems}
+                  placeholder="Ce echipa sustii?"
+                  style={{ borderWidth: 1, borderColor: "#e8e8e8" }}
+                  dropDownContainerStyle={{
+                    borderWidth: 1,
+                    borderColor: "#e8e8e8",
+                  }}
+                  labelStyle={{}}
+                  textStyle={{ color: color, fontSize: 15 }}
+                  onChangeValue={changeColor}
+                />
+                <TextInput
+                  value={password}
+                  placeholder={"Codul de la dulap (parola)"}
+                  onChangeText={(text) => setPassword(text)}
+                  style={styles.input}
+                  secureTextEntry={true}
+                  selectionColor={colors.appDarkBlue}
+                />
+                <TouchableOpacity
+                  onPress={signUp}
+                  style={styles.loginContainer}
+                  activeOpacity={0.8}
+                >
+                  <Text style={styles.loginText}>Creeaza cont</Text>
+                </TouchableOpacity>
 
-              <Text
-                style={{
-                  fontSize: 10,
-                  color: "grey",
-                }}
-              >
-                Folosirea aplicatiei Fotbalul Romanesc inseamna ca esti de acord
-                cu{" "}
                 <Text
-                  style={{ fontSize: 10, color: "#5E5E5E" }}
-                  onPress={showConfidentialiy}
+                  style={{
+                    fontSize: 10,
+                    color: "grey",
+                  }}
                 >
-                  Politica de Confidentialitate
+                  Folosirea aplicatiei Fotbalul Romanesc inseamna ca esti de
+                  acord cu{" "}
+                  <Text
+                    style={{ fontSize: 10, color: "#5E5E5E" }}
+                    onPress={showConfidentialiy}
+                  >
+                    Politica de Confidentialitate
+                  </Text>
+                  si cu{" "}
+                  <Text
+                    onPress={showTerms}
+                    style={{ fontSize: 10, color: "#5E5E5E" }}
+                  >
+                    Termenii si Conditiile.
+                  </Text>
+                  .
                 </Text>
-                si cu{" "}
-                <Text
-                  onPress={showTerms}
-                  style={{ fontSize: 10, color: "#5E5E5E" }}
-                >
-                  Termenii si Conditiile.
-                </Text>
-                .
-              </Text>
-            </View>
+              </View>
+            )}
           </View>
         </ImageBackground>
       </SafeAreaProvider>
