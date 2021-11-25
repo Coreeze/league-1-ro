@@ -9,6 +9,8 @@ import {
   FontAwesome,
   Fontisto,
   Ionicons,
+  MaterialCommunityIcons,
+  MaterialIcons,
 } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
@@ -170,8 +172,8 @@ export default function Navigation({
 
   return (
     <NavigationContainer
-      // linking={LinkingConfiguration}
-      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+    // linking={LinkingConfiguration}
+    // theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
     >
       <AuthContext.Provider value={authContext}>
         {state.userToken == null ? <AuthStackScreen /> : <RootNavigator />}
@@ -514,8 +516,13 @@ function BottomTabNavigator() {
         options={({ navigation }: RootTabScreenProps<"MainFeed">) => ({
           title: "Actual",
           tabBarIcon: ({ color, focused }) => (
-            <Entypo
-              name="news"
+            // <Entypo
+            //   name="news"
+            //   size={24}
+            //   color={focused ? "#ff4778" : "grey"}
+            // />
+            <MaterialCommunityIcons
+              name="newspaper-variant-outline"
               size={24}
               color={focused ? "#ff4778" : "grey"}
             />
@@ -531,8 +538,13 @@ function BottomTabNavigator() {
         options={{
           title: "Discutii live",
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons
-              name="chatbubble-ellipses-outline"
+            // <Ionicons
+            //   name="chatbubble-ellipses-outline"
+            //   size={24}
+            //   color={focused ? "#ff4778" : "grey"}
+            // />
+            <Entypo
+              name="chat"
               size={24}
               color={focused ? "#ff4778" : "grey"}
             />
@@ -547,9 +559,14 @@ function BottomTabNavigator() {
         component={NewPostScreen}
         options={{
           tabBarIcon: ({ color, focused }) => (
-            <AntDesign
-              name="pluscircleo"
-              size={39}
+            // <AntDesign
+            //   name="pluscircleo"
+            //   size={39}
+            //   color={focused ? "#ff4778" : "grey"}
+            // />
+            <Entypo
+              name="circle-with-plus"
+              size={44}
               color={focused ? "#ff4778" : "grey"}
             />
           ),
@@ -568,7 +585,7 @@ function BottomTabNavigator() {
           title: "Comunitati",
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
-              name="people-outline"
+              name="md-people-sharp"
               size={24}
               color={focused ? "#ff4778" : "grey"}
             />
