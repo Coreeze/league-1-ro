@@ -223,10 +223,10 @@ export default function SignUpComponent() {
           style={styles.background}
           resizeMode="cover"
         >
-          <View style={styles.container}>
-            {loading ? (
-              <ActivityIndicator size="large" color={colors.appNeonGreen} />
-            ) : (
+          {loading ? (
+            <ActivityIndicator size="large" color={colors.appNeonGreen} />
+          ) : (
+            <View style={styles.container}>
               <View style={styles.container2}>
                 <TouchableOpacity
                   onPress={navigation.goBack}
@@ -312,8 +312,8 @@ export default function SignUpComponent() {
                   .
                 </Text>
               </View>
-            )}
-          </View>
+            </View>
+          )}
         </ImageBackground>
       </SafeAreaProvider>
     );

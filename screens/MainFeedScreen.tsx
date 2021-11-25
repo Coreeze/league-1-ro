@@ -36,7 +36,9 @@ export default function MainFeedScreen({
 }: RootTabScreenProps<"MainFeed">) {
   const [user, setUser] = useState(null);
 
-  const [loadingUser, setLoadingUser] = useState(false);
+  const [loadingUser, setLoadingUser] = useState(true);
+
+  const [loading, setLoading] = useState(true);
 
   const auth: any = getAuth();
   onAuthStateChanged(auth, (user) => {
@@ -46,6 +48,7 @@ export default function MainFeedScreen({
       setUser(auth.currentUser);
       // console.log(user);
       const uid = user.uid;
+      setLoading(false);
     }
   });
 
@@ -95,12 +98,12 @@ export default function MainFeedScreen({
           }}
         >
           Salutare
-          {!user ? (
+          {/* {loading ? (
             <ActivityIndicator size="large" color={colors.appDarkBlue} />
           ) : (
             // @ts-ignore
             "\n" + user?.displayName?.split("|")[0]
-          )}
+          )} */}
         </Text>
         {/* <TouchableOpacity onPress={fetchTest}>
           <Text>BUTTON</Text>
